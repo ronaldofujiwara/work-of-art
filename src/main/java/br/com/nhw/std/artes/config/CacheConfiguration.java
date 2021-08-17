@@ -48,6 +48,12 @@ public class CacheConfiguration {
             createCache(cm, br.com.nhw.std.artes.domain.User.class.getName());
             createCache(cm, br.com.nhw.std.artes.domain.Authority.class.getName());
             createCache(cm, br.com.nhw.std.artes.domain.User.class.getName() + ".authorities");
+            createCache(cm, br.com.nhw.std.artes.domain.Ambiente.class.getName());
+            createCache(cm, br.com.nhw.std.artes.domain.AreaDepto.class.getName());
+            createCache(cm, br.com.nhw.std.artes.domain.AreaDepto.class.getName() + ".contatoes");
+            createCache(cm, br.com.nhw.std.artes.domain.Cidade.class.getName());
+            createCache(cm, br.com.nhw.std.artes.domain.Cidade.class.getName() + ".contatoes");
+            createCache(cm, br.com.nhw.std.artes.domain.Contato.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

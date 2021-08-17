@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="contato">
+      <h2 data-cy="contatoDetailsHeading"><span jhiTranslate="artesApp.contato.detail.title">Contato</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ contato.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.nomeComp">Nome Comp</span></dt>
+        <dd>
+          <span>{{ contato.nomeComp }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.empresa" [ngbTooltip]="'artesApp.contato.help.empresa' | translate">Empresa</span></dt>
+        <dd>
+          <span>{{ contato.empresa }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.funcao" [ngbTooltip]="'artesApp.contato.help.funcao' | translate">Funcao</span></dt>
+        <dd>
+          <span>{{ contato.funcao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.rg" [ngbTooltip]="'artesApp.contato.help.rg' | translate">Rg</span></dt>
+        <dd>
+          <span>{{ contato.rg }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.cpf" [ngbTooltip]="'artesApp.contato.help.cpf' | translate">Cpf</span></dt>
+        <dd>
+          <span>{{ contato.cpf }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.contato.infoContato" [ngbTooltip]="'artesApp.contato.help.infoContato' | translate"
+            >Info Contato</span
+          >
+        </dt>
+        <dd>
+          <span>{{ contato.infoContato }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.endRua" [ngbTooltip]="'artesApp.contato.help.endRua' | translate">End Rua</span></dt>
+        <dd>
+          <span>{{ contato.endRua }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.contato.endNumero" [ngbTooltip]="'artesApp.contato.help.endNumero' | translate">End Numero</span>
+        </dt>
+        <dd>
+          <span>{{ contato.endNumero }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.contato.endBairro" [ngbTooltip]="'artesApp.contato.help.endBairro' | translate">End Bairro</span>
+        </dt>
+        <dd>
+          <span>{{ contato.endBairro }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.contato.endComplemento" [ngbTooltip]="'artesApp.contato.help.endComplemento' | translate"
+            >End Complemento</span
+          >
+        </dt>
+        <dd>
+          <span>{{ contato.endComplemento }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.endCep" [ngbTooltip]="'artesApp.contato.help.endCep' | translate">End Cep</span></dt>
+        <dd>
+          <span>{{ contato.endCep }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.telefone" [ngbTooltip]="'artesApp.contato.help.telefone' | translate">Telefone</span></dt>
+        <dd>
+          <span>{{ contato.telefone }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.fax">Fax</span></dt>
+        <dd>
+          <span>{{ contato.fax }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.celular">Celular</span></dt>
+        <dd>
+          <span>{{ contato.celular }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.email">Email</span></dt>
+        <dd>
+          <span>{{ contato.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.site">Site</span></dt>
+        <dd>
+          <span>{{ contato.site }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.observacoes">Observacoes</span></dt>
+        <dd>
+          <span>{{ contato.observacoes }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.dataAtualizacao">Data Atualizacao</span></dt>
+        <dd>
+          <span>{{ contato.dataAtualizacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.ativo">Ativo</span></dt>
+        <dd>
+          <span>{{ contato.ativo }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.area">Area</span></dt>
+        <dd>
+          <div *ngIf="contato.area">
+            <a [routerLink]="['/area-depto', contato.area?.id, 'view']">{{ contato.area?.area }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.contato.cidade">Cidade</span></dt>
+        <dd>
+          <div *ngIf="contato.cidade">
+            <a [routerLink]="['/cidade', contato.cidade?.id, 'view']">{{ contato.cidade?.cidade }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/contato', contato.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

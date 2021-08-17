@@ -1,0 +1,57 @@
+{
+  "artesApp": {
+    "contato": {
+      "home": {
+        "title": "Contatoes",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Contato",
+        "createOrEditLabel": "Criar ou editar Contato",
+        "notFound": "Nenhum Contato encontrado"
+      },
+      "created": "Um novo Contato foi criado com o identificador {{ param }}",
+      "updated": "Um Contato foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Contato foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Contato {{ id }}?"
+      },
+      "detail": {
+        "title": "Contato"
+      },
+      "id": "ID",
+      "nomeComp": "Nome Comp",
+      "empresa": "Empresa",
+      "funcao": "Funcao",
+      "rg": "Rg",
+      "cpf": "Cpf",
+      "infoContato": "Info Contato",
+      "endRua": "End Rua",
+      "endNumero": "End Numero",
+      "endBairro": "End Bairro",
+      "endComplemento": "End Complemento",
+      "endCep": "End Cep",
+      "telefone": "Telefone",
+      "fax": "Fax",
+      "celular": "Celular",
+      "email": "Email",
+      "site": "Site",
+      "observacoes": "Observacoes",
+      "dataAtualizacao": "Data Atualizacao",
+      "ativo": "Ativo",
+      "area": "Area",
+      "cidade": "Cidade",
+      "help": {
+        "empresa": "Nome completo do contato",
+        "funcao": "Nome Empresa e/ou Instituição",
+        "rg": "Cargo ocupado",
+        "cpf": "Documento de identidade",
+        "infoContato": "CPF do contato",
+        "endRua": "Informacoes adicionais do contato",
+        "endNumero": "Endereço (rua,avenida,etc)",
+        "endBairro": "Número do endereço",
+        "endComplemento": "Bairro do endereço",
+        "endCep": "Complemento do endereço",
+        "telefone": "CEP do endereço"
+      }
+    }
+  }
+}

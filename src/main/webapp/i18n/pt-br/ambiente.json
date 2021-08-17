@@ -1,0 +1,25 @@
+{
+  "artesApp": {
+    "ambiente": {
+      "home": {
+        "title": "Ambientes",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Ambiente",
+        "createOrEditLabel": "Criar ou editar Ambiente",
+        "notFound": "Nenhum Ambiente encontrado"
+      },
+      "created": "Um novo Ambiente foi criado com o identificador {{ param }}",
+      "updated": "Um Ambiente foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Ambiente foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Ambiente {{ id }}?"
+      },
+      "detail": {
+        "title": "Ambiente"
+      },
+      "id": "ID",
+      "ambiente": "Ambiente",
+      "ativo": "Ativo"
+    }
+  }
+}

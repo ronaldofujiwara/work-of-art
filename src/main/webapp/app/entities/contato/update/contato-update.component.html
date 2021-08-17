@@ -1,0 +1,435 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-contato-heading" data-cy="ContatoCreateUpdateHeading" jhiTranslate="artesApp.contato.home.createOrEditLabel">
+        Create or edit a Contato
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.nomeComp" for="field_nomeComp">Nome Comp</label>
+          <input type="text" class="form-control" name="nomeComp" id="field_nomeComp" data-cy="nomeComp" formControlName="nomeComp" />
+          <div *ngIf="editForm.get('nomeComp')!.invalid && (editForm.get('nomeComp')!.dirty || editForm.get('nomeComp')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomeComp')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomeComp')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 120 }"
+            >
+              This field cannot be longer than 120 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.empresa"
+            for="field_empresa"
+            [ngbTooltip]="'artesApp.contato.help.empresa' | translate"
+            >Empresa</label
+          >
+          <input type="text" class="form-control" name="empresa" id="field_empresa" data-cy="empresa" formControlName="empresa" />
+          <div *ngIf="editForm.get('empresa')!.invalid && (editForm.get('empresa')!.dirty || editForm.get('empresa')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('empresa')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 150 }"
+            >
+              This field cannot be longer than 150 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.funcao"
+            for="field_funcao"
+            [ngbTooltip]="'artesApp.contato.help.funcao' | translate"
+            >Funcao</label
+          >
+          <input type="text" class="form-control" name="funcao" id="field_funcao" data-cy="funcao" formControlName="funcao" />
+          <div *ngIf="editForm.get('funcao')!.invalid && (editForm.get('funcao')!.dirty || editForm.get('funcao')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('funcao')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.rg"
+            for="field_rg"
+            [ngbTooltip]="'artesApp.contato.help.rg' | translate"
+            >Rg</label
+          >
+          <input type="text" class="form-control" name="rg" id="field_rg" data-cy="rg" formControlName="rg" />
+          <div *ngIf="editForm.get('rg')!.invalid && (editForm.get('rg')!.dirty || editForm.get('rg')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('rg')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 15 }"
+            >
+              This field cannot be longer than 15 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.cpf"
+            for="field_cpf"
+            [ngbTooltip]="'artesApp.contato.help.cpf' | translate"
+            >Cpf</label
+          >
+          <input type="text" class="form-control" name="cpf" id="field_cpf" data-cy="cpf" formControlName="cpf" />
+          <div *ngIf="editForm.get('cpf')!.invalid && (editForm.get('cpf')!.dirty || editForm.get('cpf')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cpf')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 15 }"
+            >
+              This field cannot be longer than 15 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.infoContato"
+            for="field_infoContato"
+            [ngbTooltip]="'artesApp.contato.help.infoContato' | translate"
+            >Info Contato</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="infoContato"
+            id="field_infoContato"
+            data-cy="infoContato"
+            formControlName="infoContato"
+          />
+          <div *ngIf="editForm.get('infoContato')!.invalid && (editForm.get('infoContato')!.dirty || editForm.get('infoContato')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('infoContato')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.endRua"
+            for="field_endRua"
+            [ngbTooltip]="'artesApp.contato.help.endRua' | translate"
+            >End Rua</label
+          >
+          <input type="text" class="form-control" name="endRua" id="field_endRua" data-cy="endRua" formControlName="endRua" />
+          <div *ngIf="editForm.get('endRua')!.invalid && (editForm.get('endRua')!.dirty || editForm.get('endRua')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endRua')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.endNumero"
+            for="field_endNumero"
+            [ngbTooltip]="'artesApp.contato.help.endNumero' | translate"
+            >End Numero</label
+          >
+          <input type="text" class="form-control" name="endNumero" id="field_endNumero" data-cy="endNumero" formControlName="endNumero" />
+          <div *ngIf="editForm.get('endNumero')!.invalid && (editForm.get('endNumero')!.dirty || editForm.get('endNumero')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endNumero')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.endBairro"
+            for="field_endBairro"
+            [ngbTooltip]="'artesApp.contato.help.endBairro' | translate"
+            >End Bairro</label
+          >
+          <input type="text" class="form-control" name="endBairro" id="field_endBairro" data-cy="endBairro" formControlName="endBairro" />
+          <div *ngIf="editForm.get('endBairro')!.invalid && (editForm.get('endBairro')!.dirty || editForm.get('endBairro')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endBairro')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.endComplemento"
+            for="field_endComplemento"
+            [ngbTooltip]="'artesApp.contato.help.endComplemento' | translate"
+            >End Complemento</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="endComplemento"
+            id="field_endComplemento"
+            data-cy="endComplemento"
+            formControlName="endComplemento"
+          />
+          <div
+            *ngIf="
+              editForm.get('endComplemento')!.invalid && (editForm.get('endComplemento')!.dirty || editForm.get('endComplemento')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endComplemento')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 30 }"
+            >
+              This field cannot be longer than 30 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.endCep"
+            for="field_endCep"
+            [ngbTooltip]="'artesApp.contato.help.endCep' | translate"
+            >End Cep</label
+          >
+          <input type="text" class="form-control" name="endCep" id="field_endCep" data-cy="endCep" formControlName="endCep" />
+          <div *ngIf="editForm.get('endCep')!.invalid && (editForm.get('endCep')!.dirty || editForm.get('endCep')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endCep')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.contato.telefone"
+            for="field_telefone"
+            [ngbTooltip]="'artesApp.contato.help.telefone' | translate"
+            >Telefone</label
+          >
+          <input type="text" class="form-control" name="telefone" id="field_telefone" data-cy="telefone" formControlName="telefone" />
+          <div *ngIf="editForm.get('telefone')!.invalid && (editForm.get('telefone')!.dirty || editForm.get('telefone')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('telefone')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.fax" for="field_fax">Fax</label>
+          <input type="text" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+          <div *ngIf="editForm.get('fax')!.invalid && (editForm.get('fax')!.dirty || editForm.get('fax')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fax')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.celular" for="field_celular">Celular</label>
+          <input type="text" class="form-control" name="celular" id="field_celular" data-cy="celular" formControlName="celular" />
+          <div *ngIf="editForm.get('celular')!.invalid && (editForm.get('celular')!.dirty || editForm.get('celular')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('celular')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 30 }"
+            >
+              This field cannot be longer than 30 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.site" for="field_site">Site</label>
+          <input type="text" class="form-control" name="site" id="field_site" data-cy="site" formControlName="site" />
+          <div *ngIf="editForm.get('site')!.invalid && (editForm.get('site')!.dirty || editForm.get('site')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('site')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.observacoes" for="field_observacoes">Observacoes</label>
+          <input
+            type="text"
+            class="form-control"
+            name="observacoes"
+            id="field_observacoes"
+            data-cy="observacoes"
+            formControlName="observacoes"
+          />
+          <div *ngIf="editForm.get('observacoes')!.invalid && (editForm.get('observacoes')!.dirty || editForm.get('observacoes')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('observacoes')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.dataAtualizacao" for="field_dataAtualizacao"
+            >Data Atualizacao</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dataAtualizacao"
+              data-cy="dataAtualizacao"
+              type="datetime-local"
+              class="form-control"
+              name="dataAtualizacao"
+              formControlName="dataAtualizacao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.ativo" for="field_ativo">Ativo</label>
+          <input type="checkbox" class="form-check" name="ativo" id="field_ativo" data-cy="ativo" formControlName="ativo" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.area" for="field_area">Area</label>
+          <select class="form-control" id="field_area" data-cy="area" name="area" formControlName="area">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="areaDeptoOption.id === editForm.get('area')!.value?.id ? editForm.get('area')!.value : areaDeptoOption"
+              *ngFor="let areaDeptoOption of areaDeptosSharedCollection; trackBy: trackAreaDeptoById"
+            >
+              {{ areaDeptoOption.area }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.contato.cidade" for="field_cidade">Cidade</label>
+          <select class="form-control" id="field_cidade" data-cy="cidade" name="cidade" formControlName="cidade">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cidadeOption.id === editForm.get('cidade')!.value?.id ? editForm.get('cidade')!.value : cidadeOption"
+              *ngFor="let cidadeOption of cidadesSharedCollection; trackBy: trackCidadeById"
+            >
+              {{ cidadeOption.cidade }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

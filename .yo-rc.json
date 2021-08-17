@@ -42,6 +42,8 @@
     "jwtSecretKey": "MjRkMjA4ZTllZjNhYzkwNzQyMTNmYjc4MGVhMzVmYmRkZTczZTE0OWMyYTI0ZjY1ZmM0MDA4NTU5Y2U0ZWQ5YjI3ZjA3YTk5NmQ0OGRhYzNhODFmYzIzOTQ2MjJhM2JlNzNkZjM1OTk1ZGY2NzMwMmNkNDkxZWQxM2NiZmVkY2I=",
     "devServerPort": 4200,
     "clientPackageManager": "npm",
-    "languages": ["pt-br", "en"]
+    "languages": ["pt-br", "en"],
+    "entities": ["Ambiente", "AreaDepto", "Cidade", "Contato"],
+    "lastLiquibaseTimestamp": 1629174536000
   }
 }

@@ -1,0 +1,153 @@
+{
+  "name": "Contato",
+  "fields": [
+    {
+      "fieldName": "nomeComp",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "120"
+    },
+    {
+      "fieldName": "empresa",
+      "fieldType": "String",
+      "javadoc": "Nome completo do contato",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "funcao",
+      "fieldType": "String",
+      "javadoc": "Nome Empresa e/ou Instituição",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "rg",
+      "fieldType": "String",
+      "javadoc": "Cargo ocupado",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "15"
+    },
+    {
+      "fieldName": "cpf",
+      "fieldType": "String",
+      "javadoc": "Documento de identidade",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "15"
+    },
+    {
+      "fieldName": "infoContato",
+      "fieldType": "String",
+      "javadoc": "CPF do contato",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "endRua",
+      "fieldType": "String",
+      "javadoc": "Informacoes adicionais do contato",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "endNumero",
+      "fieldType": "String",
+      "javadoc": "Endereço (rua,avenida,etc)",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "endBairro",
+      "fieldType": "String",
+      "javadoc": "Número do endereço",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "endComplemento",
+      "fieldType": "String",
+      "javadoc": "Bairro do endereço",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "endCep",
+      "fieldType": "String",
+      "javadoc": "Complemento do endereço",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "telefone",
+      "fieldType": "String",
+      "javadoc": "CEP do endereço",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "celular",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "site",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "observacoes",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "dataAtualizacao",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "ativo",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "areaDepto",
+      "otherEntityRelationshipName": "contato",
+      "relationshipName": "area",
+      "otherEntityField": "area"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cidade",
+      "otherEntityRelationshipName": "contato",
+      "relationshipName": "cidade",
+      "otherEntityField": "cidade"
+    }
+  ],
+  "javadoc": "Entidade: Contato\\nDados cadastrais de contatos relacionados ao Acervo Cultural",
+  "entityTableName": "contato",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210817042856"
+}

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Contato.
+    -->
+    <changeSet id="20210817042856-1" author="jhipster">
+        <createTable tableName="contato" remarks="Entidade: Contato\nDados cadastrais de contatos relacionados ao Acervo Cultural">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nome_comp" type="varchar(120)">
+                <constraints nullable="false" />
+            </column>
+            <column name="empresa" type="varchar(150)" remarks="Nome completo do contato">
+                <constraints nullable="true" />
+            </column>
+            <column name="funcao" type="varchar(50)" remarks="Nome Empresa e/ou Instituição">
+                <constraints nullable="true" />
+            </column>
+            <column name="rg" type="varchar(15)" remarks="Cargo ocupado">
+                <constraints nullable="true" />
+            </column>
+            <column name="cpf" type="varchar(15)" remarks="Documento de identidade">
+                <constraints nullable="true" />
+            </column>
+            <column name="info_contato" type="varchar(200)" remarks="CPF do contato">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_rua" type="varchar(50)" remarks="Informacoes adicionais do contato">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_numero" type="varchar(10)" remarks="Endereço (rua,avenida,etc)">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_bairro" type="varchar(50)" remarks="Número do endereço">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_complemento" type="varchar(30)" remarks="Bairro do endereço">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_cep" type="varchar(10)" remarks="Complemento do endereço">
+                <constraints nullable="true" />
+            </column>
+            <column name="telefone" type="varchar(50)" remarks="CEP do endereço">
+                <constraints nullable="true" />
+            </column>
+            <column name="fax" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="celular" type="varchar(30)">
+                <constraints nullable="true" />
+            </column>
+            <column name="email" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="site" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="observacoes" type="varchar(200)">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_atualizacao" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="ativo" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="area_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="cidade_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="contato" columnName="data_atualizacao" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210817042856-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/contato.csv"
+                  separator=";"
+                  tableName="contato">
+            <column name="id" type="numeric"/>
+            <column name="nome_comp" type="string"/>
+            <column name="empresa" type="string"/>
+            <column name="funcao" type="string"/>
+            <column name="rg" type="string"/>
+            <column name="cpf" type="string"/>
+            <column name="info_contato" type="string"/>
+            <column name="end_rua" type="string"/>
+            <column name="end_numero" type="string"/>
+            <column name="end_bairro" type="string"/>
+            <column name="end_complemento" type="string"/>
+            <column name="end_cep" type="string"/>
+            <column name="telefone" type="string"/>
+            <column name="fax" type="string"/>
+            <column name="celular" type="string"/>
+            <column name="email" type="string"/>
+            <column name="site" type="string"/>
+            <column name="observacoes" type="string"/>
+            <column name="data_atualizacao" type="${datetimeType}"/>
+            <column name="ativo" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

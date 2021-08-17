@@ -1,0 +1,71 @@
+
+entity Ambiente{
+	ambiente String required maxlength(50),
+    ativo Boolean 
+}
+
+entity AreaDepto {
+	area String required maxlength(100),
+    ativo Boolean
+}
+
+entity Cidade {
+	cidade String required maxlength(255),
+    estado String maxlength(255),
+    pais String maxlength(255)
+}
+
+/**
+ * Entidade: Contato
+ * Dados cadastrais de contatos relacionados ao Acervo Cultural 
+ */
+entity Contato{
+	nomeComp String required maxlength(120), /** Nome completo do contato */
+    empresa String maxlength(150),/** Nome Empresa e/ou Instituição */
+    funcao String maxlength(50), 	/** Cargo ocupado */
+    rg String maxlength(15), 		/** Documento de identidade */
+    cpf String maxlength(15),  /** CPF do contato */
+    infoContato String maxlength(200), /** Informacoes adicionais do contato */
+    endRua String maxlength(50), 	/** Endereço (rua,avenida,etc) */
+    endNumero String maxlength(10), 	/** Número do endereço */
+    endBairro String maxlength(50), 	/** Bairro do endereço */
+    endComplemento String maxlength(30), 	/** Complemento do endereço */
+    endCep String maxlength(10), /** CEP do endereço */
+    telefone String maxlength(50), /** */
+    fax String maxlength(50), /** */
+    celular String maxlength(30), /** */
+    email String maxlength(50), /** */
+    site String maxlength(50), /** */
+    observacoes String maxlength(200), /** */
+    dataAtualizacao Instant, /** */
+    ativo Boolean  /** */   
+}
+
+relationship OneToMany {
+  AreaDepto to Contato{area(area)},
+  Cidade to Contato{cidade(cidade)}
+}
+
+//relationship OneToOne {
+//  Contato{area(area)}to AreaDepto,
+//  Contato{cidade(cidade)} to Cidade
+//}
+
+// Set service options to all 
+service all with serviceClass
+
+// Aplica DTO com uso de mapstruct
+//dto * with mapstruct except Ambiente
+
+// Set filter options
+filter * 
+
+// Set search options
+//search Contato, AreaDepto, Cidade with elasticsearch
+
+// Set pagination options
+//paginate Contato, Ambiente with pagination
+
+
+
+    

@@ -1,0 +1,26 @@
+{
+  "artesApp": {
+    "areaDepto": {
+      "home": {
+        "title": "Area Deptos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Area Depto",
+        "createOrEditLabel": "Criar ou editar Area Depto",
+        "notFound": "Nenhum Area Depto encontrado"
+      },
+      "created": "Um novo Area Depto foi criado com o identificador {{ param }}",
+      "updated": "Um Area Depto foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Area Depto foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Area Depto {{ id }}?"
+      },
+      "detail": {
+        "title": "Area Depto"
+      },
+      "id": "ID",
+      "area": "Area",
+      "ativo": "Ativo",
+      "contato": "Contato"
+    }
+  }
+}

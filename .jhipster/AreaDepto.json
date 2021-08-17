@@ -1,0 +1,33 @@
+{
+  "name": "AreaDepto",
+  "fields": [
+    {
+      "fieldName": "area",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "ativo",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "contato",
+      "otherEntityRelationshipName": "area",
+      "relationshipName": "contato"
+    }
+  ],
+  "entityTableName": "area_depto",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210817042854"
+}
