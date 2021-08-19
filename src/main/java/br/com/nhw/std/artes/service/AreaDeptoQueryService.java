@@ -4,6 +4,8 @@ import br.com.nhw.std.artes.domain.*; // for static metamodels
 import br.com.nhw.std.artes.domain.AreaDepto;
 import br.com.nhw.std.artes.repository.AreaDeptoRepository;
 import br.com.nhw.std.artes.service.criteria.AreaDeptoCriteria;
+import br.com.nhw.std.artes.service.dto.AreaDeptoDTO;
+import br.com.nhw.std.artes.service.mapper.AreaDeptoMapper;
 import java.util.List;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ import tech.jhipster.service.QueryService;
  * Service for executing complex queries for {@link AreaDepto} entities in the database.
  * The main input is a {@link AreaDeptoCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
- * It returns a {@link List} of {@link AreaDepto} or a {@link Page} of {@link AreaDepto} which fulfills the criteria.
+ * It returns a {@link List} of {@link AreaDeptoDTO} or a {@link Page} of {@link AreaDeptoDTO} which fulfills the criteria.
  */
 @Service
 @Transactional(readOnly = true)
@@ -29,33 +31,36 @@ public class AreaDeptoQueryService extends QueryService<AreaDepto> {
 
     private final AreaDeptoRepository areaDeptoRepository;
 
-    public AreaDeptoQueryService(AreaDeptoRepository areaDeptoRepository) {
+    private final AreaDeptoMapper areaDeptoMapper;
+
+    public AreaDeptoQueryService(AreaDeptoRepository areaDeptoRepository, AreaDeptoMapper areaDeptoMapper) {
         this.areaDeptoRepository = areaDeptoRepository;
+        this.areaDeptoMapper = areaDeptoMapper;
     }
 
     /**
-     * Return a {@link List} of {@link AreaDepto} which matches the criteria from the database.
+     * Return a {@link List} of {@link AreaDeptoDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public List<AreaDepto> findByCriteria(AreaDeptoCriteria criteria) {
+    public List<AreaDeptoDTO> findByCriteria(AreaDeptoCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<AreaDepto> specification = createSpecification(criteria);
-        return areaDeptoRepository.findAll(specification);
+        return areaDeptoMapper.toDto(areaDeptoRepository.findAll(specification));
     }
 
     /**
-     * Return a {@link Page} of {@link AreaDepto} which matches the criteria from the database.
+     * Return a {@link Page} of {@link AreaDeptoDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public Page<AreaDepto> findByCriteria(AreaDeptoCriteria criteria, Pageable page) {
+    public Page<AreaDeptoDTO> findByCriteria(AreaDeptoCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<AreaDepto> specification = createSpecification(criteria);
-        return areaDeptoRepository.findAll(specification, page);
+        return areaDeptoRepository.findAll(specification, page).map(areaDeptoMapper::toDto);
     }
 
     /**

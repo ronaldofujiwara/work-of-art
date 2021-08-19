@@ -1,10 +1,10 @@
 package br.com.nhw.std.artes.web.rest;
 
-import br.com.nhw.std.artes.domain.Contato;
 import br.com.nhw.std.artes.repository.ContatoRepository;
 import br.com.nhw.std.artes.service.ContatoQueryService;
 import br.com.nhw.std.artes.service.ContatoService;
 import br.com.nhw.std.artes.service.criteria.ContatoCriteria;
+import br.com.nhw.std.artes.service.dto.ContatoDTO;
 import br.com.nhw.std.artes.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,9 +16,15 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -50,17 +56,17 @@ public class ContatoResource {
     /**
      * {@code POST  /contatoes} : Create a new contato.
      *
-     * @param contato the contato to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new contato, or with status {@code 400 (Bad Request)} if the contato has already an ID.
+     * @param contatoDTO the contatoDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new contatoDTO, or with status {@code 400 (Bad Request)} if the contato has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/contatoes")
-    public ResponseEntity<Contato> createContato(@Valid @RequestBody Contato contato) throws URISyntaxException {
-        log.debug("REST request to save Contato : {}", contato);
-        if (contato.getId() != null) {
+    public ResponseEntity<ContatoDTO> createContato(@Valid @RequestBody ContatoDTO contatoDTO) throws URISyntaxException {
+        log.debug("REST request to save Contato : {}", contatoDTO);
+        if (contatoDTO.getId() != null) {
             throw new BadRequestAlertException("A new contato cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Contato result = contatoService.save(contato);
+        ContatoDTO result = contatoService.save(contatoDTO);
         return ResponseEntity
             .created(new URI("/api/contatoes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -70,23 +76,23 @@ public class ContatoResource {
     /**
      * {@code PUT  /contatoes/:id} : Updates an existing contato.
      *
-     * @param id the id of the contato to save.
-     * @param contato the contato to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated contato,
-     * or with status {@code 400 (Bad Request)} if the contato is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the contato couldn't be updated.
+     * @param id the id of the contatoDTO to save.
+     * @param contatoDTO the contatoDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated contatoDTO,
+     * or with status {@code 400 (Bad Request)} if the contatoDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the contatoDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/contatoes/{id}")
-    public ResponseEntity<Contato> updateContato(
+    public ResponseEntity<ContatoDTO> updateContato(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Contato contato
+        @Valid @RequestBody ContatoDTO contatoDTO
     ) throws URISyntaxException {
-        log.debug("REST request to update Contato : {}, {}", id, contato);
-        if (contato.getId() == null) {
+        log.debug("REST request to update Contato : {}, {}", id, contatoDTO);
+        if (contatoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, contato.getId())) {
+        if (!Objects.equals(id, contatoDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -94,34 +100,34 @@ public class ContatoResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Contato result = contatoService.save(contato);
+        ContatoDTO result = contatoService.save(contatoDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contato.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contatoDTO.getId().toString()))
             .body(result);
     }
 
     /**
      * {@code PATCH  /contatoes/:id} : Partial updates given fields of an existing contato, field will ignore if it is null
      *
-     * @param id the id of the contato to save.
-     * @param contato the contato to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated contato,
-     * or with status {@code 400 (Bad Request)} if the contato is not valid,
-     * or with status {@code 404 (Not Found)} if the contato is not found,
-     * or with status {@code 500 (Internal Server Error)} if the contato couldn't be updated.
+     * @param id the id of the contatoDTO to save.
+     * @param contatoDTO the contatoDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated contatoDTO,
+     * or with status {@code 400 (Bad Request)} if the contatoDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the contatoDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the contatoDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/contatoes/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Contato> partialUpdateContato(
+    public ResponseEntity<ContatoDTO> partialUpdateContato(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Contato contato
+        @NotNull @RequestBody ContatoDTO contatoDTO
     ) throws URISyntaxException {
-        log.debug("REST request to partial update Contato partially : {}, {}", id, contato);
-        if (contato.getId() == null) {
+        log.debug("REST request to partial update Contato partially : {}, {}", id, contatoDTO);
+        if (contatoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, contato.getId())) {
+        if (!Objects.equals(id, contatoDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -129,25 +135,27 @@ public class ContatoResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Contato> result = contatoService.partialUpdate(contato);
+        Optional<ContatoDTO> result = contatoService.partialUpdate(contatoDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contato.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contatoDTO.getId().toString())
         );
     }
 
     /**
      * {@code GET  /contatoes} : get all the contatoes.
      *
+     * @param pageable the pagination information.
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contatoes in body.
      */
     @GetMapping("/contatoes")
-    public ResponseEntity<List<Contato>> getAllContatoes(ContatoCriteria criteria) {
+    public ResponseEntity<List<ContatoDTO>> getAllContatoes(ContatoCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Contatoes by criteria: {}", criteria);
-        List<Contato> entityList = contatoQueryService.findByCriteria(criteria);
-        return ResponseEntity.ok().body(entityList);
+        Page<ContatoDTO> page = contatoQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -165,20 +173,20 @@ public class ContatoResource {
     /**
      * {@code GET  /contatoes/:id} : get the "id" contato.
      *
-     * @param id the id of the contato to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contato, or with status {@code 404 (Not Found)}.
+     * @param id the id of the contatoDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contatoDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/contatoes/{id}")
-    public ResponseEntity<Contato> getContato(@PathVariable Long id) {
+    public ResponseEntity<ContatoDTO> getContato(@PathVariable Long id) {
         log.debug("REST request to get Contato : {}", id);
-        Optional<Contato> contato = contatoService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(contato);
+        Optional<ContatoDTO> contatoDTO = contatoService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(contatoDTO);
     }
 
     /**
      * {@code DELETE  /contatoes/:id} : delete the "id" contato.
      *
-     * @param id the id of the contato to delete.
+     * @param id the id of the contatoDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/contatoes/{id}")

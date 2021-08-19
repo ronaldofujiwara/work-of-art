@@ -1,0 +1,174 @@
+
+entity Ambiente {
+	ambiente String required maxlength(50),
+    inativo Boolean 
+}
+
+entity AreaDepto {
+	area String required maxlength(100),
+    inativo Boolean
+}
+
+entity Categoria {
+	categoria String required maxlength(40),
+    inativo Boolean 
+}
+
+
+entity Cidade {
+	cidade String required maxlength(255),
+    estado String maxlength(255),
+    pais String maxlength(255)
+}
+
+/**
+ * Entidade: Contato
+ * Dados cadastrais de contatos relacionados ao Acervo Cultural 
+ */
+entity Contato{
+	nomeComp String required maxlength(120), /** Nome completo do contato */
+    empresa String maxlength(150),/** Nome Empresa e/ou Instituição */
+    funcao String maxlength(50), 	/** Cargo ocupado */
+    rg String maxlength(15), 		/** Documento de identidade */
+    cpf String maxlength(15),  /** CPF do contato */
+    infoContato String maxlength(200), /** Informacoes adicionais do contato */
+    endRua String maxlength(50), 	/** Endereço (rua,avenida,etc) */
+    endNumero String maxlength(10), 	/** Número do endereço */
+    endBairro String maxlength(50), 	/** Bairro do endereço */
+    endComplemento String maxlength(30), 	/** Complemento do endereço */
+    endCep String maxlength(10), /** CEP do endereço */
+    telefone String maxlength(50), /** */
+    fax String maxlength(50), /** */
+    celular String maxlength(30), /** */
+    email String maxlength(50), /** */
+    site String maxlength(50), /** */
+    observacoes String maxlength(200), /** */
+    dataAtualizacao Instant, /** */
+    inativo Boolean  /** */   
+}
+
+/** Entidade: Data
+ *  Data de execução da obra */
+entity Data {
+	data String required maxlength(50),  /** Data da obra */
+    inativo Boolean  /** O registro está inativo? */
+}
+
+
+/** Entidade: Nivel
+ *  Nivel de classificacao geral da obra */
+entity Nivel {
+	nivel String required maxlength(250),  /** Nivel de classificacao */
+    inativo Boolean  /** O registro está inativo? */
+}
+
+
+/** Entidade: Obra
+ *  Dados principais das obras do Acervo de Arte */
+entity Obra {
+	tombo String maxlength(8) required,  /** Nº Tombo da Obras */
+	multiplo String maxlength(1),   /** (M) - Indica Obra Multipla: (-)=multiplo; (.)=cópia */
+	numeroRegistro String maxlength(50),  /** Número do Registro existente no Bradesco = ATIP */
+	outrosTitulos String maxlength(200),  /** Outros Títulos da obra */
+	tituloOriginal String maxlength(200),  /** Título da original da obra */
+	origem String maxlength(100),  /** Local de origem onde foi feita a obra */
+	descricao String maxlength(16777216),  /** Descrição da obra */
+	assinatura Boolean,  /** Se a obra é assinada ou não */
+	localAssinatura String maxlength(16777216),   /** Localização da assinatura do artista na obra */
+	marcaInscrObra String maxlength(16777216),  /** Marcas e/ou Inscrições que se encontram na obra */
+	marcaInscrSuporte String maxlength(16777216),  /** Marcas e/ou Inscrições que se encontram no suporte/moldura da obra */
+	MedidasAprox Boolean,  /** Indica se as medidas são aproximadas ou se reais */
+	alturaObra BigDecimal, /** Altura da Obra s/suporte ou moldura (precisão 2 decimais) */
+	largObra BigDecimal ,  /** Largura da Obra s/suporte ou moldura (precisão 2 decimais) */
+	profObra BigDecimal,   /** Profundidade da Obra s/suporte ou moldura (precisão 2 decimais) */
+	diametrObra String maxlength(6), /** Diâmetro da Obra s/suporte ou moldura */
+	alturaMold BigDecimal, /** Altura da Obra c/Moldura (precisão 2 decimais) */
+	largMold BigDecimal,   /** Largura da Obra c/Moldura (precisão 2 decimais) */
+	profMold BigDecimal,   /** Profundidade da Obra c/Moldura (precisão 2 decimais) */
+	diametroMold String maxlength(10), /** Diâmetro da Obra s/suporte ou moldura */
+	dimensAdic String maxlength(150),   /** Dimensões adicionais da obra */
+	pesObra String maxlength(10),  /** Peso da Obra */
+	atribuido Boolean,  /** Autoria é atribuída ou não */
+	nFoto String maxlength(10),   /** Nome e ou número da foto correspondente a obra */
+	conjunto Boolean,  /** Faz parte de um conjunto? */
+	conjTombo String maxlength(100),  /** Nº Tombos que formam o  conjunto */
+	valorSeguro BigDecimal,  /** Valor do Seguro (precisão 4 decimais) */
+	valorSeguroReal BigDecimal, /** Valor do Seguro convertido em Reais (precisão 4 decimais) */ 
+	dataconversao LocalDate,  /** Data da conversão da moeda */
+	dataAlterApolice LocalDate,   /** Data que a obra foi Incluida/Excluida na Apólice */
+	localAtual String maxlength(100),  /** Localização atual da obra - relacionada com QryLocalização */
+	localAtualNovo String maxlength(200),  /** Localização atual da obra - relacionada com QryLocalizaçãoNOVA */
+	codParametro String maxlength(50),  /** Categorias da tblParametros para associarmos com a obra */
+	obs String maxlength(16777216),   /** Observações gerais da obra */
+	tiragem String maxlength(16777216),  /** Tiragem da gravura */
+	serie String maxlength(200),  /** Título da Série da gravura */
+	selo Integer,  /** Classificação da obra quanto ao uso, designado pelos pesquisadores */
+	tomboAnterio String maxlength(50),   /** Número da antiga catalogação */
+	verbete String maxlength(16777216),  /** Dados específicos sobre a obra */
+	livro Boolean,  /** Selecionar caso a obra esteja participando da última publicação da coleção */
+	imagemAlta Boolean,  /** Selecionar caso a obra possua imagem digital em alta resolução */
+	apabex Boolean,  /** Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino à APABEX */
+	bunkyo Boolean,  /** Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino ao BUNKYO */
+	faseDepuracao String maxlength(255),  /** Indique em qual fase a obra será destinada à Apabex ou ao Bunkyo */
+	paraAvaliacao Boolean,  /** Selecionar caso a obra necessite ser encaminhada para avaliação de mercado */
+	paraRestauracao Boolean,  /** Selecionar caso a obra necessite ser encaminhada para restauração */
+	paraMoldura Boolean,  /** Selecionar caso a obra necessite ser encaminhada para confecção de moldura */
+	paraLegenda Boolean,  /** Selecionar caso a obra necessite ser encaminhada para confecção de legenda */
+	tempField Boolean,  /** Selecionar caso a obra necessite ser encaminhada para foto em alta */
+	selecaoListaAvulsa Boolean,  /** Selecionar para incluir a obra em uma eventual seleção avulsa */
+	dominioPubl Boolean,  /** É de domínio público  */
+	dtVencFoto LocalDate,  /** Data de vencimento de uso de imagem do Fotografo */
+	obsUsoFoto String maxlength(255),  /** Observações de uso de imagem do Fotografo */
+	localFotoAlta String maxlength(255),  /** Localização da FotoAlta */
+	dataInclusao LocalDate,  /** Data que a obra foi inserida */
+	dataExclusao LocalDate,  /** Data que a obra foi excluida */
+	bookX Integer,  /** Posicao do Eixo X no book */
+	bookY Integer,  /** Posicao do Eixo Y no book */
+	genDescricao Integer,  /**    */
+	genField1 Integer,  /**    */
+	paraFotografia Boolean,  /** Selecionar caso a obra necessite ser encaminhada para foto em alta  */
+	genMarcaInscrObra Integer,  /**   */
+	palavrasChave String maxlength(16777216),  /** Palavras-chave relacionadas à obra, para pesquisa mais detalhada */
+	genMarcaInscrSuporte Integer,  /**   */
+	genObs Integer,  /**   */
+	genVerbete Integer  /**   */
+}
+
+
+/** Entidade: Tecnica
+ *  Relação de técnicas ou materiais que constituem a obra */
+entity Tecnica {
+	tecnicas String required maxlength(150),  /** Técnicas ou materiais que constituem a obra */
+    inativo Boolean  /** O registro está inativo? */
+}
+
+
+
+relationship OneToMany {
+  AreaDepto to Contato{area(area)},
+  Cidade to Contato{cidade(cidade)}
+  Categoria to Obra{categoria(categoria)}
+  Tecnica to Obra{tecnica(tecnica)}
+  Nivel to Obra{nivel(nivel)}
+  Data to Obra{data(data)}
+}
+
+
+// Set service options to all 
+service all with serviceClass
+
+// Aplica DTO com uso de mapstruct
+dto * with mapstruct
+
+// Set filter options
+filter all 
+
+// Set search options
+//search Contato, AreaDepto, Cidade with elasticsearch
+
+// Set pagination options
+paginate Contato, Ambiente, Obra with pagination
+
+
+
+    

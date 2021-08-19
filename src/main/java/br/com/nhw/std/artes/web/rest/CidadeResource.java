@@ -1,10 +1,10 @@
 package br.com.nhw.std.artes.web.rest;
 
-import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.repository.CidadeRepository;
 import br.com.nhw.std.artes.service.CidadeQueryService;
 import br.com.nhw.std.artes.service.CidadeService;
 import br.com.nhw.std.artes.service.criteria.CidadeCriteria;
+import br.com.nhw.std.artes.service.dto.CidadeDTO;
 import br.com.nhw.std.artes.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,9 +16,15 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -50,17 +56,17 @@ public class CidadeResource {
     /**
      * {@code POST  /cidades} : Create a new cidade.
      *
-     * @param cidade the cidade to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new cidade, or with status {@code 400 (Bad Request)} if the cidade has already an ID.
+     * @param cidadeDTO the cidadeDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new cidadeDTO, or with status {@code 400 (Bad Request)} if the cidade has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/cidades")
-    public ResponseEntity<Cidade> createCidade(@Valid @RequestBody Cidade cidade) throws URISyntaxException {
-        log.debug("REST request to save Cidade : {}", cidade);
-        if (cidade.getId() != null) {
+    public ResponseEntity<CidadeDTO> createCidade(@Valid @RequestBody CidadeDTO cidadeDTO) throws URISyntaxException {
+        log.debug("REST request to save Cidade : {}", cidadeDTO);
+        if (cidadeDTO.getId() != null) {
             throw new BadRequestAlertException("A new cidade cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Cidade result = cidadeService.save(cidade);
+        CidadeDTO result = cidadeService.save(cidadeDTO);
         return ResponseEntity
             .created(new URI("/api/cidades/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -70,23 +76,23 @@ public class CidadeResource {
     /**
      * {@code PUT  /cidades/:id} : Updates an existing cidade.
      *
-     * @param id the id of the cidade to save.
-     * @param cidade the cidade to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cidade,
-     * or with status {@code 400 (Bad Request)} if the cidade is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the cidade couldn't be updated.
+     * @param id the id of the cidadeDTO to save.
+     * @param cidadeDTO the cidadeDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cidadeDTO,
+     * or with status {@code 400 (Bad Request)} if the cidadeDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the cidadeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/cidades/{id}")
-    public ResponseEntity<Cidade> updateCidade(
+    public ResponseEntity<CidadeDTO> updateCidade(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Cidade cidade
+        @Valid @RequestBody CidadeDTO cidadeDTO
     ) throws URISyntaxException {
-        log.debug("REST request to update Cidade : {}, {}", id, cidade);
-        if (cidade.getId() == null) {
+        log.debug("REST request to update Cidade : {}, {}", id, cidadeDTO);
+        if (cidadeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, cidade.getId())) {
+        if (!Objects.equals(id, cidadeDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -94,34 +100,34 @@ public class CidadeResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Cidade result = cidadeService.save(cidade);
+        CidadeDTO result = cidadeService.save(cidadeDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cidade.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cidadeDTO.getId().toString()))
             .body(result);
     }
 
     /**
      * {@code PATCH  /cidades/:id} : Partial updates given fields of an existing cidade, field will ignore if it is null
      *
-     * @param id the id of the cidade to save.
-     * @param cidade the cidade to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cidade,
-     * or with status {@code 400 (Bad Request)} if the cidade is not valid,
-     * or with status {@code 404 (Not Found)} if the cidade is not found,
-     * or with status {@code 500 (Internal Server Error)} if the cidade couldn't be updated.
+     * @param id the id of the cidadeDTO to save.
+     * @param cidadeDTO the cidadeDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cidadeDTO,
+     * or with status {@code 400 (Bad Request)} if the cidadeDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the cidadeDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the cidadeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/cidades/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Cidade> partialUpdateCidade(
+    public ResponseEntity<CidadeDTO> partialUpdateCidade(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Cidade cidade
+        @NotNull @RequestBody CidadeDTO cidadeDTO
     ) throws URISyntaxException {
-        log.debug("REST request to partial update Cidade partially : {}, {}", id, cidade);
-        if (cidade.getId() == null) {
+        log.debug("REST request to partial update Cidade partially : {}, {}", id, cidadeDTO);
+        if (cidadeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, cidade.getId())) {
+        if (!Objects.equals(id, cidadeDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -129,25 +135,27 @@ public class CidadeResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Cidade> result = cidadeService.partialUpdate(cidade);
+        Optional<CidadeDTO> result = cidadeService.partialUpdate(cidadeDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cidade.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cidadeDTO.getId().toString())
         );
     }
 
     /**
      * {@code GET  /cidades} : get all the cidades.
      *
+     * @param pageable the pagination information.
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cidades in body.
      */
     @GetMapping("/cidades")
-    public ResponseEntity<List<Cidade>> getAllCidades(CidadeCriteria criteria) {
+    public ResponseEntity<List<CidadeDTO>> getAllCidades(CidadeCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Cidades by criteria: {}", criteria);
-        List<Cidade> entityList = cidadeQueryService.findByCriteria(criteria);
-        return ResponseEntity.ok().body(entityList);
+        Page<CidadeDTO> page = cidadeQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -165,20 +173,20 @@ public class CidadeResource {
     /**
      * {@code GET  /cidades/:id} : get the "id" cidade.
      *
-     * @param id the id of the cidade to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cidade, or with status {@code 404 (Not Found)}.
+     * @param id the id of the cidadeDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cidadeDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/cidades/{id}")
-    public ResponseEntity<Cidade> getCidade(@PathVariable Long id) {
+    public ResponseEntity<CidadeDTO> getCidade(@PathVariable Long id) {
         log.debug("REST request to get Cidade : {}", id);
-        Optional<Cidade> cidade = cidadeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(cidade);
+        Optional<CidadeDTO> cidadeDTO = cidadeService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(cidadeDTO);
     }
 
     /**
      * {@code DELETE  /cidades/:id} : delete the "id" cidade.
      *
-     * @param id the id of the cidade to delete.
+     * @param id the id of the cidadeDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/cidades/{id}")

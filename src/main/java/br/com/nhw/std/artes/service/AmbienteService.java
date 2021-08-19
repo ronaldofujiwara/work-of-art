@@ -2,10 +2,13 @@ package br.com.nhw.std.artes.service;
 
 import br.com.nhw.std.artes.domain.Ambiente;
 import br.com.nhw.std.artes.repository.AmbienteRepository;
-import java.util.List;
+import br.com.nhw.std.artes.service.dto.AmbienteDTO;
+import br.com.nhw.std.artes.service.mapper.AmbienteMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,56 +23,58 @@ public class AmbienteService {
 
     private final AmbienteRepository ambienteRepository;
 
-    public AmbienteService(AmbienteRepository ambienteRepository) {
+    private final AmbienteMapper ambienteMapper;
+
+    public AmbienteService(AmbienteRepository ambienteRepository, AmbienteMapper ambienteMapper) {
         this.ambienteRepository = ambienteRepository;
+        this.ambienteMapper = ambienteMapper;
     }
 
     /**
      * Save a ambiente.
      *
-     * @param ambiente the entity to save.
+     * @param ambienteDTO the entity to save.
      * @return the persisted entity.
      */
-    public Ambiente save(Ambiente ambiente) {
-        log.debug("Request to save Ambiente : {}", ambiente);
-        return ambienteRepository.save(ambiente);
+    public AmbienteDTO save(AmbienteDTO ambienteDTO) {
+        log.debug("Request to save Ambiente : {}", ambienteDTO);
+        Ambiente ambiente = ambienteMapper.toEntity(ambienteDTO);
+        ambiente = ambienteRepository.save(ambiente);
+        return ambienteMapper.toDto(ambiente);
     }
 
     /**
      * Partially update a ambiente.
      *
-     * @param ambiente the entity to update partially.
+     * @param ambienteDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Ambiente> partialUpdate(Ambiente ambiente) {
-        log.debug("Request to partially update Ambiente : {}", ambiente);
+    public Optional<AmbienteDTO> partialUpdate(AmbienteDTO ambienteDTO) {
+        log.debug("Request to partially update Ambiente : {}", ambienteDTO);
 
         return ambienteRepository
-            .findById(ambiente.getId())
+            .findById(ambienteDTO.getId())
             .map(
                 existingAmbiente -> {
-                    if (ambiente.getAmbiente() != null) {
-                        existingAmbiente.setAmbiente(ambiente.getAmbiente());
-                    }
-                    if (ambiente.getAtivo() != null) {
-                        existingAmbiente.setAtivo(ambiente.getAtivo());
-                    }
+                    ambienteMapper.partialUpdate(existingAmbiente, ambienteDTO);
 
                     return existingAmbiente;
                 }
             )
-            .map(ambienteRepository::save);
+            .map(ambienteRepository::save)
+            .map(ambienteMapper::toDto);
     }
 
     /**
      * Get all the ambientes.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<Ambiente> findAll() {
+    public Page<AmbienteDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Ambientes");
-        return ambienteRepository.findAll();
+        return ambienteRepository.findAll(pageable).map(ambienteMapper::toDto);
     }
 
     /**
@@ -79,9 +84,9 @@ public class AmbienteService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<Ambiente> findOne(Long id) {
+    public Optional<AmbienteDTO> findOne(Long id) {
         log.debug("Request to get Ambiente : {}", id);
-        return ambienteRepository.findById(id);
+        return ambienteRepository.findById(id).map(ambienteMapper::toDto);
     }
 
     /**

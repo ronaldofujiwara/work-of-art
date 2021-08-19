@@ -10,6 +10,8 @@ import br.com.nhw.std.artes.domain.AreaDepto;
 import br.com.nhw.std.artes.domain.Contato;
 import br.com.nhw.std.artes.repository.AreaDeptoRepository;
 import br.com.nhw.std.artes.service.criteria.AreaDeptoCriteria;
+import br.com.nhw.std.artes.service.dto.AreaDeptoDTO;
+import br.com.nhw.std.artes.service.mapper.AreaDeptoMapper;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -45,6 +47,9 @@ class AreaDeptoResourceIT {
 
     @Autowired
     private AreaDeptoRepository areaDeptoRepository;
+
+    @Autowired
+    private AreaDeptoMapper areaDeptoMapper;
 
     @Autowired
     private EntityManager em;
@@ -86,8 +91,9 @@ class AreaDeptoResourceIT {
     void createAreaDepto() throws Exception {
         int databaseSizeBeforeCreate = areaDeptoRepository.findAll().size();
         // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
         restAreaDeptoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDepto)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO)))
             .andExpect(status().isCreated());
 
         // Validate the AreaDepto in the database
@@ -103,12 +109,13 @@ class AreaDeptoResourceIT {
     void createAreaDeptoWithExistingId() throws Exception {
         // Create the AreaDepto with an existing ID
         areaDepto.setId(1L);
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
 
         int databaseSizeBeforeCreate = areaDeptoRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAreaDeptoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDepto)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the AreaDepto in the database
@@ -124,9 +131,10 @@ class AreaDeptoResourceIT {
         areaDepto.setArea(null);
 
         // Create the AreaDepto, which fails.
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
 
         restAreaDeptoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDepto)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO)))
             .andExpect(status().isBadRequest());
 
         List<AreaDepto> areaDeptoList = areaDeptoRepository.findAll();
@@ -391,12 +399,13 @@ class AreaDeptoResourceIT {
         // Disconnect from session so that the updates on updatedAreaDepto are not directly saved in db
         em.detach(updatedAreaDepto);
         updatedAreaDepto.area(UPDATED_AREA).ativo(UPDATED_ATIVO);
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(updatedAreaDepto);
 
         restAreaDeptoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedAreaDepto.getId())
+                put(ENTITY_API_URL_ID, areaDeptoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedAreaDepto))
+                    .content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO))
             )
             .andExpect(status().isOk());
 
@@ -414,12 +423,15 @@ class AreaDeptoResourceIT {
         int databaseSizeBeforeUpdate = areaDeptoRepository.findAll().size();
         areaDepto.setId(count.incrementAndGet());
 
+        // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAreaDeptoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, areaDepto.getId())
+                put(ENTITY_API_URL_ID, areaDeptoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(areaDepto))
+                    .content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -434,12 +446,15 @@ class AreaDeptoResourceIT {
         int databaseSizeBeforeUpdate = areaDeptoRepository.findAll().size();
         areaDepto.setId(count.incrementAndGet());
 
+        // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAreaDeptoMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(areaDepto))
+                    .content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -454,9 +469,12 @@ class AreaDeptoResourceIT {
         int databaseSizeBeforeUpdate = areaDeptoRepository.findAll().size();
         areaDepto.setId(count.incrementAndGet());
 
+        // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAreaDeptoMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDepto)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the AreaDepto in the database
@@ -530,12 +548,15 @@ class AreaDeptoResourceIT {
         int databaseSizeBeforeUpdate = areaDeptoRepository.findAll().size();
         areaDepto.setId(count.incrementAndGet());
 
+        // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAreaDeptoMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, areaDepto.getId())
+                patch(ENTITY_API_URL_ID, areaDeptoDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(areaDepto))
+                    .content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -550,12 +571,15 @@ class AreaDeptoResourceIT {
         int databaseSizeBeforeUpdate = areaDeptoRepository.findAll().size();
         areaDepto.setId(count.incrementAndGet());
 
+        // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAreaDeptoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(areaDepto))
+                    .content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -570,10 +594,13 @@ class AreaDeptoResourceIT {
         int databaseSizeBeforeUpdate = areaDeptoRepository.findAll().size();
         areaDepto.setId(count.incrementAndGet());
 
+        // Create the AreaDepto
+        AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(areaDepto);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAreaDeptoMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(areaDepto))
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(areaDeptoDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 

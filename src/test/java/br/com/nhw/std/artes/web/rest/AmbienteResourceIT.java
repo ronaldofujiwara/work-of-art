@@ -9,6 +9,8 @@ import br.com.nhw.std.artes.IntegrationTest;
 import br.com.nhw.std.artes.domain.Ambiente;
 import br.com.nhw.std.artes.repository.AmbienteRepository;
 import br.com.nhw.std.artes.service.criteria.AmbienteCriteria;
+import br.com.nhw.std.artes.service.dto.AmbienteDTO;
+import br.com.nhw.std.artes.service.mapper.AmbienteMapper;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -44,6 +46,9 @@ class AmbienteResourceIT {
 
     @Autowired
     private AmbienteRepository ambienteRepository;
+
+    @Autowired
+    private AmbienteMapper ambienteMapper;
 
     @Autowired
     private EntityManager em;
@@ -85,8 +90,9 @@ class AmbienteResourceIT {
     void createAmbiente() throws Exception {
         int databaseSizeBeforeCreate = ambienteRepository.findAll().size();
         // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
         restAmbienteMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambiente)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambienteDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Ambiente in the database
@@ -102,12 +108,13 @@ class AmbienteResourceIT {
     void createAmbienteWithExistingId() throws Exception {
         // Create the Ambiente with an existing ID
         ambiente.setId(1L);
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
 
         int databaseSizeBeforeCreate = ambienteRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAmbienteMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambiente)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambienteDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Ambiente in the database
@@ -123,9 +130,10 @@ class AmbienteResourceIT {
         ambiente.setAmbiente(null);
 
         // Create the Ambiente, which fails.
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
 
         restAmbienteMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambiente)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambienteDTO)))
             .andExpect(status().isBadRequest());
 
         List<Ambiente> ambienteList = ambienteRepository.findAll();
@@ -371,12 +379,13 @@ class AmbienteResourceIT {
         // Disconnect from session so that the updates on updatedAmbiente are not directly saved in db
         em.detach(updatedAmbiente);
         updatedAmbiente.ambiente(UPDATED_AMBIENTE).ativo(UPDATED_ATIVO);
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(updatedAmbiente);
 
         restAmbienteMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedAmbiente.getId())
+                put(ENTITY_API_URL_ID, ambienteDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedAmbiente))
+                    .content(TestUtil.convertObjectToJsonBytes(ambienteDTO))
             )
             .andExpect(status().isOk());
 
@@ -394,12 +403,15 @@ class AmbienteResourceIT {
         int databaseSizeBeforeUpdate = ambienteRepository.findAll().size();
         ambiente.setId(count.incrementAndGet());
 
+        // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAmbienteMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, ambiente.getId())
+                put(ENTITY_API_URL_ID, ambienteDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(ambiente))
+                    .content(TestUtil.convertObjectToJsonBytes(ambienteDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -414,12 +426,15 @@ class AmbienteResourceIT {
         int databaseSizeBeforeUpdate = ambienteRepository.findAll().size();
         ambiente.setId(count.incrementAndGet());
 
+        // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAmbienteMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(ambiente))
+                    .content(TestUtil.convertObjectToJsonBytes(ambienteDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -434,9 +449,12 @@ class AmbienteResourceIT {
         int databaseSizeBeforeUpdate = ambienteRepository.findAll().size();
         ambiente.setId(count.incrementAndGet());
 
+        // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAmbienteMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambiente)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ambienteDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Ambiente in the database
@@ -510,12 +528,15 @@ class AmbienteResourceIT {
         int databaseSizeBeforeUpdate = ambienteRepository.findAll().size();
         ambiente.setId(count.incrementAndGet());
 
+        // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAmbienteMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, ambiente.getId())
+                patch(ENTITY_API_URL_ID, ambienteDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(ambiente))
+                    .content(TestUtil.convertObjectToJsonBytes(ambienteDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -530,12 +551,15 @@ class AmbienteResourceIT {
         int databaseSizeBeforeUpdate = ambienteRepository.findAll().size();
         ambiente.setId(count.incrementAndGet());
 
+        // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAmbienteMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(ambiente))
+                    .content(TestUtil.convertObjectToJsonBytes(ambienteDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -550,9 +574,14 @@ class AmbienteResourceIT {
         int databaseSizeBeforeUpdate = ambienteRepository.findAll().size();
         ambiente.setId(count.incrementAndGet());
 
+        // Create the Ambiente
+        AmbienteDTO ambienteDTO = ambienteMapper.toDto(ambiente);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAmbienteMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(ambiente)))
+            .perform(
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(ambienteDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Ambiente in the database

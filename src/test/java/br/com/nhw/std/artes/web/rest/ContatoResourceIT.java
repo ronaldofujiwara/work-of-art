@@ -11,6 +11,8 @@ import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.domain.Contato;
 import br.com.nhw.std.artes.repository.ContatoRepository;
 import br.com.nhw.std.artes.service.criteria.ContatoCriteria;
+import br.com.nhw.std.artes.service.dto.ContatoDTO;
+import br.com.nhw.std.artes.service.mapper.ContatoMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -101,6 +103,9 @@ class ContatoResourceIT {
     private ContatoRepository contatoRepository;
 
     @Autowired
+    private ContatoMapper contatoMapper;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -178,8 +183,9 @@ class ContatoResourceIT {
     void createContato() throws Exception {
         int databaseSizeBeforeCreate = contatoRepository.findAll().size();
         // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
         restContatoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contato)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contatoDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Contato in the database
@@ -212,12 +218,13 @@ class ContatoResourceIT {
     void createContatoWithExistingId() throws Exception {
         // Create the Contato with an existing ID
         contato.setId(1L);
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
 
         int databaseSizeBeforeCreate = contatoRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restContatoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contato)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contatoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Contato in the database
@@ -233,9 +240,10 @@ class ContatoResourceIT {
         contato.setNomeComp(null);
 
         // Create the Contato, which fails.
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
 
         restContatoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contato)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contatoDTO)))
             .andExpect(status().isBadRequest());
 
         List<Contato> contatoList = contatoRepository.findAll();
@@ -1889,12 +1897,13 @@ class ContatoResourceIT {
             .observacoes(UPDATED_OBSERVACOES)
             .dataAtualizacao(UPDATED_DATA_ATUALIZACAO)
             .ativo(UPDATED_ATIVO);
+        ContatoDTO contatoDTO = contatoMapper.toDto(updatedContato);
 
         restContatoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedContato.getId())
+                put(ENTITY_API_URL_ID, contatoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedContato))
+                    .content(TestUtil.convertObjectToJsonBytes(contatoDTO))
             )
             .andExpect(status().isOk());
 
@@ -1929,12 +1938,15 @@ class ContatoResourceIT {
         int databaseSizeBeforeUpdate = contatoRepository.findAll().size();
         contato.setId(count.incrementAndGet());
 
+        // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContatoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, contato.getId())
+                put(ENTITY_API_URL_ID, contatoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(contato))
+                    .content(TestUtil.convertObjectToJsonBytes(contatoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -1949,12 +1961,15 @@ class ContatoResourceIT {
         int databaseSizeBeforeUpdate = contatoRepository.findAll().size();
         contato.setId(count.incrementAndGet());
 
+        // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContatoMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(contato))
+                    .content(TestUtil.convertObjectToJsonBytes(contatoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -1969,9 +1984,12 @@ class ContatoResourceIT {
         int databaseSizeBeforeUpdate = contatoRepository.findAll().size();
         contato.setId(count.incrementAndGet());
 
+        // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContatoMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contato)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(contatoDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Contato in the database
@@ -2115,12 +2133,15 @@ class ContatoResourceIT {
         int databaseSizeBeforeUpdate = contatoRepository.findAll().size();
         contato.setId(count.incrementAndGet());
 
+        // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContatoMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, contato.getId())
+                patch(ENTITY_API_URL_ID, contatoDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(contato))
+                    .content(TestUtil.convertObjectToJsonBytes(contatoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -2135,12 +2156,15 @@ class ContatoResourceIT {
         int databaseSizeBeforeUpdate = contatoRepository.findAll().size();
         contato.setId(count.incrementAndGet());
 
+        // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContatoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(contato))
+                    .content(TestUtil.convertObjectToJsonBytes(contatoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -2155,9 +2179,14 @@ class ContatoResourceIT {
         int databaseSizeBeforeUpdate = contatoRepository.findAll().size();
         contato.setId(count.incrementAndGet());
 
+        // Create the Contato
+        ContatoDTO contatoDTO = contatoMapper.toDto(contato);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContatoMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(contato)))
+            .perform(
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(contatoDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Contato in the database

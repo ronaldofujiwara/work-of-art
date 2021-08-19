@@ -1,7 +1,7 @@
 
 entity Ambiente{
 	ambiente String required maxlength(50),
-    ativo Boolean 
+    ativo Boolean
 }
 
 entity AreaDepto {
@@ -17,7 +17,7 @@ entity Cidade {
 
 /**
  * Entidade: Contato
- * Dados cadastrais de contatos relacionados ao Acervo Cultural 
+ * Dados cadastrais de contatos relacionados ao Acervo Cultural
  */
 entity Contato{
 	nomeComp String required maxlength(120), /** Nome completo do contato */
@@ -38,7 +38,7 @@ entity Contato{
     site String maxlength(50), /** */
     observacoes String maxlength(200), /** */
     dataAtualizacao Instant, /** */
-    ativo Boolean  /** */   
+    ativo Boolean  /** */
 }
 
 relationship OneToMany {
@@ -51,21 +51,20 @@ relationship OneToMany {
 //  Contato{cidade(cidade)} to Cidade
 //}
 
-// Set service options to all 
+// Set service options to all
 service all with serviceClass
 
 // Aplica DTO com uso de mapstruct
-//dto * with mapstruct except Ambiente
+dto * with mapstruct
 
 // Set filter options
-filter * 
+filter AreaDepto, Cidade, Contato, Ambiente
 
-// Set search options
+// Set search options (desabilitado)
 //search Contato, AreaDepto, Cidade with elasticsearch
 
 // Set pagination options
-//paginate Contato, Ambiente with pagination
+paginate Contato, Ambiente, Cidade, AreaDepto with pagination
 
 
 
-    

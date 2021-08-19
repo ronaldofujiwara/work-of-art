@@ -4,6 +4,8 @@ import br.com.nhw.std.artes.domain.*; // for static metamodels
 import br.com.nhw.std.artes.domain.Ambiente;
 import br.com.nhw.std.artes.repository.AmbienteRepository;
 import br.com.nhw.std.artes.service.criteria.AmbienteCriteria;
+import br.com.nhw.std.artes.service.dto.AmbienteDTO;
+import br.com.nhw.std.artes.service.mapper.AmbienteMapper;
 import java.util.List;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ import tech.jhipster.service.QueryService;
  * Service for executing complex queries for {@link Ambiente} entities in the database.
  * The main input is a {@link AmbienteCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
- * It returns a {@link List} of {@link Ambiente} or a {@link Page} of {@link Ambiente} which fulfills the criteria.
+ * It returns a {@link List} of {@link AmbienteDTO} or a {@link Page} of {@link AmbienteDTO} which fulfills the criteria.
  */
 @Service
 @Transactional(readOnly = true)
@@ -29,33 +31,36 @@ public class AmbienteQueryService extends QueryService<Ambiente> {
 
     private final AmbienteRepository ambienteRepository;
 
-    public AmbienteQueryService(AmbienteRepository ambienteRepository) {
+    private final AmbienteMapper ambienteMapper;
+
+    public AmbienteQueryService(AmbienteRepository ambienteRepository, AmbienteMapper ambienteMapper) {
         this.ambienteRepository = ambienteRepository;
+        this.ambienteMapper = ambienteMapper;
     }
 
     /**
-     * Return a {@link List} of {@link Ambiente} which matches the criteria from the database.
+     * Return a {@link List} of {@link AmbienteDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public List<Ambiente> findByCriteria(AmbienteCriteria criteria) {
+    public List<AmbienteDTO> findByCriteria(AmbienteCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<Ambiente> specification = createSpecification(criteria);
-        return ambienteRepository.findAll(specification);
+        return ambienteMapper.toDto(ambienteRepository.findAll(specification));
     }
 
     /**
-     * Return a {@link Page} of {@link Ambiente} which matches the criteria from the database.
+     * Return a {@link Page} of {@link AmbienteDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public Page<Ambiente> findByCriteria(AmbienteCriteria criteria, Pageable page) {
+    public Page<AmbienteDTO> findByCriteria(AmbienteCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Ambiente> specification = createSpecification(criteria);
-        return ambienteRepository.findAll(specification, page);
+        return ambienteRepository.findAll(specification, page).map(ambienteMapper::toDto);
     }
 
     /**

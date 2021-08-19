@@ -11,6 +11,9 @@ const ambienteRoute: Routes = [
   {
     path: '',
     component: AmbienteComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

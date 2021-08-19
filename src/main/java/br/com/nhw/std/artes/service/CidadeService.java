@@ -2,10 +2,13 @@ package br.com.nhw.std.artes.service;
 
 import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.repository.CidadeRepository;
-import java.util.List;
+import br.com.nhw.std.artes.service.dto.CidadeDTO;
+import br.com.nhw.std.artes.service.mapper.CidadeMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,59 +23,58 @@ public class CidadeService {
 
     private final CidadeRepository cidadeRepository;
 
-    public CidadeService(CidadeRepository cidadeRepository) {
+    private final CidadeMapper cidadeMapper;
+
+    public CidadeService(CidadeRepository cidadeRepository, CidadeMapper cidadeMapper) {
         this.cidadeRepository = cidadeRepository;
+        this.cidadeMapper = cidadeMapper;
     }
 
     /**
      * Save a cidade.
      *
-     * @param cidade the entity to save.
+     * @param cidadeDTO the entity to save.
      * @return the persisted entity.
      */
-    public Cidade save(Cidade cidade) {
-        log.debug("Request to save Cidade : {}", cidade);
-        return cidadeRepository.save(cidade);
+    public CidadeDTO save(CidadeDTO cidadeDTO) {
+        log.debug("Request to save Cidade : {}", cidadeDTO);
+        Cidade cidade = cidadeMapper.toEntity(cidadeDTO);
+        cidade = cidadeRepository.save(cidade);
+        return cidadeMapper.toDto(cidade);
     }
 
     /**
      * Partially update a cidade.
      *
-     * @param cidade the entity to update partially.
+     * @param cidadeDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Cidade> partialUpdate(Cidade cidade) {
-        log.debug("Request to partially update Cidade : {}", cidade);
+    public Optional<CidadeDTO> partialUpdate(CidadeDTO cidadeDTO) {
+        log.debug("Request to partially update Cidade : {}", cidadeDTO);
 
         return cidadeRepository
-            .findById(cidade.getId())
+            .findById(cidadeDTO.getId())
             .map(
                 existingCidade -> {
-                    if (cidade.getCidade() != null) {
-                        existingCidade.setCidade(cidade.getCidade());
-                    }
-                    if (cidade.getEstado() != null) {
-                        existingCidade.setEstado(cidade.getEstado());
-                    }
-                    if (cidade.getPais() != null) {
-                        existingCidade.setPais(cidade.getPais());
-                    }
+                    cidadeMapper.partialUpdate(existingCidade, cidadeDTO);
 
                     return existingCidade;
                 }
             )
-            .map(cidadeRepository::save);
+            .map(cidadeRepository::save)
+            .map(cidadeMapper::toDto);
     }
 
     /**
      * Get all the cidades.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<Cidade> findAll() {
+    public Page<CidadeDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Cidades");
-        return cidadeRepository.findAll();
+        return cidadeRepository.findAll(pageable).map(cidadeMapper::toDto);
     }
 
     /**
@@ -82,9 +84,9 @@ public class CidadeService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<Cidade> findOne(Long id) {
+    public Optional<CidadeDTO> findOne(Long id) {
         log.debug("Request to get Cidade : {}", id);
-        return cidadeRepository.findById(id);
+        return cidadeRepository.findById(id).map(cidadeMapper::toDto);
     }
 
     /**

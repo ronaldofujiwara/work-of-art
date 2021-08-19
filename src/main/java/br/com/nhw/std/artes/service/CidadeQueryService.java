@@ -4,6 +4,8 @@ import br.com.nhw.std.artes.domain.*; // for static metamodels
 import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.repository.CidadeRepository;
 import br.com.nhw.std.artes.service.criteria.CidadeCriteria;
+import br.com.nhw.std.artes.service.dto.CidadeDTO;
+import br.com.nhw.std.artes.service.mapper.CidadeMapper;
 import java.util.List;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ import tech.jhipster.service.QueryService;
  * Service for executing complex queries for {@link Cidade} entities in the database.
  * The main input is a {@link CidadeCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
- * It returns a {@link List} of {@link Cidade} or a {@link Page} of {@link Cidade} which fulfills the criteria.
+ * It returns a {@link List} of {@link CidadeDTO} or a {@link Page} of {@link CidadeDTO} which fulfills the criteria.
  */
 @Service
 @Transactional(readOnly = true)
@@ -29,33 +31,36 @@ public class CidadeQueryService extends QueryService<Cidade> {
 
     private final CidadeRepository cidadeRepository;
 
-    public CidadeQueryService(CidadeRepository cidadeRepository) {
+    private final CidadeMapper cidadeMapper;
+
+    public CidadeQueryService(CidadeRepository cidadeRepository, CidadeMapper cidadeMapper) {
         this.cidadeRepository = cidadeRepository;
+        this.cidadeMapper = cidadeMapper;
     }
 
     /**
-     * Return a {@link List} of {@link Cidade} which matches the criteria from the database.
+     * Return a {@link List} of {@link CidadeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public List<Cidade> findByCriteria(CidadeCriteria criteria) {
+    public List<CidadeDTO> findByCriteria(CidadeCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<Cidade> specification = createSpecification(criteria);
-        return cidadeRepository.findAll(specification);
+        return cidadeMapper.toDto(cidadeRepository.findAll(specification));
     }
 
     /**
-     * Return a {@link Page} of {@link Cidade} which matches the criteria from the database.
+     * Return a {@link Page} of {@link CidadeDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public Page<Cidade> findByCriteria(CidadeCriteria criteria, Pageable page) {
+    public Page<CidadeDTO> findByCriteria(CidadeCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Cidade> specification = createSpecification(criteria);
-        return cidadeRepository.findAll(specification, page);
+        return cidadeRepository.findAll(specification, page).map(cidadeMapper::toDto);
     }
 
     /**

@@ -11,6 +11,9 @@ const areaDeptoRoute: Routes = [
   {
     path: '',
     component: AreaDeptoComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

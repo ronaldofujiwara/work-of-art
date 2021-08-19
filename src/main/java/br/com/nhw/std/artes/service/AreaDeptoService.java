@@ -2,10 +2,13 @@ package br.com.nhw.std.artes.service;
 
 import br.com.nhw.std.artes.domain.AreaDepto;
 import br.com.nhw.std.artes.repository.AreaDeptoRepository;
-import java.util.List;
+import br.com.nhw.std.artes.service.dto.AreaDeptoDTO;
+import br.com.nhw.std.artes.service.mapper.AreaDeptoMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,56 +23,58 @@ public class AreaDeptoService {
 
     private final AreaDeptoRepository areaDeptoRepository;
 
-    public AreaDeptoService(AreaDeptoRepository areaDeptoRepository) {
+    private final AreaDeptoMapper areaDeptoMapper;
+
+    public AreaDeptoService(AreaDeptoRepository areaDeptoRepository, AreaDeptoMapper areaDeptoMapper) {
         this.areaDeptoRepository = areaDeptoRepository;
+        this.areaDeptoMapper = areaDeptoMapper;
     }
 
     /**
      * Save a areaDepto.
      *
-     * @param areaDepto the entity to save.
+     * @param areaDeptoDTO the entity to save.
      * @return the persisted entity.
      */
-    public AreaDepto save(AreaDepto areaDepto) {
-        log.debug("Request to save AreaDepto : {}", areaDepto);
-        return areaDeptoRepository.save(areaDepto);
+    public AreaDeptoDTO save(AreaDeptoDTO areaDeptoDTO) {
+        log.debug("Request to save AreaDepto : {}", areaDeptoDTO);
+        AreaDepto areaDepto = areaDeptoMapper.toEntity(areaDeptoDTO);
+        areaDepto = areaDeptoRepository.save(areaDepto);
+        return areaDeptoMapper.toDto(areaDepto);
     }
 
     /**
      * Partially update a areaDepto.
      *
-     * @param areaDepto the entity to update partially.
+     * @param areaDeptoDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<AreaDepto> partialUpdate(AreaDepto areaDepto) {
-        log.debug("Request to partially update AreaDepto : {}", areaDepto);
+    public Optional<AreaDeptoDTO> partialUpdate(AreaDeptoDTO areaDeptoDTO) {
+        log.debug("Request to partially update AreaDepto : {}", areaDeptoDTO);
 
         return areaDeptoRepository
-            .findById(areaDepto.getId())
+            .findById(areaDeptoDTO.getId())
             .map(
                 existingAreaDepto -> {
-                    if (areaDepto.getArea() != null) {
-                        existingAreaDepto.setArea(areaDepto.getArea());
-                    }
-                    if (areaDepto.getAtivo() != null) {
-                        existingAreaDepto.setAtivo(areaDepto.getAtivo());
-                    }
+                    areaDeptoMapper.partialUpdate(existingAreaDepto, areaDeptoDTO);
 
                     return existingAreaDepto;
                 }
             )
-            .map(areaDeptoRepository::save);
+            .map(areaDeptoRepository::save)
+            .map(areaDeptoMapper::toDto);
     }
 
     /**
      * Get all the areaDeptos.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<AreaDepto> findAll() {
+    public Page<AreaDeptoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all AreaDeptos");
-        return areaDeptoRepository.findAll();
+        return areaDeptoRepository.findAll(pageable).map(areaDeptoMapper::toDto);
     }
 
     /**
@@ -79,9 +84,9 @@ public class AreaDeptoService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<AreaDepto> findOne(Long id) {
+    public Optional<AreaDeptoDTO> findOne(Long id) {
         log.debug("Request to get AreaDepto : {}", id);
-        return areaDeptoRepository.findById(id);
+        return areaDeptoRepository.findById(id).map(areaDeptoMapper::toDto);
     }
 
     /**

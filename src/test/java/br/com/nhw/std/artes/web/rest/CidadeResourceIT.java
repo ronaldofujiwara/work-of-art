@@ -10,6 +10,8 @@ import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.domain.Contato;
 import br.com.nhw.std.artes.repository.CidadeRepository;
 import br.com.nhw.std.artes.service.criteria.CidadeCriteria;
+import br.com.nhw.std.artes.service.dto.CidadeDTO;
+import br.com.nhw.std.artes.service.mapper.CidadeMapper;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -48,6 +50,9 @@ class CidadeResourceIT {
 
     @Autowired
     private CidadeRepository cidadeRepository;
+
+    @Autowired
+    private CidadeMapper cidadeMapper;
 
     @Autowired
     private EntityManager em;
@@ -89,8 +94,9 @@ class CidadeResourceIT {
     void createCidade() throws Exception {
         int databaseSizeBeforeCreate = cidadeRepository.findAll().size();
         // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
         restCidadeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidade)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidadeDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Cidade in the database
@@ -107,12 +113,13 @@ class CidadeResourceIT {
     void createCidadeWithExistingId() throws Exception {
         // Create the Cidade with an existing ID
         cidade.setId(1L);
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
 
         int databaseSizeBeforeCreate = cidadeRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restCidadeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidade)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidadeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Cidade in the database
@@ -128,9 +135,10 @@ class CidadeResourceIT {
         cidade.setCidade(null);
 
         // Create the Cidade, which fails.
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
 
         restCidadeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidade)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidadeDTO)))
             .andExpect(status().isBadRequest());
 
         List<Cidade> cidadeList = cidadeRepository.findAll();
@@ -502,12 +510,13 @@ class CidadeResourceIT {
         // Disconnect from session so that the updates on updatedCidade are not directly saved in db
         em.detach(updatedCidade);
         updatedCidade.cidade(UPDATED_CIDADE).estado(UPDATED_ESTADO).pais(UPDATED_PAIS);
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(updatedCidade);
 
         restCidadeMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedCidade.getId())
+                put(ENTITY_API_URL_ID, cidadeDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedCidade))
+                    .content(TestUtil.convertObjectToJsonBytes(cidadeDTO))
             )
             .andExpect(status().isOk());
 
@@ -526,12 +535,15 @@ class CidadeResourceIT {
         int databaseSizeBeforeUpdate = cidadeRepository.findAll().size();
         cidade.setId(count.incrementAndGet());
 
+        // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCidadeMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, cidade.getId())
+                put(ENTITY_API_URL_ID, cidadeDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cidade))
+                    .content(TestUtil.convertObjectToJsonBytes(cidadeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -546,12 +558,15 @@ class CidadeResourceIT {
         int databaseSizeBeforeUpdate = cidadeRepository.findAll().size();
         cidade.setId(count.incrementAndGet());
 
+        // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCidadeMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cidade))
+                    .content(TestUtil.convertObjectToJsonBytes(cidadeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -566,9 +581,12 @@ class CidadeResourceIT {
         int databaseSizeBeforeUpdate = cidadeRepository.findAll().size();
         cidade.setId(count.incrementAndGet());
 
+        // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCidadeMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidade)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cidadeDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Cidade in the database
@@ -644,12 +662,15 @@ class CidadeResourceIT {
         int databaseSizeBeforeUpdate = cidadeRepository.findAll().size();
         cidade.setId(count.incrementAndGet());
 
+        // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCidadeMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, cidade.getId())
+                patch(ENTITY_API_URL_ID, cidadeDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cidade))
+                    .content(TestUtil.convertObjectToJsonBytes(cidadeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -664,12 +685,15 @@ class CidadeResourceIT {
         int databaseSizeBeforeUpdate = cidadeRepository.findAll().size();
         cidade.setId(count.incrementAndGet());
 
+        // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCidadeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cidade))
+                    .content(TestUtil.convertObjectToJsonBytes(cidadeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -684,9 +708,14 @@ class CidadeResourceIT {
         int databaseSizeBeforeUpdate = cidadeRepository.findAll().size();
         cidade.setId(count.incrementAndGet());
 
+        // Create the Cidade
+        CidadeDTO cidadeDTO = cidadeMapper.toDto(cidade);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCidadeMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(cidade)))
+            .perform(
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(cidadeDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Cidade in the database

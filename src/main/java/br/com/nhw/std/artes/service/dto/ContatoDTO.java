@@ -1,145 +1,124 @@
-package br.com.nhw.std.artes.domain;
+package br.com.nhw.std.artes.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.Instant;
-import javax.persistence.*;
+import java.util.Objects;
 import javax.validation.constraints.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * Entidade: Contato\nDados cadastrais de contatos relacionados ao Acervo Cultural
+ * A DTO for the {@link br.com.nhw.std.artes.domain.Contato} entity.
  */
-@Entity
-@Table(name = "contato")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Contato implements Serializable {
+@ApiModel(description = "Entidade: Contato\nDados cadastrais de contatos relacionados ao Acervo Cultural")
+public class ContatoDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @NotNull
     @Size(max = 120)
-    @Column(name = "nome_comp", length = 120, nullable = false)
     private String nomeComp;
 
     /**
      * Nome completo do contato
      */
     @Size(max = 150)
-    @Column(name = "empresa", length = 150)
+    @ApiModelProperty(value = "Nome completo do contato")
     private String empresa;
 
     /**
      * Nome Empresa e/ou Instituição
      */
     @Size(max = 50)
-    @Column(name = "funcao", length = 50)
+    @ApiModelProperty(value = "Nome Empresa e/ou Instituição")
     private String funcao;
 
     /**
      * Cargo ocupado
      */
     @Size(max = 15)
-    @Column(name = "rg", length = 15)
+    @ApiModelProperty(value = "Cargo ocupado")
     private String rg;
 
     /**
      * Documento de identidade
      */
     @Size(max = 15)
-    @Column(name = "cpf", length = 15)
+    @ApiModelProperty(value = "Documento de identidade")
     private String cpf;
 
     /**
      * CPF do contato
      */
     @Size(max = 200)
-    @Column(name = "info_contato", length = 200)
+    @ApiModelProperty(value = "CPF do contato")
     private String infoContato;
 
     /**
      * Informacoes adicionais do contato
      */
     @Size(max = 50)
-    @Column(name = "end_rua", length = 50)
+    @ApiModelProperty(value = "Informacoes adicionais do contato")
     private String endRua;
 
     /**
      * Endereço (rua,avenida,etc)
      */
     @Size(max = 10)
-    @Column(name = "end_numero", length = 10)
+    @ApiModelProperty(value = "Endereço (rua,avenida,etc)")
     private String endNumero;
 
     /**
      * Número do endereço
      */
     @Size(max = 50)
-    @Column(name = "end_bairro", length = 50)
+    @ApiModelProperty(value = "Número do endereço")
     private String endBairro;
 
     /**
      * Bairro do endereço
      */
     @Size(max = 30)
-    @Column(name = "end_complemento", length = 30)
+    @ApiModelProperty(value = "Bairro do endereço")
     private String endComplemento;
 
     /**
      * Complemento do endereço
      */
     @Size(max = 10)
-    @Column(name = "end_cep", length = 10)
+    @ApiModelProperty(value = "Complemento do endereço")
     private String endCep;
 
     /**
      * CEP do endereço
      */
     @Size(max = 50)
-    @Column(name = "telefone", length = 50)
+    @ApiModelProperty(value = "CEP do endereço")
     private String telefone;
 
     @Size(max = 50)
-    @Column(name = "fax", length = 50)
     private String fax;
 
     @Size(max = 30)
-    @Column(name = "celular", length = 30)
     private String celular;
 
     @Size(max = 50)
-    @Column(name = "email", length = 50)
     private String email;
 
     @Size(max = 50)
-    @Column(name = "site", length = 50)
     private String site;
 
     @Size(max = 200)
-    @Column(name = "observacoes", length = 200)
     private String observacoes;
 
-    @Column(name = "data_atualizacao")
     private Instant dataAtualizacao;
 
-    @Column(name = "ativo")
     private Boolean ativo;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "contatoes" }, allowSetters = true)
-    private AreaDepto area;
+    private AreaDeptoDTO area;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "contatoes" }, allowSetters = true)
-    private Cidade cidade;
+    private CidadeDTO cidade;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -148,18 +127,8 @@ public class Contato implements Serializable {
         this.id = id;
     }
 
-    public Contato id(Long id) {
-        this.id = id;
-        return this;
-    }
-
     public String getNomeComp() {
-        return this.nomeComp;
-    }
-
-    public Contato nomeComp(String nomeComp) {
-        this.nomeComp = nomeComp;
-        return this;
+        return nomeComp;
     }
 
     public void setNomeComp(String nomeComp) {
@@ -167,12 +136,7 @@ public class Contato implements Serializable {
     }
 
     public String getEmpresa() {
-        return this.empresa;
-    }
-
-    public Contato empresa(String empresa) {
-        this.empresa = empresa;
-        return this;
+        return empresa;
     }
 
     public void setEmpresa(String empresa) {
@@ -180,12 +144,7 @@ public class Contato implements Serializable {
     }
 
     public String getFuncao() {
-        return this.funcao;
-    }
-
-    public Contato funcao(String funcao) {
-        this.funcao = funcao;
-        return this;
+        return funcao;
     }
 
     public void setFuncao(String funcao) {
@@ -193,12 +152,7 @@ public class Contato implements Serializable {
     }
 
     public String getRg() {
-        return this.rg;
-    }
-
-    public Contato rg(String rg) {
-        this.rg = rg;
-        return this;
+        return rg;
     }
 
     public void setRg(String rg) {
@@ -206,12 +160,7 @@ public class Contato implements Serializable {
     }
 
     public String getCpf() {
-        return this.cpf;
-    }
-
-    public Contato cpf(String cpf) {
-        this.cpf = cpf;
-        return this;
+        return cpf;
     }
 
     public void setCpf(String cpf) {
@@ -219,12 +168,7 @@ public class Contato implements Serializable {
     }
 
     public String getInfoContato() {
-        return this.infoContato;
-    }
-
-    public Contato infoContato(String infoContato) {
-        this.infoContato = infoContato;
-        return this;
+        return infoContato;
     }
 
     public void setInfoContato(String infoContato) {
@@ -232,12 +176,7 @@ public class Contato implements Serializable {
     }
 
     public String getEndRua() {
-        return this.endRua;
-    }
-
-    public Contato endRua(String endRua) {
-        this.endRua = endRua;
-        return this;
+        return endRua;
     }
 
     public void setEndRua(String endRua) {
@@ -245,12 +184,7 @@ public class Contato implements Serializable {
     }
 
     public String getEndNumero() {
-        return this.endNumero;
-    }
-
-    public Contato endNumero(String endNumero) {
-        this.endNumero = endNumero;
-        return this;
+        return endNumero;
     }
 
     public void setEndNumero(String endNumero) {
@@ -258,12 +192,7 @@ public class Contato implements Serializable {
     }
 
     public String getEndBairro() {
-        return this.endBairro;
-    }
-
-    public Contato endBairro(String endBairro) {
-        this.endBairro = endBairro;
-        return this;
+        return endBairro;
     }
 
     public void setEndBairro(String endBairro) {
@@ -271,12 +200,7 @@ public class Contato implements Serializable {
     }
 
     public String getEndComplemento() {
-        return this.endComplemento;
-    }
-
-    public Contato endComplemento(String endComplemento) {
-        this.endComplemento = endComplemento;
-        return this;
+        return endComplemento;
     }
 
     public void setEndComplemento(String endComplemento) {
@@ -284,12 +208,7 @@ public class Contato implements Serializable {
     }
 
     public String getEndCep() {
-        return this.endCep;
-    }
-
-    public Contato endCep(String endCep) {
-        this.endCep = endCep;
-        return this;
+        return endCep;
     }
 
     public void setEndCep(String endCep) {
@@ -297,12 +216,7 @@ public class Contato implements Serializable {
     }
 
     public String getTelefone() {
-        return this.telefone;
-    }
-
-    public Contato telefone(String telefone) {
-        this.telefone = telefone;
-        return this;
+        return telefone;
     }
 
     public void setTelefone(String telefone) {
@@ -310,12 +224,7 @@ public class Contato implements Serializable {
     }
 
     public String getFax() {
-        return this.fax;
-    }
-
-    public Contato fax(String fax) {
-        this.fax = fax;
-        return this;
+        return fax;
     }
 
     public void setFax(String fax) {
@@ -323,12 +232,7 @@ public class Contato implements Serializable {
     }
 
     public String getCelular() {
-        return this.celular;
-    }
-
-    public Contato celular(String celular) {
-        this.celular = celular;
-        return this;
+        return celular;
     }
 
     public void setCelular(String celular) {
@@ -336,12 +240,7 @@ public class Contato implements Serializable {
     }
 
     public String getEmail() {
-        return this.email;
-    }
-
-    public Contato email(String email) {
-        this.email = email;
-        return this;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -349,12 +248,7 @@ public class Contato implements Serializable {
     }
 
     public String getSite() {
-        return this.site;
-    }
-
-    public Contato site(String site) {
-        this.site = site;
-        return this;
+        return site;
     }
 
     public void setSite(String site) {
@@ -362,12 +256,7 @@ public class Contato implements Serializable {
     }
 
     public String getObservacoes() {
-        return this.observacoes;
-    }
-
-    public Contato observacoes(String observacoes) {
-        this.observacoes = observacoes;
-        return this;
+        return observacoes;
     }
 
     public void setObservacoes(String observacoes) {
@@ -375,12 +264,7 @@ public class Contato implements Serializable {
     }
 
     public Instant getDataAtualizacao() {
-        return this.dataAtualizacao;
-    }
-
-    public Contato dataAtualizacao(Instant dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
-        return this;
+        return dataAtualizacao;
     }
 
     public void setDataAtualizacao(Instant dataAtualizacao) {
@@ -388,67 +272,54 @@ public class Contato implements Serializable {
     }
 
     public Boolean getAtivo() {
-        return this.ativo;
-    }
-
-    public Contato ativo(Boolean ativo) {
-        this.ativo = ativo;
-        return this;
+        return ativo;
     }
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
-    public AreaDepto getArea() {
-        return this.area;
+    public AreaDeptoDTO getArea() {
+        return area;
     }
 
-    public Contato area(AreaDepto areaDepto) {
-        this.setArea(areaDepto);
-        return this;
+    public void setArea(AreaDeptoDTO area) {
+        this.area = area;
     }
 
-    public void setArea(AreaDepto areaDepto) {
-        this.area = areaDepto;
+    public CidadeDTO getCidade() {
+        return cidade;
     }
 
-    public Cidade getCidade() {
-        return this.cidade;
-    }
-
-    public Contato cidade(Cidade cidade) {
-        this.setCidade(cidade);
-        return this;
-    }
-
-    public void setCidade(Cidade cidade) {
+    public void setCidade(CidadeDTO cidade) {
         this.cidade = cidade;
     }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Contato)) {
+        if (!(o instanceof ContatoDTO)) {
             return false;
         }
-        return id != null && id.equals(((Contato) o).id);
+
+        ContatoDTO contatoDTO = (ContatoDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, contatoDTO.id);
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
+        return Objects.hash(this.id);
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Contato{" +
+        return "ContatoDTO{" +
             "id=" + getId() +
             ", nomeComp='" + getNomeComp() + "'" +
             ", empresa='" + getEmpresa() + "'" +
@@ -469,6 +340,8 @@ public class Contato implements Serializable {
             ", observacoes='" + getObservacoes() + "'" +
             ", dataAtualizacao='" + getDataAtualizacao() + "'" +
             ", ativo='" + getAtivo() + "'" +
+            ", area=" + getArea() +
+            ", cidade=" + getCidade() +
             "}";
     }
 }

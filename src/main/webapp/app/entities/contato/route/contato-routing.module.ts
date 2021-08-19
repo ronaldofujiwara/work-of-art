@@ -11,6 +11,9 @@ const contatoRoute: Routes = [
   {
     path: '',
     component: ContatoComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

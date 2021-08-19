@@ -21,8 +21,8 @@
     }
   ],
   "entityTableName": "area_depto",
-  "dto": "no",
-  "pagination": "no",
+  "dto": "mapstruct",
+  "pagination": "pagination",
   "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
