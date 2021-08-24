@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="data">
+      <h2 data-cy="dataDetailsHeading"><span jhiTranslate="artesApp.data.detail.title">Data</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ data.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.data.data">Data</span></dt>
+        <dd>
+          <span>{{ data.data }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.data.inativo" [ngbTooltip]="'artesApp.data.help.inativo' | translate">Inativo</span></dt>
+        <dd>
+          <span>{{ data.inativo }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/data', data.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

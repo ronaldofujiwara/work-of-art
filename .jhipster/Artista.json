@@ -1,0 +1,154 @@
+{
+  "name": "Artista",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "dataNasc",
+      "fieldType": "String",
+      "javadoc": "Nome artístico",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "dataFalec",
+      "fieldType": "String",
+      "javadoc": "Data do Nascimento",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "biografia",
+      "fieldType": "String",
+      "javadoc": "Data do Falecimento",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "verbete",
+      "fieldType": "String",
+      "javadoc": "Texto memorando para biografia do artista",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "dataAtualBio",
+      "fieldType": "LocalDate",
+      "javadoc": "Texto memorando para verbete sobre o artista"
+    },
+    {
+      "fieldName": "dataAtualVerb",
+      "fieldType": "LocalDate",
+      "javadoc": "Data de atualização da biografia"
+    },
+    {
+      "fieldName": "possuiBio",
+      "fieldType": "Boolean",
+      "javadoc": "Data de atualização do verbete"
+    },
+    {
+      "fieldName": "possuiVerb",
+      "fieldType": "Boolean",
+      "javadoc": "Possui biografia?"
+    },
+    {
+      "fieldName": "fonteBio",
+      "fieldType": "String",
+      "javadoc": "Possui verbete?",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "obrasNoAcervo",
+      "fieldType": "String",
+      "javadoc": "Fonte da biografia",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Número de Tombo das obras do artista no acervo??"
+    },
+    {
+      "fieldName": "agradecimentos",
+      "fieldType": "String",
+      "javadoc": "Registro inativo?",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "copyright",
+      "fieldType": "String",
+      "javadoc": "Agradecimentos (Direitos de Uso)",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "obsUso",
+      "fieldType": "String",
+      "javadoc": "Copyright (Direitos de Uso)",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "artista",
+      "relationshipName": "obra"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "contato",
+      "otherEntityRelationshipName": "artista",
+      "relationshipName": "contato",
+      "otherEntityField": "nomeComp",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cidade",
+      "otherEntityRelationshipName": "artistaNasc",
+      "relationshipName": "cidadeNasc",
+      "otherEntityField": "cidade"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cidade",
+      "otherEntityRelationshipName": "artistaFalesc",
+      "relationshipName": "cidadeFalesc",
+      "otherEntityField": "cidade"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "responsavel",
+      "otherEntityRelationshipName": "artVerbete",
+      "relationshipName": "respVerbete",
+      "otherEntityField": "nome"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "funcaoArtista",
+      "otherEntityRelationshipName": "artista",
+      "relationshipName": "funcaoArtista",
+      "otherEntityField": "funcaoArtista"
+    }
+  ],
+  "javadoc": "Artistas autores das obras",
+  "entityTableName": "artista",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045453"
+}

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="andarMapa">
+      <h2 data-cy="andarMapaDetailsHeading"><span jhiTranslate="artesApp.andarMapa.detail.title">Andar Mapa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ andarMapa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.andarMapa.imagemMapa">Imagem Mapa</span></dt>
+        <dd>
+          <span>{{ andarMapa.imagemMapa }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.andarMapa.espaco">Espaco</span></dt>
+        <dd>
+          <div *ngIf="andarMapa.espaco">
+            <a [routerLink]="['/espaco', andarMapa.espaco?.id, 'view']">{{ andarMapa.espaco?.espaco }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/andar-mapa', andarMapa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

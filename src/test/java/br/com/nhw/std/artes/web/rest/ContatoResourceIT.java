@@ -7,8 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import br.com.nhw.std.artes.IntegrationTest;
 import br.com.nhw.std.artes.domain.AreaDepto;
+import br.com.nhw.std.artes.domain.Artista;
 import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.domain.Contato;
+import br.com.nhw.std.artes.domain.Obra;
+import br.com.nhw.std.artes.domain.Seguro;
 import br.com.nhw.std.artes.repository.ContatoRepository;
 import br.com.nhw.std.artes.service.criteria.ContatoCriteria;
 import br.com.nhw.std.artes.service.dto.ContatoDTO;
@@ -90,8 +93,8 @@ class ContatoResourceIT {
     private static final Instant DEFAULT_DATA_ATUALIZACAO = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATA_ATUALIZACAO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Boolean DEFAULT_ATIVO = false;
-    private static final Boolean UPDATED_ATIVO = true;
+    private static final Boolean DEFAULT_INATIVO = false;
+    private static final Boolean UPDATED_INATIVO = true;
 
     private static final String ENTITY_API_URL = "/api/contatoes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -139,7 +142,7 @@ class ContatoResourceIT {
             .site(DEFAULT_SITE)
             .observacoes(DEFAULT_OBSERVACOES)
             .dataAtualizacao(DEFAULT_DATA_ATUALIZACAO)
-            .ativo(DEFAULT_ATIVO);
+            .inativo(DEFAULT_INATIVO);
         return contato;
     }
 
@@ -169,7 +172,7 @@ class ContatoResourceIT {
             .site(UPDATED_SITE)
             .observacoes(UPDATED_OBSERVACOES)
             .dataAtualizacao(UPDATED_DATA_ATUALIZACAO)
-            .ativo(UPDATED_ATIVO);
+            .inativo(UPDATED_INATIVO);
         return contato;
     }
 
@@ -210,7 +213,7 @@ class ContatoResourceIT {
         assertThat(testContato.getSite()).isEqualTo(DEFAULT_SITE);
         assertThat(testContato.getObservacoes()).isEqualTo(DEFAULT_OBSERVACOES);
         assertThat(testContato.getDataAtualizacao()).isEqualTo(DEFAULT_DATA_ATUALIZACAO);
-        assertThat(testContato.getAtivo()).isEqualTo(DEFAULT_ATIVO);
+        assertThat(testContato.getInativo()).isEqualTo(DEFAULT_INATIVO);
     }
 
     @Test
@@ -280,7 +283,7 @@ class ContatoResourceIT {
             .andExpect(jsonPath("$.[*].site").value(hasItem(DEFAULT_SITE)))
             .andExpect(jsonPath("$.[*].observacoes").value(hasItem(DEFAULT_OBSERVACOES)))
             .andExpect(jsonPath("$.[*].dataAtualizacao").value(hasItem(DEFAULT_DATA_ATUALIZACAO.toString())))
-            .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
     }
 
     @Test
@@ -313,7 +316,7 @@ class ContatoResourceIT {
             .andExpect(jsonPath("$.site").value(DEFAULT_SITE))
             .andExpect(jsonPath("$.observacoes").value(DEFAULT_OBSERVACOES))
             .andExpect(jsonPath("$.dataAtualizacao").value(DEFAULT_DATA_ATUALIZACAO.toString()))
-            .andExpect(jsonPath("$.ativo").value(DEFAULT_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.inativo").value(DEFAULT_INATIVO.booleanValue()));
     }
 
     @Test
@@ -1714,54 +1717,111 @@ class ContatoResourceIT {
 
     @Test
     @Transactional
-    void getAllContatoesByAtivoIsEqualToSomething() throws Exception {
+    void getAllContatoesByInativoIsEqualToSomething() throws Exception {
         // Initialize the database
         contatoRepository.saveAndFlush(contato);
 
-        // Get all the contatoList where ativo equals to DEFAULT_ATIVO
-        defaultContatoShouldBeFound("ativo.equals=" + DEFAULT_ATIVO);
+        // Get all the contatoList where inativo equals to DEFAULT_INATIVO
+        defaultContatoShouldBeFound("inativo.equals=" + DEFAULT_INATIVO);
 
-        // Get all the contatoList where ativo equals to UPDATED_ATIVO
-        defaultContatoShouldNotBeFound("ativo.equals=" + UPDATED_ATIVO);
+        // Get all the contatoList where inativo equals to UPDATED_INATIVO
+        defaultContatoShouldNotBeFound("inativo.equals=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllContatoesByAtivoIsNotEqualToSomething() throws Exception {
+    void getAllContatoesByInativoIsNotEqualToSomething() throws Exception {
         // Initialize the database
         contatoRepository.saveAndFlush(contato);
 
-        // Get all the contatoList where ativo not equals to DEFAULT_ATIVO
-        defaultContatoShouldNotBeFound("ativo.notEquals=" + DEFAULT_ATIVO);
+        // Get all the contatoList where inativo not equals to DEFAULT_INATIVO
+        defaultContatoShouldNotBeFound("inativo.notEquals=" + DEFAULT_INATIVO);
 
-        // Get all the contatoList where ativo not equals to UPDATED_ATIVO
-        defaultContatoShouldBeFound("ativo.notEquals=" + UPDATED_ATIVO);
+        // Get all the contatoList where inativo not equals to UPDATED_INATIVO
+        defaultContatoShouldBeFound("inativo.notEquals=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllContatoesByAtivoIsInShouldWork() throws Exception {
+    void getAllContatoesByInativoIsInShouldWork() throws Exception {
         // Initialize the database
         contatoRepository.saveAndFlush(contato);
 
-        // Get all the contatoList where ativo in DEFAULT_ATIVO or UPDATED_ATIVO
-        defaultContatoShouldBeFound("ativo.in=" + DEFAULT_ATIVO + "," + UPDATED_ATIVO);
+        // Get all the contatoList where inativo in DEFAULT_INATIVO or UPDATED_INATIVO
+        defaultContatoShouldBeFound("inativo.in=" + DEFAULT_INATIVO + "," + UPDATED_INATIVO);
 
-        // Get all the contatoList where ativo equals to UPDATED_ATIVO
-        defaultContatoShouldNotBeFound("ativo.in=" + UPDATED_ATIVO);
+        // Get all the contatoList where inativo equals to UPDATED_INATIVO
+        defaultContatoShouldNotBeFound("inativo.in=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllContatoesByAtivoIsNullOrNotNull() throws Exception {
+    void getAllContatoesByInativoIsNullOrNotNull() throws Exception {
         // Initialize the database
         contatoRepository.saveAndFlush(contato);
 
-        // Get all the contatoList where ativo is not null
-        defaultContatoShouldBeFound("ativo.specified=true");
+        // Get all the contatoList where inativo is not null
+        defaultContatoShouldBeFound("inativo.specified=true");
 
-        // Get all the contatoList where ativo is null
-        defaultContatoShouldNotBeFound("ativo.specified=false");
+        // Get all the contatoList where inativo is null
+        defaultContatoShouldNotBeFound("inativo.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllContatoesByObraIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contatoRepository.saveAndFlush(contato);
+        Obra obra = ObraResourceIT.createEntity(em);
+        em.persist(obra);
+        em.flush();
+        contato.addObra(obra);
+        contatoRepository.saveAndFlush(contato);
+        Long obraId = obra.getId();
+
+        // Get all the contatoList where obra equals to obraId
+        defaultContatoShouldBeFound("obraId.equals=" + obraId);
+
+        // Get all the contatoList where obra equals to (obraId + 1)
+        defaultContatoShouldNotBeFound("obraId.equals=" + (obraId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllContatoesBySeguroSegIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contatoRepository.saveAndFlush(contato);
+        Seguro seguroSeg = SeguroResourceIT.createEntity(em);
+        em.persist(seguroSeg);
+        em.flush();
+        contato.addSeguroSeg(seguroSeg);
+        contatoRepository.saveAndFlush(contato);
+        Long seguroSegId = seguroSeg.getId();
+
+        // Get all the contatoList where seguroSeg equals to seguroSegId
+        defaultContatoShouldBeFound("seguroSegId.equals=" + seguroSegId);
+
+        // Get all the contatoList where seguroSeg equals to (seguroSegId + 1)
+        defaultContatoShouldNotBeFound("seguroSegId.equals=" + (seguroSegId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllContatoesBySeguroCorIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contatoRepository.saveAndFlush(contato);
+        Seguro seguroCor = SeguroResourceIT.createEntity(em);
+        em.persist(seguroCor);
+        em.flush();
+        contato.addSeguroCor(seguroCor);
+        contatoRepository.saveAndFlush(contato);
+        Long seguroCorId = seguroCor.getId();
+
+        // Get all the contatoList where seguroCor equals to seguroCorId
+        defaultContatoShouldBeFound("seguroCorId.equals=" + seguroCorId);
+
+        // Get all the contatoList where seguroCor equals to (seguroCorId + 1)
+        defaultContatoShouldNotBeFound("seguroCorId.equals=" + (seguroCorId + 1));
     }
 
     @Test
@@ -1802,6 +1862,25 @@ class ContatoResourceIT {
         defaultContatoShouldNotBeFound("cidadeId.equals=" + (cidadeId + 1));
     }
 
+    @Test
+    @Transactional
+    void getAllContatoesByArtistaIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contatoRepository.saveAndFlush(contato);
+        Artista artista = ArtistaResourceIT.createEntity(em);
+        em.persist(artista);
+        em.flush();
+        contato.addArtista(artista);
+        contatoRepository.saveAndFlush(contato);
+        Long artistaId = artista.getId();
+
+        // Get all the contatoList where artista equals to artistaId
+        defaultContatoShouldBeFound("artistaId.equals=" + artistaId);
+
+        // Get all the contatoList where artista equals to (artistaId + 1)
+        defaultContatoShouldNotBeFound("artistaId.equals=" + (artistaId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1829,7 +1908,7 @@ class ContatoResourceIT {
             .andExpect(jsonPath("$.[*].site").value(hasItem(DEFAULT_SITE)))
             .andExpect(jsonPath("$.[*].observacoes").value(hasItem(DEFAULT_OBSERVACOES)))
             .andExpect(jsonPath("$.[*].dataAtualizacao").value(hasItem(DEFAULT_DATA_ATUALIZACAO.toString())))
-            .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
 
         // Check, that the count call also returns 1
         restContatoMockMvc
@@ -1896,7 +1975,7 @@ class ContatoResourceIT {
             .site(UPDATED_SITE)
             .observacoes(UPDATED_OBSERVACOES)
             .dataAtualizacao(UPDATED_DATA_ATUALIZACAO)
-            .ativo(UPDATED_ATIVO);
+            .inativo(UPDATED_INATIVO);
         ContatoDTO contatoDTO = contatoMapper.toDto(updatedContato);
 
         restContatoMockMvc
@@ -1929,7 +2008,7 @@ class ContatoResourceIT {
         assertThat(testContato.getSite()).isEqualTo(UPDATED_SITE);
         assertThat(testContato.getObservacoes()).isEqualTo(UPDATED_OBSERVACOES);
         assertThat(testContato.getDataAtualizacao()).isEqualTo(UPDATED_DATA_ATUALIZACAO);
-        assertThat(testContato.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testContato.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -2026,7 +2105,7 @@ class ContatoResourceIT {
             .site(UPDATED_SITE)
             .observacoes(UPDATED_OBSERVACOES)
             .dataAtualizacao(UPDATED_DATA_ATUALIZACAO)
-            .ativo(UPDATED_ATIVO);
+            .inativo(UPDATED_INATIVO);
 
         restContatoMockMvc
             .perform(
@@ -2058,7 +2137,7 @@ class ContatoResourceIT {
         assertThat(testContato.getSite()).isEqualTo(UPDATED_SITE);
         assertThat(testContato.getObservacoes()).isEqualTo(UPDATED_OBSERVACOES);
         assertThat(testContato.getDataAtualizacao()).isEqualTo(UPDATED_DATA_ATUALIZACAO);
-        assertThat(testContato.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testContato.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -2092,7 +2171,7 @@ class ContatoResourceIT {
             .site(UPDATED_SITE)
             .observacoes(UPDATED_OBSERVACOES)
             .dataAtualizacao(UPDATED_DATA_ATUALIZACAO)
-            .ativo(UPDATED_ATIVO);
+            .inativo(UPDATED_INATIVO);
 
         restContatoMockMvc
             .perform(
@@ -2124,7 +2203,7 @@ class ContatoResourceIT {
         assertThat(testContato.getSite()).isEqualTo(UPDATED_SITE);
         assertThat(testContato.getObservacoes()).isEqualTo(UPDATED_OBSERVACOES);
         assertThat(testContato.getDataAtualizacao()).isEqualTo(UPDATED_DATA_ATUALIZACAO);
-        assertThat(testContato.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testContato.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test

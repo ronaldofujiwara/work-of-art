@@ -1,0 +1,32 @@
+{
+  "artesApp": {
+    "dadoDocumental": {
+      "home": {
+        "title": "Dado Documentals",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dado Documental",
+        "createOrEditLabel": "Create or edit a Dado Documental",
+        "notFound": "No Dado Documentals found"
+      },
+      "created": "A new Dado Documental is created with identifier {{ param }}",
+      "updated": "A Dado Documental is updated with identifier {{ param }}",
+      "deleted": "A Dado Documental is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dado Documental {{ id }}?"
+      },
+      "detail": {
+        "title": "Dado Documental"
+      },
+      "id": "ID",
+      "data": "Data",
+      "emissor": "Emissor",
+      "receptor": "Receptor",
+      "obs": "Obs",
+      "transcricao": "Transcricao",
+      "finalizado": "Finalizado",
+      "genTranscricao": "Gen Transcricao",
+      "tipoDocumento": "Tipo Documento",
+      "obra": "Obra"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "artesApp": {
+    "andarMapa": {
+      "home": {
+        "title": "Andar Mapas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Andar Mapa",
+        "createOrEditLabel": "Create or edit a Andar Mapa",
+        "notFound": "No Andar Mapas found"
+      },
+      "created": "A new Andar Mapa is created with identifier {{ param }}",
+      "updated": "A Andar Mapa is updated with identifier {{ param }}",
+      "deleted": "A Andar Mapa is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Andar Mapa {{ id }}?"
+      },
+      "detail": {
+        "title": "Andar Mapa"
+      },
+      "id": "ID",
+      "imagemMapa": "Imagem Mapa",
+      "obra": "Obra",
+      "espaco": "Espaco"
+    }
+  }
+}

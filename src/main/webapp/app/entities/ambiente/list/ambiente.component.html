@@ -36,7 +36,9 @@
           <th scope="col" jhiSortBy="ambiente">
             <span jhiTranslate="artesApp.ambiente.ambiente">Ambiente</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="ativo"><span jhiTranslate="artesApp.ambiente.ativo">Ativo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.ambiente.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -46,7 +48,7 @@
             <a [routerLink]="['/ambiente', ambiente.id, 'view']">{{ ambiente.id }}</a>
           </td>
           <td>{{ ambiente.ambiente }}</td>
-          <td>{{ ambiente.ativo }}</td>
+          <td>{{ ambiente.inativo }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

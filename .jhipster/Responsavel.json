@@ -1,0 +1,41 @@
+{
+  "name": "Responsavel",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Colaborador responsavel pelo verbete"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "artista",
+      "otherEntityRelationshipName": "respVerbete",
+      "relationshipName": "artVerbete"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "responsavel",
+      "relationshipName": "obra"
+    }
+  ],
+  "javadoc": "Entidade: Responsavel\\nColaborador responsavel pelo verbete/registro - Obs: no Access -> tabela Expomus",
+  "entityTableName": "responsavel",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045503"
+}

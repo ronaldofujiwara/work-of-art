@@ -1,0 +1,389 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-seguro-heading" data-cy="SeguroCreateUpdateHeading" jhiTranslate="artesApp.seguro.home.createOrEditLabel">
+        Create or edit a Seguro
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.apolice" for="field_apolice">Apolice</label>
+          <input type="text" class="form-control" name="apolice" id="field_apolice" data-cy="apolice" formControlName="apolice" />
+          <div *ngIf="editForm.get('apolice')!.invalid && (editForm.get('apolice')!.dirty || editForm.get('apolice')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('apolice')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.obsSeguro" for="field_obsSeguro">Obs Seguro</label>
+          <input type="text" class="form-control" name="obsSeguro" id="field_obsSeguro" data-cy="obsSeguro" formControlName="obsSeguro" />
+          <div *ngIf="editForm.get('obsSeguro')!.invalid && (editForm.get('obsSeguro')!.dirty || editForm.get('obsSeguro')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('obsSeguro')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 30 }"
+            >
+              This field cannot be longer than 30 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.contratoProposta" for="field_contratoProposta"
+            >Contrato Proposta</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contratoProposta"
+            id="field_contratoProposta"
+            data-cy="contratoProposta"
+            formControlName="contratoProposta"
+          />
+          <div
+            *ngIf="
+              editForm.get('contratoProposta')!.invalid &&
+              (editForm.get('contratoProposta')!.dirty || editForm.get('contratoProposta')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('contratoProposta')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.ciaSeguradora" for="field_ciaSeguradora">Cia Seguradora</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ciaSeguradora"
+            id="field_ciaSeguradora"
+            data-cy="ciaSeguradora"
+            formControlName="ciaSeguradora"
+          />
+          <div
+            *ngIf="
+              editForm.get('ciaSeguradora')!.invalid && (editForm.get('ciaSeguradora')!.dirty || editForm.get('ciaSeguradora')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ciaSeguradora')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.cnpjSeguradora" for="field_cnpjSeguradora">Cnpj Seguradora</label>
+          <input
+            type="text"
+            class="form-control"
+            name="cnpjSeguradora"
+            id="field_cnpjSeguradora"
+            data-cy="cnpjSeguradora"
+            formControlName="cnpjSeguradora"
+          />
+          <div
+            *ngIf="
+              editForm.get('cnpjSeguradora')!.invalid && (editForm.get('cnpjSeguradora')!.dirty || editForm.get('cnpjSeguradora')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cnpjSeguradora')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.susepSeguradora" for="field_susepSeguradora"
+            >Susep Seguradora</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="susepSeguradora"
+            id="field_susepSeguradora"
+            data-cy="susepSeguradora"
+            formControlName="susepSeguradora"
+          />
+          <div
+            *ngIf="
+              editForm.get('susepSeguradora')!.invalid &&
+              (editForm.get('susepSeguradora')!.dirty || editForm.get('susepSeguradora')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('susepSeguradora')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.corretora" for="field_corretora">Corretora</label>
+          <input type="text" class="form-control" name="corretora" id="field_corretora" data-cy="corretora" formControlName="corretora" />
+          <div *ngIf="editForm.get('corretora')!.invalid && (editForm.get('corretora')!.dirty || editForm.get('corretora')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('corretora')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.cnpjCorretora" for="field_cnpjCorretora">Cnpj Corretora</label>
+          <input
+            type="text"
+            class="form-control"
+            name="cnpjCorretora"
+            id="field_cnpjCorretora"
+            data-cy="cnpjCorretora"
+            formControlName="cnpjCorretora"
+          />
+          <div
+            *ngIf="
+              editForm.get('cnpjCorretora')!.invalid && (editForm.get('cnpjCorretora')!.dirty || editForm.get('cnpjCorretora')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cnpjCorretora')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.susepCorretora" for="field_susepCorretora">Susep Corretora</label>
+          <input
+            type="text"
+            class="form-control"
+            name="susepCorretora"
+            id="field_susepCorretora"
+            data-cy="susepCorretora"
+            formControlName="susepCorretora"
+          />
+          <div
+            *ngIf="
+              editForm.get('susepCorretora')!.invalid && (editForm.get('susepCorretora')!.dirty || editForm.get('susepCorretora')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('susepCorretora')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.dataInicio" for="field_dataInicio">Data Inicio</label>
+          <div class="input-group">
+            <input
+              id="field_dataInicio"
+              data-cy="dataInicio"
+              type="text"
+              class="form-control"
+              name="dataInicio"
+              ngbDatepicker
+              #dataInicioDp="ngbDatepicker"
+              formControlName="dataInicio"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataInicioDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.dataVenc" for="field_dataVenc">Data Venc</label>
+          <div class="input-group">
+            <input
+              id="field_dataVenc"
+              data-cy="dataVenc"
+              type="text"
+              class="form-control"
+              name="dataVenc"
+              ngbDatepicker
+              #dataVencDp="ngbDatepicker"
+              formControlName="dataVenc"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataVencDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.inativo" for="field_inativo">Inativo</label>
+          <input type="checkbox" class="form-check" name="inativo" id="field_inativo" data-cy="inativo" formControlName="inativo" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.premio" for="field_premio">Premio</label>
+          <input type="text" class="form-control" name="premio" id="field_premio" data-cy="premio" formControlName="premio" />
+          <div *ngIf="editForm.get('premio')!.invalid && (editForm.get('premio')!.dirty || editForm.get('premio')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('premio')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.txConversao" for="field_txConversao">Tx Conversao</label>
+          <input
+            type="number"
+            class="form-control"
+            name="txConversao"
+            id="field_txConversao"
+            data-cy="txConversao"
+            formControlName="txConversao"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.genStatusSeguro" for="field_genStatusSeguro"
+            >Gen Status Seguro</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="genStatusSeguro"
+            id="field_genStatusSeguro"
+            data-cy="genStatusSeguro"
+            formControlName="genStatusSeguro"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.dataAtualSeguro" for="field_dataAtualSeguro"
+            >Data Atual Seguro</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataAtualSeguro"
+              data-cy="dataAtualSeguro"
+              type="text"
+              class="form-control"
+              name="dataAtualSeguro"
+              ngbDatepicker
+              #dataAtualSeguroDp="ngbDatepicker"
+              formControlName="dataAtualSeguro"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataAtualSeguroDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.contatoSeg" for="field_contatoSeg">Contato Seg</label>
+          <select class="form-control" id="field_contatoSeg" data-cy="contatoSeg" name="contatoSeg" formControlName="contatoSeg">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="contatoOption.id === editForm.get('contatoSeg')!.value?.id ? editForm.get('contatoSeg')!.value : contatoOption"
+              *ngFor="let contatoOption of contatoesSharedCollection; trackBy: trackContatoById"
+            >
+              {{ contatoOption.nomeComp }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.contatoCor" for="field_contatoCor">Contato Cor</label>
+          <select class="form-control" id="field_contatoCor" data-cy="contatoCor" name="contatoCor" formControlName="contatoCor">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="contatoOption.id === editForm.get('contatoCor')!.value?.id ? editForm.get('contatoCor')!.value : contatoOption"
+              *ngFor="let contatoOption of contatoesSharedCollection; trackBy: trackContatoById"
+            >
+              {{ contatoOption.nomeComp }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.seguro.moeda" for="field_moeda">Moeda</label>
+          <select class="form-control" id="field_moeda" data-cy="moeda" name="moeda" formControlName="moeda">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="moedaOption.id === editForm.get('moeda')!.value?.id ? editForm.get('moeda')!.value : moedaOption"
+              *ngFor="let moedaOption of moedasSharedCollection; trackBy: trackMoedaById"
+            >
+              {{ moedaOption.tipoMoeda }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

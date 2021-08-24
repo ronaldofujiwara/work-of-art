@@ -1,0 +1,30 @@
+{
+  "artesApp": {
+    "moeda": {
+      "home": {
+        "title": "Moedas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Moeda",
+        "createOrEditLabel": "Criar ou editar Moeda",
+        "notFound": "Nenhum Moeda encontrado"
+      },
+      "created": "Um novo Moeda foi criado com o identificador {{ param }}",
+      "updated": "Um Moeda foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Moeda foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Moeda {{ id }}?"
+      },
+      "detail": {
+        "title": "Moeda"
+      },
+      "id": "ID",
+      "tipoMoeda": "Tipo Moeda",
+      "inativo": "Inativo",
+      "obra": "Obra",
+      "seguro": "Seguro",
+      "help": {
+        "inativo": "Moeda"
+      }
+    }
+  }
+}

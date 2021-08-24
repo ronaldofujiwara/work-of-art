@@ -25,6 +25,9 @@ describe('Service Tests', () => {
         cidade: 'AAAAAAA',
         estado: 'AAAAAAA',
         pais: 'AAAAAAA',
+        cidadeUFPais: 'AAAAAAA',
+        estadoPais: 'AAAAAAA',
+        inativo: false,
       };
     });
 
@@ -63,6 +66,9 @@ describe('Service Tests', () => {
             cidade: 'BBBBBB',
             estado: 'BBBBBB',
             pais: 'BBBBBB',
+            cidadeUFPais: 'BBBBBB',
+            estadoPais: 'BBBBBB',
+            inativo: true,
           },
           elemDefault
         );
@@ -82,6 +88,8 @@ describe('Service Tests', () => {
             cidade: 'BBBBBB',
             estado: 'BBBBBB',
             pais: 'BBBBBB',
+            estadoPais: 'BBBBBB',
+            inativo: true,
           },
           new Cidade()
         );
@@ -104,6 +112,9 @@ describe('Service Tests', () => {
             cidade: 'BBBBBB',
             estado: 'BBBBBB',
             pais: 'BBBBBB',
+            cidadeUFPais: 'BBBBBB',
+            estadoPais: 'BBBBBB',
+            inativo: true,
           },
           elemDefault
         );
@@ -155,7 +166,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Cidade to an array', () => {
-          const cidadeArray: ICidade[] = [{ id: 123 }, { id: 456 }, { id: 23659 }];
+          const cidadeArray: ICidade[] = [{ id: 123 }, { id: 456 }, { id: 58700 }];
           const cidadeCollection: ICidade[] = [{ id: 123 }];
           expectedResult = service.addCidadeToCollectionIfMissing(cidadeCollection, ...cidadeArray);
           expect(expectedResult).toHaveLength(3);

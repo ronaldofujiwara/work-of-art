@@ -3,13 +3,13 @@ import { IContato } from 'app/entities/contato/contato.model';
 export interface IAreaDepto {
   id?: number;
   area?: string;
-  ativo?: boolean | null;
+  inativo?: boolean | null;
   contatoes?: IContato[] | null;
 }
 
 export class AreaDepto implements IAreaDepto {
-  constructor(public id?: number, public area?: string, public ativo?: boolean | null, public contatoes?: IContato[] | null) {
-    this.ativo = this.ativo ?? false;
+  constructor(public id?: number, public area?: string, public inativo?: boolean | null, public contatoes?: IContato[] | null) {
+    this.inativo = this.inativo ?? false;
   }
 }
 

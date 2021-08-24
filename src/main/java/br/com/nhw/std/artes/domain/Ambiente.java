@@ -26,8 +26,8 @@ public class Ambiente implements Serializable {
     @Column(name = "ambiente", length = 50, nullable = false)
     private String ambiente;
 
-    @Column(name = "ativo")
-    private Boolean ativo;
+    @Column(name = "inativo")
+    private Boolean inativo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -56,17 +56,17 @@ public class Ambiente implements Serializable {
         this.ambiente = ambiente;
     }
 
-    public Boolean getAtivo() {
-        return this.ativo;
+    public Boolean getInativo() {
+        return this.inativo;
     }
 
-    public Ambiente ativo(Boolean ativo) {
-        this.ativo = ativo;
+    public Ambiente inativo(Boolean inativo) {
+        this.inativo = inativo;
         return this;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -94,7 +94,7 @@ public class Ambiente implements Serializable {
         return "Ambiente{" +
             "id=" + getId() +
             ", ambiente='" + getAmbiente() + "'" +
-            ", ativo='" + getAtivo() + "'" +
+            ", inativo='" + getInativo() + "'" +
             "}";
     }
 }

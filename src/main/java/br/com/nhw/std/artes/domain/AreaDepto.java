@@ -29,12 +29,12 @@ public class AreaDepto implements Serializable {
     @Column(name = "area", length = 100, nullable = false)
     private String area;
 
-    @Column(name = "ativo")
-    private Boolean ativo;
+    @Column(name = "inativo")
+    private Boolean inativo;
 
     @OneToMany(mappedBy = "area")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "area", "cidade" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "obras", "seguroSegs", "seguroCors", "area", "cidade", "artistas" }, allowSetters = true)
     private Set<Contato> contatoes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -64,17 +64,17 @@ public class AreaDepto implements Serializable {
         this.area = area;
     }
 
-    public Boolean getAtivo() {
-        return this.ativo;
+    public Boolean getInativo() {
+        return this.inativo;
     }
 
-    public AreaDepto ativo(Boolean ativo) {
-        this.ativo = ativo;
+    public AreaDepto inativo(Boolean inativo) {
+        this.inativo = inativo;
         return this;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
     }
 
     public Set<Contato> getContatoes() {
@@ -133,7 +133,7 @@ public class AreaDepto implements Serializable {
         return "AreaDepto{" +
             "id=" + getId() +
             ", area='" + getArea() + "'" +
-            ", ativo='" + getAtivo() + "'" +
+            ", inativo='" + getInativo() + "'" +
             "}";
     }
 }

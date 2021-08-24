@@ -1,0 +1,467 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="obra">
+      <h2 data-cy="obraDetailsHeading"><span jhiTranslate="artesApp.obra.detail.title">Obra</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ obra.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.tombo">Tombo</span></dt>
+        <dd>
+          <span>{{ obra.tombo }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.multiplo" [ngbTooltip]="'artesApp.obra.help.multiplo' | translate">Multiplo</span></dt>
+        <dd>
+          <span>{{ obra.multiplo }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.numeroRegistro" [ngbTooltip]="'artesApp.obra.help.numeroRegistro' | translate"
+            >Numero Registro</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.numeroRegistro }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.outrosTitulos" [ngbTooltip]="'artesApp.obra.help.outrosTitulos' | translate"
+            >Outros Titulos</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.outrosTitulos }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.tituloOriginal" [ngbTooltip]="'artesApp.obra.help.tituloOriginal' | translate"
+            >Titulo Original</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.tituloOriginal }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.origem" [ngbTooltip]="'artesApp.obra.help.origem' | translate">Origem</span></dt>
+        <dd>
+          <span>{{ obra.origem }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.descricao" [ngbTooltip]="'artesApp.obra.help.descricao' | translate">Descricao</span></dt>
+        <dd>
+          <span>{{ obra.descricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.assinatura" [ngbTooltip]="'artesApp.obra.help.assinatura' | translate">Assinatura</span></dt>
+        <dd>
+          <span>{{ obra.assinatura }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.localAssinatura" [ngbTooltip]="'artesApp.obra.help.localAssinatura' | translate"
+            >Local Assinatura</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.localAssinatura }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.marcaInscrObra" [ngbTooltip]="'artesApp.obra.help.marcaInscrObra' | translate"
+            >Marca Inscr Obra</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.marcaInscrObra }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.marcaInscrSuporte" [ngbTooltip]="'artesApp.obra.help.marcaInscrSuporte' | translate"
+            >Marca Inscr Suporte</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.marcaInscrSuporte }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.medidasAprox" [ngbTooltip]="'artesApp.obra.help.medidasAprox' | translate">Medidas Aprox</span>
+        </dt>
+        <dd>
+          <span>{{ obra.medidasAprox }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.alturaObra" [ngbTooltip]="'artesApp.obra.help.alturaObra' | translate">Altura Obra</span></dt>
+        <dd>
+          <span>{{ obra.alturaObra }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.largObra" [ngbTooltip]="'artesApp.obra.help.largObra' | translate">Larg Obra</span></dt>
+        <dd>
+          <span>{{ obra.largObra }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.profObra" [ngbTooltip]="'artesApp.obra.help.profObra' | translate">Prof Obra</span></dt>
+        <dd>
+          <span>{{ obra.profObra }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.diametrObra" [ngbTooltip]="'artesApp.obra.help.diametrObra' | translate">Diametr Obra</span>
+        </dt>
+        <dd>
+          <span>{{ obra.diametrObra }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.alturaMold" [ngbTooltip]="'artesApp.obra.help.alturaMold' | translate">Altura Mold</span></dt>
+        <dd>
+          <span>{{ obra.alturaMold }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.largMold" [ngbTooltip]="'artesApp.obra.help.largMold' | translate">Larg Mold</span></dt>
+        <dd>
+          <span>{{ obra.largMold }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.profMold" [ngbTooltip]="'artesApp.obra.help.profMold' | translate">Prof Mold</span></dt>
+        <dd>
+          <span>{{ obra.profMold }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.diametroMold" [ngbTooltip]="'artesApp.obra.help.diametroMold' | translate">Diametro Mold</span>
+        </dt>
+        <dd>
+          <span>{{ obra.diametroMold }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.dimensAdic" [ngbTooltip]="'artesApp.obra.help.dimensAdic' | translate">Dimens Adic</span></dt>
+        <dd>
+          <span>{{ obra.dimensAdic }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.pesObra" [ngbTooltip]="'artesApp.obra.help.pesObra' | translate">Pes Obra</span></dt>
+        <dd>
+          <span>{{ obra.pesObra }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.atribuido" [ngbTooltip]="'artesApp.obra.help.atribuido' | translate">Atribuido</span></dt>
+        <dd>
+          <span>{{ obra.atribuido }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.nFoto" [ngbTooltip]="'artesApp.obra.help.nFoto' | translate">N Foto</span></dt>
+        <dd>
+          <span>{{ obra.nFoto }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.conjunto" [ngbTooltip]="'artesApp.obra.help.conjunto' | translate">Conjunto</span></dt>
+        <dd>
+          <span>{{ obra.conjunto }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.conjTombo" [ngbTooltip]="'artesApp.obra.help.conjTombo' | translate">Conj Tombo</span></dt>
+        <dd>
+          <span>{{ obra.conjTombo }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.valorSeguro" [ngbTooltip]="'artesApp.obra.help.valorSeguro' | translate">Valor Seguro</span>
+        </dt>
+        <dd>
+          <span>{{ obra.valorSeguro }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.valorSeguroReal" [ngbTooltip]="'artesApp.obra.help.valorSeguroReal' | translate"
+            >Valor Seguro Real</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.valorSeguroReal }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.dataconversao" [ngbTooltip]="'artesApp.obra.help.dataconversao' | translate"
+            >Dataconversao</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.dataconversao | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.dataAlterApolice" [ngbTooltip]="'artesApp.obra.help.dataAlterApolice' | translate"
+            >Data Alter Apolice</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.dataAlterApolice | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.localAtual" [ngbTooltip]="'artesApp.obra.help.localAtual' | translate">Local Atual</span></dt>
+        <dd>
+          <span>{{ obra.localAtual }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.localAtualNovo" [ngbTooltip]="'artesApp.obra.help.localAtualNovo' | translate"
+            >Local Atual Novo</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.localAtualNovo }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.codParametro" [ngbTooltip]="'artesApp.obra.help.codParametro' | translate">Cod Parametro</span>
+        </dt>
+        <dd>
+          <span>{{ obra.codParametro }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.obs" [ngbTooltip]="'artesApp.obra.help.obs' | translate">Obs</span></dt>
+        <dd>
+          <span>{{ obra.obs }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.tiragem" [ngbTooltip]="'artesApp.obra.help.tiragem' | translate">Tiragem</span></dt>
+        <dd>
+          <span>{{ obra.tiragem }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.serie" [ngbTooltip]="'artesApp.obra.help.serie' | translate">Serie</span></dt>
+        <dd>
+          <span>{{ obra.serie }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.selo" [ngbTooltip]="'artesApp.obra.help.selo' | translate">Selo</span></dt>
+        <dd>
+          <span>{{ obra.selo }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.tomboAnterio" [ngbTooltip]="'artesApp.obra.help.tomboAnterio' | translate">Tombo Anterio</span>
+        </dt>
+        <dd>
+          <span>{{ obra.tomboAnterio }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.verbete" [ngbTooltip]="'artesApp.obra.help.verbete' | translate">Verbete</span></dt>
+        <dd>
+          <span>{{ obra.verbete }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.livro" [ngbTooltip]="'artesApp.obra.help.livro' | translate">Livro</span></dt>
+        <dd>
+          <span>{{ obra.livro }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.imagemAlta" [ngbTooltip]="'artesApp.obra.help.imagemAlta' | translate">Imagem Alta</span></dt>
+        <dd>
+          <span>{{ obra.imagemAlta }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.apabex" [ngbTooltip]="'artesApp.obra.help.apabex' | translate">Apabex</span></dt>
+        <dd>
+          <span>{{ obra.apabex }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.bunkyo" [ngbTooltip]="'artesApp.obra.help.bunkyo' | translate">Bunkyo</span></dt>
+        <dd>
+          <span>{{ obra.bunkyo }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.faseDepuracao" [ngbTooltip]="'artesApp.obra.help.faseDepuracao' | translate"
+            >Fase Depuracao</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.faseDepuracao }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.paraAvaliacao" [ngbTooltip]="'artesApp.obra.help.paraAvaliacao' | translate"
+            >Para Avaliacao</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.paraAvaliacao }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.paraRestauracao" [ngbTooltip]="'artesApp.obra.help.paraRestauracao' | translate"
+            >Para Restauracao</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.paraRestauracao }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.paraMoldura" [ngbTooltip]="'artesApp.obra.help.paraMoldura' | translate">Para Moldura</span>
+        </dt>
+        <dd>
+          <span>{{ obra.paraMoldura }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.paraLegenda" [ngbTooltip]="'artesApp.obra.help.paraLegenda' | translate">Para Legenda</span>
+        </dt>
+        <dd>
+          <span>{{ obra.paraLegenda }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.tempField" [ngbTooltip]="'artesApp.obra.help.tempField' | translate">Temp Field</span></dt>
+        <dd>
+          <span>{{ obra.tempField }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.selecaoListaAvulsa" [ngbTooltip]="'artesApp.obra.help.selecaoListaAvulsa' | translate"
+            >Selecao Lista Avulsa</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.selecaoListaAvulsa }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.dominioPubl" [ngbTooltip]="'artesApp.obra.help.dominioPubl' | translate">Dominio Publ</span>
+        </dt>
+        <dd>
+          <span>{{ obra.dominioPubl }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.dtVencFoto" [ngbTooltip]="'artesApp.obra.help.dtVencFoto' | translate">Dt Venc Foto</span>
+        </dt>
+        <dd>
+          <span>{{ obra.dtVencFoto | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.obsUsoFoto" [ngbTooltip]="'artesApp.obra.help.obsUsoFoto' | translate">Obs Uso Foto</span>
+        </dt>
+        <dd>
+          <span>{{ obra.obsUsoFoto }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.localFotoAlta" [ngbTooltip]="'artesApp.obra.help.localFotoAlta' | translate"
+            >Local Foto Alta</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.localFotoAlta }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.dataInclusao" [ngbTooltip]="'artesApp.obra.help.dataInclusao' | translate">Data Inclusao</span>
+        </dt>
+        <dd>
+          <span>{{ obra.dataInclusao | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.dataExclusao" [ngbTooltip]="'artesApp.obra.help.dataExclusao' | translate">Data Exclusao</span>
+        </dt>
+        <dd>
+          <span>{{ obra.dataExclusao | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.bookX" [ngbTooltip]="'artesApp.obra.help.bookX' | translate">Book X</span></dt>
+        <dd>
+          <span>{{ obra.bookX }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.bookY" [ngbTooltip]="'artesApp.obra.help.bookY' | translate">Book Y</span></dt>
+        <dd>
+          <span>{{ obra.bookY }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.genDescricao" [ngbTooltip]="'artesApp.obra.help.genDescricao' | translate">Gen Descricao</span>
+        </dt>
+        <dd>
+          <span>{{ obra.genDescricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.genField1">Gen Field 1</span></dt>
+        <dd>
+          <span>{{ obra.genField1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.paraFotografia">Para Fotografia</span></dt>
+        <dd>
+          <span>{{ obra.paraFotografia }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.genMarcaInscrObra" [ngbTooltip]="'artesApp.obra.help.genMarcaInscrObra' | translate"
+            >Gen Marca Inscr Obra</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.genMarcaInscrObra }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.palavrasChave">Palavras Chave</span></dt>
+        <dd>
+          <span>{{ obra.palavrasChave }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.obra.genMarcaInscrSuporte" [ngbTooltip]="'artesApp.obra.help.genMarcaInscrSuporte' | translate"
+            >Gen Marca Inscr Suporte</span
+          >
+        </dt>
+        <dd>
+          <span>{{ obra.genMarcaInscrSuporte }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.genObs">Gen Obs</span></dt>
+        <dd>
+          <span>{{ obra.genObs }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.genVerbete">Gen Verbete</span></dt>
+        <dd>
+          <span>{{ obra.genVerbete }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.dadoDocumental">Dado Documental</span></dt>
+        <dd>
+          <span *ngFor="let dadoDocumental of obra.dadoDocumentals; let last = last">
+            <a [routerLink]="['/dado-documental', dadoDocumental?.id, 'view']">{{ dadoDocumental.data }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.artista">Artista</span></dt>
+        <dd>
+          <div *ngIf="obra.artista">
+            <a [routerLink]="['/artista', obra.artista?.id, 'view']">{{ obra.artista?.nome }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.categoria">Categoria</span></dt>
+        <dd>
+          <div *ngIf="obra.categoria">
+            <a [routerLink]="['/categoria', obra.categoria?.id, 'view']">{{ obra.categoria?.categoria }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.tecnica">Tecnica</span></dt>
+        <dd>
+          <div *ngIf="obra.tecnica">
+            <a [routerLink]="['/tecnica', obra.tecnica?.id, 'view']">{{ obra.tecnica?.tecnica }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.nivel">Nivel</span></dt>
+        <dd>
+          <div *ngIf="obra.nivel">
+            <a [routerLink]="['/nivel', obra.nivel?.id, 'view']">{{ obra.nivel?.nivel }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.data">Data</span></dt>
+        <dd>
+          <div *ngIf="obra.data">
+            <a [routerLink]="['/data', obra.data?.id, 'view']">{{ obra.data?.data }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.empresa">Empresa</span></dt>
+        <dd>
+          <div *ngIf="obra.empresa">
+            <a [routerLink]="['/empresa', obra.empresa?.id, 'view']">{{ obra.empresa?.empresa }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.moeda">Moeda</span></dt>
+        <dd>
+          <div *ngIf="obra.moeda">
+            <a [routerLink]="['/moeda', obra.moeda?.id, 'view']">{{ obra.moeda?.tipoMoeda }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.seguro">Seguro</span></dt>
+        <dd>
+          <div *ngIf="obra.seguro">
+            <a [routerLink]="['/seguro', obra.seguro?.id, 'view']">{{ obra.seguro?.apolice }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.responsavel">Responsavel</span></dt>
+        <dd>
+          <div *ngIf="obra.responsavel">
+            <a [routerLink]="['/responsavel', obra.responsavel?.id, 'view']">{{ obra.responsavel?.nome }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.acervoatual">Acervoatual</span></dt>
+        <dd>
+          <div *ngIf="obra.acervoatual">
+            <a [routerLink]="['/acervo-atual', obra.acervoatual?.id, 'view']">{{ obra.acervoatual?.acervoAtual }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.fotografo">Fotografo</span></dt>
+        <dd>
+          <div *ngIf="obra.fotografo">
+            <a [routerLink]="['/contato', obra.fotografo?.id, 'view']">{{ obra.fotografo?.nomeComp }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.obra.andarMapa">Andar Mapa</span></dt>
+        <dd>
+          <div *ngIf="obra.andarMapa">
+            <a [routerLink]="['/andar-mapa', obra.andarMapa?.id, 'view']">{{ obra.andarMapa?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/obra', obra.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

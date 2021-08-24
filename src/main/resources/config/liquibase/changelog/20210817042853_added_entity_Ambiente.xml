@@ -17,7 +17,7 @@
             <column name="ambiente" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
-            <column name="ativo" type="boolean">
+            <column name="inativo" type="boolean">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -41,7 +41,7 @@
                   tableName="ambiente">
             <column name="id" type="numeric"/>
             <column name="ambiente" type="string"/>
-            <column name="ativo" type="boolean"/>
+            <column name="inativo" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

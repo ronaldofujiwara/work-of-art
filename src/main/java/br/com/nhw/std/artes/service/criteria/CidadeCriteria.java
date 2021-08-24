@@ -32,6 +32,18 @@ public class CidadeCriteria implements Serializable, Criteria {
 
     private StringFilter pais;
 
+    private StringFilter cidadeUFPais;
+
+    private StringFilter estadoPais;
+
+    private BooleanFilter inativo;
+
+    private LongFilter empresaId;
+
+    private LongFilter artistaNascId;
+
+    private LongFilter artistaFalescId;
+
     private LongFilter contatoId;
 
     public CidadeCriteria() {}
@@ -41,6 +53,12 @@ public class CidadeCriteria implements Serializable, Criteria {
         this.cidade = other.cidade == null ? null : other.cidade.copy();
         this.estado = other.estado == null ? null : other.estado.copy();
         this.pais = other.pais == null ? null : other.pais.copy();
+        this.cidadeUFPais = other.cidadeUFPais == null ? null : other.cidadeUFPais.copy();
+        this.estadoPais = other.estadoPais == null ? null : other.estadoPais.copy();
+        this.inativo = other.inativo == null ? null : other.inativo.copy();
+        this.empresaId = other.empresaId == null ? null : other.empresaId.copy();
+        this.artistaNascId = other.artistaNascId == null ? null : other.artistaNascId.copy();
+        this.artistaFalescId = other.artistaFalescId == null ? null : other.artistaFalescId.copy();
         this.contatoId = other.contatoId == null ? null : other.contatoId.copy();
     }
 
@@ -109,6 +127,96 @@ public class CidadeCriteria implements Serializable, Criteria {
         this.pais = pais;
     }
 
+    public StringFilter getCidadeUFPais() {
+        return cidadeUFPais;
+    }
+
+    public StringFilter cidadeUFPais() {
+        if (cidadeUFPais == null) {
+            cidadeUFPais = new StringFilter();
+        }
+        return cidadeUFPais;
+    }
+
+    public void setCidadeUFPais(StringFilter cidadeUFPais) {
+        this.cidadeUFPais = cidadeUFPais;
+    }
+
+    public StringFilter getEstadoPais() {
+        return estadoPais;
+    }
+
+    public StringFilter estadoPais() {
+        if (estadoPais == null) {
+            estadoPais = new StringFilter();
+        }
+        return estadoPais;
+    }
+
+    public void setEstadoPais(StringFilter estadoPais) {
+        this.estadoPais = estadoPais;
+    }
+
+    public BooleanFilter getInativo() {
+        return inativo;
+    }
+
+    public BooleanFilter inativo() {
+        if (inativo == null) {
+            inativo = new BooleanFilter();
+        }
+        return inativo;
+    }
+
+    public void setInativo(BooleanFilter inativo) {
+        this.inativo = inativo;
+    }
+
+    public LongFilter getEmpresaId() {
+        return empresaId;
+    }
+
+    public LongFilter empresaId() {
+        if (empresaId == null) {
+            empresaId = new LongFilter();
+        }
+        return empresaId;
+    }
+
+    public void setEmpresaId(LongFilter empresaId) {
+        this.empresaId = empresaId;
+    }
+
+    public LongFilter getArtistaNascId() {
+        return artistaNascId;
+    }
+
+    public LongFilter artistaNascId() {
+        if (artistaNascId == null) {
+            artistaNascId = new LongFilter();
+        }
+        return artistaNascId;
+    }
+
+    public void setArtistaNascId(LongFilter artistaNascId) {
+        this.artistaNascId = artistaNascId;
+    }
+
+    public LongFilter getArtistaFalescId() {
+        return artistaFalescId;
+    }
+
+    public LongFilter artistaFalescId() {
+        if (artistaFalescId == null) {
+            artistaFalescId = new LongFilter();
+        }
+        return artistaFalescId;
+    }
+
+    public void setArtistaFalescId(LongFilter artistaFalescId) {
+        this.artistaFalescId = artistaFalescId;
+    }
+
     public LongFilter getContatoId() {
         return contatoId;
     }
@@ -138,13 +246,31 @@ public class CidadeCriteria implements Serializable, Criteria {
             Objects.equals(cidade, that.cidade) &&
             Objects.equals(estado, that.estado) &&
             Objects.equals(pais, that.pais) &&
+            Objects.equals(cidadeUFPais, that.cidadeUFPais) &&
+            Objects.equals(estadoPais, that.estadoPais) &&
+            Objects.equals(inativo, that.inativo) &&
+            Objects.equals(empresaId, that.empresaId) &&
+            Objects.equals(artistaNascId, that.artistaNascId) &&
+            Objects.equals(artistaFalescId, that.artistaFalescId) &&
             Objects.equals(contatoId, that.contatoId)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cidade, estado, pais, contatoId);
+        return Objects.hash(
+            id,
+            cidade,
+            estado,
+            pais,
+            cidadeUFPais,
+            estadoPais,
+            inativo,
+            empresaId,
+            artistaNascId,
+            artistaFalescId,
+            contatoId
+        );
     }
 
     // prettier-ignore
@@ -155,6 +281,12 @@ public class CidadeCriteria implements Serializable, Criteria {
             (cidade != null ? "cidade=" + cidade + ", " : "") +
             (estado != null ? "estado=" + estado + ", " : "") +
             (pais != null ? "pais=" + pais + ", " : "") +
+            (cidadeUFPais != null ? "cidadeUFPais=" + cidadeUFPais + ", " : "") +
+            (estadoPais != null ? "estadoPais=" + estadoPais + ", " : "") +
+            (inativo != null ? "inativo=" + inativo + ", " : "") +
+            (empresaId != null ? "empresaId=" + empresaId + ", " : "") +
+            (artistaNascId != null ? "artistaNascId=" + artistaNascId + ", " : "") +
+            (artistaFalescId != null ? "artistaFalescId=" + artistaFalescId + ", " : "") +
             (contatoId != null ? "contatoId=" + contatoId + ", " : "") +
             "}";
     }

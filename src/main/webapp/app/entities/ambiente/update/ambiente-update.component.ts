@@ -18,7 +18,7 @@ export class AmbienteUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     ambiente: [null, [Validators.required, Validators.maxLength(50)]],
-    ativo: [],
+    inativo: [],
   });
 
   constructor(protected ambienteService: AmbienteService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -66,7 +66,7 @@ export class AmbienteUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: ambiente.id,
       ambiente: ambiente.ambiente,
-      ativo: ambiente.ativo,
+      inativo: ambiente.inativo,
     });
   }
 
@@ -75,7 +75,7 @@ export class AmbienteUpdateComponent implements OnInit {
       ...new Ambiente(),
       id: this.editForm.get(['id'])!.value,
       ambiente: this.editForm.get(['ambiente'])!.value,
-      ativo: this.editForm.get(['ativo'])!.value,
+      inativo: this.editForm.get(['inativo'])!.value,
     };
   }
 }

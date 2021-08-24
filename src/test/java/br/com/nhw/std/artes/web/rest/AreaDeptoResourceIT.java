@@ -36,8 +36,8 @@ class AreaDeptoResourceIT {
     private static final String DEFAULT_AREA = "AAAAAAAAAA";
     private static final String UPDATED_AREA = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_ATIVO = false;
-    private static final Boolean UPDATED_ATIVO = true;
+    private static final Boolean DEFAULT_INATIVO = false;
+    private static final Boolean UPDATED_INATIVO = true;
 
     private static final String ENTITY_API_URL = "/api/area-deptos";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -66,7 +66,7 @@ class AreaDeptoResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static AreaDepto createEntity(EntityManager em) {
-        AreaDepto areaDepto = new AreaDepto().area(DEFAULT_AREA).ativo(DEFAULT_ATIVO);
+        AreaDepto areaDepto = new AreaDepto().area(DEFAULT_AREA).inativo(DEFAULT_INATIVO);
         return areaDepto;
     }
 
@@ -77,7 +77,7 @@ class AreaDeptoResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static AreaDepto createUpdatedEntity(EntityManager em) {
-        AreaDepto areaDepto = new AreaDepto().area(UPDATED_AREA).ativo(UPDATED_ATIVO);
+        AreaDepto areaDepto = new AreaDepto().area(UPDATED_AREA).inativo(UPDATED_INATIVO);
         return areaDepto;
     }
 
@@ -101,7 +101,7 @@ class AreaDeptoResourceIT {
         assertThat(areaDeptoList).hasSize(databaseSizeBeforeCreate + 1);
         AreaDepto testAreaDepto = areaDeptoList.get(areaDeptoList.size() - 1);
         assertThat(testAreaDepto.getArea()).isEqualTo(DEFAULT_AREA);
-        assertThat(testAreaDepto.getAtivo()).isEqualTo(DEFAULT_ATIVO);
+        assertThat(testAreaDepto.getInativo()).isEqualTo(DEFAULT_INATIVO);
     }
 
     @Test
@@ -154,7 +154,7 @@ class AreaDeptoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(areaDepto.getId().intValue())))
             .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA)))
-            .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
     }
 
     @Test
@@ -170,7 +170,7 @@ class AreaDeptoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(areaDepto.getId().intValue()))
             .andExpect(jsonPath("$.area").value(DEFAULT_AREA))
-            .andExpect(jsonPath("$.ativo").value(DEFAULT_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.inativo").value(DEFAULT_INATIVO.booleanValue()));
     }
 
     @Test
@@ -271,54 +271,54 @@ class AreaDeptoResourceIT {
 
     @Test
     @Transactional
-    void getAllAreaDeptosByAtivoIsEqualToSomething() throws Exception {
+    void getAllAreaDeptosByInativoIsEqualToSomething() throws Exception {
         // Initialize the database
         areaDeptoRepository.saveAndFlush(areaDepto);
 
-        // Get all the areaDeptoList where ativo equals to DEFAULT_ATIVO
-        defaultAreaDeptoShouldBeFound("ativo.equals=" + DEFAULT_ATIVO);
+        // Get all the areaDeptoList where inativo equals to DEFAULT_INATIVO
+        defaultAreaDeptoShouldBeFound("inativo.equals=" + DEFAULT_INATIVO);
 
-        // Get all the areaDeptoList where ativo equals to UPDATED_ATIVO
-        defaultAreaDeptoShouldNotBeFound("ativo.equals=" + UPDATED_ATIVO);
+        // Get all the areaDeptoList where inativo equals to UPDATED_INATIVO
+        defaultAreaDeptoShouldNotBeFound("inativo.equals=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllAreaDeptosByAtivoIsNotEqualToSomething() throws Exception {
+    void getAllAreaDeptosByInativoIsNotEqualToSomething() throws Exception {
         // Initialize the database
         areaDeptoRepository.saveAndFlush(areaDepto);
 
-        // Get all the areaDeptoList where ativo not equals to DEFAULT_ATIVO
-        defaultAreaDeptoShouldNotBeFound("ativo.notEquals=" + DEFAULT_ATIVO);
+        // Get all the areaDeptoList where inativo not equals to DEFAULT_INATIVO
+        defaultAreaDeptoShouldNotBeFound("inativo.notEquals=" + DEFAULT_INATIVO);
 
-        // Get all the areaDeptoList where ativo not equals to UPDATED_ATIVO
-        defaultAreaDeptoShouldBeFound("ativo.notEquals=" + UPDATED_ATIVO);
+        // Get all the areaDeptoList where inativo not equals to UPDATED_INATIVO
+        defaultAreaDeptoShouldBeFound("inativo.notEquals=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllAreaDeptosByAtivoIsInShouldWork() throws Exception {
+    void getAllAreaDeptosByInativoIsInShouldWork() throws Exception {
         // Initialize the database
         areaDeptoRepository.saveAndFlush(areaDepto);
 
-        // Get all the areaDeptoList where ativo in DEFAULT_ATIVO or UPDATED_ATIVO
-        defaultAreaDeptoShouldBeFound("ativo.in=" + DEFAULT_ATIVO + "," + UPDATED_ATIVO);
+        // Get all the areaDeptoList where inativo in DEFAULT_INATIVO or UPDATED_INATIVO
+        defaultAreaDeptoShouldBeFound("inativo.in=" + DEFAULT_INATIVO + "," + UPDATED_INATIVO);
 
-        // Get all the areaDeptoList where ativo equals to UPDATED_ATIVO
-        defaultAreaDeptoShouldNotBeFound("ativo.in=" + UPDATED_ATIVO);
+        // Get all the areaDeptoList where inativo equals to UPDATED_INATIVO
+        defaultAreaDeptoShouldNotBeFound("inativo.in=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllAreaDeptosByAtivoIsNullOrNotNull() throws Exception {
+    void getAllAreaDeptosByInativoIsNullOrNotNull() throws Exception {
         // Initialize the database
         areaDeptoRepository.saveAndFlush(areaDepto);
 
-        // Get all the areaDeptoList where ativo is not null
-        defaultAreaDeptoShouldBeFound("ativo.specified=true");
+        // Get all the areaDeptoList where inativo is not null
+        defaultAreaDeptoShouldBeFound("inativo.specified=true");
 
-        // Get all the areaDeptoList where ativo is null
-        defaultAreaDeptoShouldNotBeFound("ativo.specified=false");
+        // Get all the areaDeptoList where inativo is null
+        defaultAreaDeptoShouldNotBeFound("inativo.specified=false");
     }
 
     @Test
@@ -350,7 +350,7 @@ class AreaDeptoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(areaDepto.getId().intValue())))
             .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA)))
-            .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
 
         // Check, that the count call also returns 1
         restAreaDeptoMockMvc
@@ -398,7 +398,7 @@ class AreaDeptoResourceIT {
         AreaDepto updatedAreaDepto = areaDeptoRepository.findById(areaDepto.getId()).get();
         // Disconnect from session so that the updates on updatedAreaDepto are not directly saved in db
         em.detach(updatedAreaDepto);
-        updatedAreaDepto.area(UPDATED_AREA).ativo(UPDATED_ATIVO);
+        updatedAreaDepto.area(UPDATED_AREA).inativo(UPDATED_INATIVO);
         AreaDeptoDTO areaDeptoDTO = areaDeptoMapper.toDto(updatedAreaDepto);
 
         restAreaDeptoMockMvc
@@ -414,7 +414,7 @@ class AreaDeptoResourceIT {
         assertThat(areaDeptoList).hasSize(databaseSizeBeforeUpdate);
         AreaDepto testAreaDepto = areaDeptoList.get(areaDeptoList.size() - 1);
         assertThat(testAreaDepto.getArea()).isEqualTo(UPDATED_AREA);
-        assertThat(testAreaDepto.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testAreaDepto.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -494,7 +494,7 @@ class AreaDeptoResourceIT {
         AreaDepto partialUpdatedAreaDepto = new AreaDepto();
         partialUpdatedAreaDepto.setId(areaDepto.getId());
 
-        partialUpdatedAreaDepto.area(UPDATED_AREA).ativo(UPDATED_ATIVO);
+        partialUpdatedAreaDepto.area(UPDATED_AREA).inativo(UPDATED_INATIVO);
 
         restAreaDeptoMockMvc
             .perform(
@@ -509,7 +509,7 @@ class AreaDeptoResourceIT {
         assertThat(areaDeptoList).hasSize(databaseSizeBeforeUpdate);
         AreaDepto testAreaDepto = areaDeptoList.get(areaDeptoList.size() - 1);
         assertThat(testAreaDepto.getArea()).isEqualTo(UPDATED_AREA);
-        assertThat(testAreaDepto.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testAreaDepto.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -524,7 +524,7 @@ class AreaDeptoResourceIT {
         AreaDepto partialUpdatedAreaDepto = new AreaDepto();
         partialUpdatedAreaDepto.setId(areaDepto.getId());
 
-        partialUpdatedAreaDepto.area(UPDATED_AREA).ativo(UPDATED_ATIVO);
+        partialUpdatedAreaDepto.area(UPDATED_AREA).inativo(UPDATED_INATIVO);
 
         restAreaDeptoMockMvc
             .perform(
@@ -539,7 +539,7 @@ class AreaDeptoResourceIT {
         assertThat(areaDeptoList).hasSize(databaseSizeBeforeUpdate);
         AreaDepto testAreaDepto = areaDeptoList.get(areaDeptoList.size() - 1);
         assertThat(testAreaDepto.getArea()).isEqualTo(UPDATED_AREA);
-        assertThat(testAreaDepto.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testAreaDepto.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test

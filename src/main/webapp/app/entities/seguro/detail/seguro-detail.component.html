@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="seguro">
+      <h2 data-cy="seguroDetailsHeading"><span jhiTranslate="artesApp.seguro.detail.title">Seguro</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ seguro.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.apolice">Apolice</span></dt>
+        <dd>
+          <span>{{ seguro.apolice }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.obsSeguro">Obs Seguro</span></dt>
+        <dd>
+          <span>{{ seguro.obsSeguro }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.contratoProposta">Contrato Proposta</span></dt>
+        <dd>
+          <span>{{ seguro.contratoProposta }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.ciaSeguradora">Cia Seguradora</span></dt>
+        <dd>
+          <span>{{ seguro.ciaSeguradora }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.cnpjSeguradora">Cnpj Seguradora</span></dt>
+        <dd>
+          <span>{{ seguro.cnpjSeguradora }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.susepSeguradora">Susep Seguradora</span></dt>
+        <dd>
+          <span>{{ seguro.susepSeguradora }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.corretora">Corretora</span></dt>
+        <dd>
+          <span>{{ seguro.corretora }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.cnpjCorretora">Cnpj Corretora</span></dt>
+        <dd>
+          <span>{{ seguro.cnpjCorretora }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.susepCorretora">Susep Corretora</span></dt>
+        <dd>
+          <span>{{ seguro.susepCorretora }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.dataInicio">Data Inicio</span></dt>
+        <dd>
+          <span>{{ seguro.dataInicio | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.dataVenc">Data Venc</span></dt>
+        <dd>
+          <span>{{ seguro.dataVenc | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.inativo">Inativo</span></dt>
+        <dd>
+          <span>{{ seguro.inativo }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.premio">Premio</span></dt>
+        <dd>
+          <span>{{ seguro.premio }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.txConversao">Tx Conversao</span></dt>
+        <dd>
+          <span>{{ seguro.txConversao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.genStatusSeguro">Gen Status Seguro</span></dt>
+        <dd>
+          <span>{{ seguro.genStatusSeguro }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.dataAtualSeguro">Data Atual Seguro</span></dt>
+        <dd>
+          <span>{{ seguro.dataAtualSeguro | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.contatoSeg">Contato Seg</span></dt>
+        <dd>
+          <div *ngIf="seguro.contatoSeg">
+            <a [routerLink]="['/contato', seguro.contatoSeg?.id, 'view']">{{ seguro.contatoSeg?.nomeComp }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.contatoCor">Contato Cor</span></dt>
+        <dd>
+          <div *ngIf="seguro.contatoCor">
+            <a [routerLink]="['/contato', seguro.contatoCor?.id, 'view']">{{ seguro.contatoCor?.nomeComp }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="artesApp.seguro.moeda">Moeda</span></dt>
+        <dd>
+          <div *ngIf="seguro.moeda">
+            <a [routerLink]="['/moeda', seguro.moeda?.id, 'view']">{{ seguro.moeda?.tipoMoeda }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/seguro', seguro.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

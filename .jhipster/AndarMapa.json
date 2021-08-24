@@ -1,0 +1,37 @@
+{
+  "name": "AndarMapa",
+  "fields": [
+    {
+      "fieldName": "imagemMapa",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "andarMapa",
+      "relationshipName": "obra"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "espaco",
+      "otherEntityRelationshipName": "andarMapa",
+      "relationshipName": "espaco",
+      "otherEntityField": "espaco"
+    }
+  ],
+  "javadoc": "Mapa do Andar/Local/ambiente de exposicao da obra",
+  "entityTableName": "andar_mapa",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045452"
+}

@@ -18,7 +18,7 @@ export class AreaDeptoUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     area: [null, [Validators.required, Validators.maxLength(100)]],
-    ativo: [],
+    inativo: [],
   });
 
   constructor(protected areaDeptoService: AreaDeptoService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -66,7 +66,7 @@ export class AreaDeptoUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: areaDepto.id,
       area: areaDepto.area,
-      ativo: areaDepto.ativo,
+      inativo: areaDepto.inativo,
     });
   }
 
@@ -75,7 +75,7 @@ export class AreaDeptoUpdateComponent implements OnInit {
       ...new AreaDepto(),
       id: this.editForm.get(['id'])!.value,
       area: this.editForm.get(['area'])!.value,
-      ativo: this.editForm.get(['ativo'])!.value,
+      inativo: this.editForm.get(['inativo'])!.value,
     };
   }
 }

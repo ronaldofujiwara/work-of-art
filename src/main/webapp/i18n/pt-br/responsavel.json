@@ -1,0 +1,30 @@
+{
+  "artesApp": {
+    "responsavel": {
+      "home": {
+        "title": "Responsavels",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Responsavel",
+        "createOrEditLabel": "Criar ou editar Responsavel",
+        "notFound": "Nenhum Responsavel encontrado"
+      },
+      "created": "Um novo Responsavel foi criado com o identificador {{ param }}",
+      "updated": "Um Responsavel foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Responsavel foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Responsavel {{ id }}?"
+      },
+      "detail": {
+        "title": "Responsavel"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "inativo": "Inativo",
+      "artVerbete": "Art Verbete",
+      "obra": "Obra",
+      "help": {
+        "inativo": "Colaborador responsavel pelo verbete"
+      }
+    }
+  }
+}

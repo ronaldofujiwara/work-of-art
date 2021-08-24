@@ -28,7 +28,7 @@ public class AreaDeptoCriteria implements Serializable, Criteria {
 
     private StringFilter area;
 
-    private BooleanFilter ativo;
+    private BooleanFilter inativo;
 
     private LongFilter contatoId;
 
@@ -37,7 +37,7 @@ public class AreaDeptoCriteria implements Serializable, Criteria {
     public AreaDeptoCriteria(AreaDeptoCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.area = other.area == null ? null : other.area.copy();
-        this.ativo = other.ativo == null ? null : other.ativo.copy();
+        this.inativo = other.inativo == null ? null : other.inativo.copy();
         this.contatoId = other.contatoId == null ? null : other.contatoId.copy();
     }
 
@@ -76,19 +76,19 @@ public class AreaDeptoCriteria implements Serializable, Criteria {
         this.area = area;
     }
 
-    public BooleanFilter getAtivo() {
-        return ativo;
+    public BooleanFilter getInativo() {
+        return inativo;
     }
 
-    public BooleanFilter ativo() {
-        if (ativo == null) {
-            ativo = new BooleanFilter();
+    public BooleanFilter inativo() {
+        if (inativo == null) {
+            inativo = new BooleanFilter();
         }
-        return ativo;
+        return inativo;
     }
 
-    public void setAtivo(BooleanFilter ativo) {
-        this.ativo = ativo;
+    public void setInativo(BooleanFilter inativo) {
+        this.inativo = inativo;
     }
 
     public LongFilter getContatoId() {
@@ -118,14 +118,14 @@ public class AreaDeptoCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(area, that.area) &&
-            Objects.equals(ativo, that.ativo) &&
+            Objects.equals(inativo, that.inativo) &&
             Objects.equals(contatoId, that.contatoId)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, area, ativo, contatoId);
+        return Objects.hash(id, area, inativo, contatoId);
     }
 
     // prettier-ignore
@@ -134,7 +134,7 @@ public class AreaDeptoCriteria implements Serializable, Criteria {
         return "AreaDeptoCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (area != null ? "area=" + area + ", " : "") +
-            (ativo != null ? "ativo=" + ativo + ", " : "") +
+            (inativo != null ? "inativo=" + inativo + ", " : "") +
             (contatoId != null ? "contatoId=" + contatoId + ", " : "") +
             "}";
     }

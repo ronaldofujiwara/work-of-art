@@ -89,8 +89,8 @@ public class AreaDeptoQueryService extends QueryService<AreaDepto> {
             if (criteria.getArea() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getArea(), AreaDepto_.area));
             }
-            if (criteria.getAtivo() != null) {
-                specification = specification.and(buildSpecification(criteria.getAtivo(), AreaDepto_.ativo));
+            if (criteria.getInativo() != null) {
+                specification = specification.and(buildSpecification(criteria.getInativo(), AreaDepto_.inativo));
             }
             if (criteria.getContatoId() != null) {
                 specification =

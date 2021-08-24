@@ -1,0 +1,35 @@
+{
+  "name": "Tecnica",
+  "fields": [
+    {
+      "fieldName": "tecnica",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Técnicas ou materiais que constituem a obra"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "tecnica",
+      "relationshipName": "obra"
+    }
+  ],
+  "javadoc": "Entidade: Tecnica\\nRelação de técnicas ou materiais que constituem a obra",
+  "entityTableName": "tecnica",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045505"
+}

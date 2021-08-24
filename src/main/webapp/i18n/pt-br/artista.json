@@ -1,0 +1,60 @@
+{
+  "artesApp": {
+    "artista": {
+      "home": {
+        "title": "Artistas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Artista",
+        "createOrEditLabel": "Criar ou editar Artista",
+        "notFound": "Nenhum Artista encontrado"
+      },
+      "created": "Um novo Artista foi criado com o identificador {{ param }}",
+      "updated": "Um Artista foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Artista foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Artista {{ id }}?"
+      },
+      "detail": {
+        "title": "Artista"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "dataNasc": "Data Nasc",
+      "dataFalec": "Data Falec",
+      "biografia": "Biografia",
+      "verbete": "Verbete",
+      "dataAtualBio": "Data Atual Bio",
+      "dataAtualVerb": "Data Atual Verb",
+      "possuiBio": "Possui Bio",
+      "possuiVerb": "Possui Verb",
+      "fonteBio": "Fonte Bio",
+      "obrasNoAcervo": "Obras No Acervo",
+      "inativo": "Inativo",
+      "agradecimentos": "Agradecimentos",
+      "copyright": "Copyright",
+      "obsUso": "Obs Uso",
+      "obra": "Obra",
+      "contato": "Contato",
+      "cidadeNasc": "Cidade Nasc",
+      "cidadeFalesc": "Cidade Falesc",
+      "respVerbete": "Resp Verbete",
+      "funcaoArtista": "Funcao Artista",
+      "help": {
+        "dataNasc": "Nome artístico",
+        "dataFalec": "Data do Nascimento",
+        "biografia": "Data do Falecimento",
+        "verbete": "Texto memorando para biografia do artista",
+        "dataAtualBio": "Texto memorando para verbete sobre o artista",
+        "dataAtualVerb": "Data de atualização da biografia",
+        "possuiBio": "Data de atualização do verbete",
+        "possuiVerb": "Possui biografia?",
+        "fonteBio": "Possui verbete?",
+        "obrasNoAcervo": "Fonte da biografia",
+        "inativo": "Número de Tombo das obras do artista no acervo??",
+        "agradecimentos": "Registro inativo?",
+        "copyright": "Agradecimentos (Direitos de Uso)",
+        "obsUso": "Copyright (Direitos de Uso)"
+      }
+    }
+  }
+}

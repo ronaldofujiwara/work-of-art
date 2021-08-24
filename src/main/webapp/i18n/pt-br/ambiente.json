@@ -19,7 +19,7 @@
       },
       "id": "ID",
       "ambiente": "Ambiente",
-      "ativo": "Ativo"
+      "inativo": "Inativo"
     }
   }
 }

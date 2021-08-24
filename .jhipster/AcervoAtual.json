@@ -1,0 +1,35 @@
+{
+  "name": "AcervoAtual",
+  "fields": [
+    {
+      "fieldName": "acervoAtual",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Acervo Atual"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "acervoatual",
+      "relationshipName": "obra"
+    }
+  ],
+  "javadoc": "Acervo atual em uso",
+  "entityTableName": "acervo_atual",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045451"
+}

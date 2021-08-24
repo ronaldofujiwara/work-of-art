@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Artista.
+    -->
+    <changeSet id="20210819045453-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="artista_id"
+                                 baseTableName="rel_artista__contato"
+                                 constraintName="fk_rel_artista__contato__artista_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artista"/>
+
+        <addForeignKeyConstraint baseColumnNames="contato_id"
+                                 baseTableName="rel_artista__contato"
+                                 constraintName="fk_rel_artista__contato__contato_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contato"/>
+
+        <addForeignKeyConstraint baseColumnNames="cidade_nasc_id"
+                                 baseTableName="artista"
+                                 constraintName="fk_artista__cidade_nasc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cidade"/>
+
+        <addForeignKeyConstraint baseColumnNames="cidade_falesc_id"
+                                 baseTableName="artista"
+                                 constraintName="fk_artista__cidade_falesc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cidade"/>
+
+        <addForeignKeyConstraint baseColumnNames="resp_verbete_id"
+                                 baseTableName="artista"
+                                 constraintName="fk_artista__resp_verbete_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="responsavel"/>
+
+        <addForeignKeyConstraint baseColumnNames="funcao_artista_id"
+                                 baseTableName="artista"
+                                 constraintName="fk_artista__funcao_artista_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="funcao_artista"/>
+    </changeSet>
+</databaseChangeLog>

@@ -28,14 +28,14 @@ public class AmbienteCriteria implements Serializable, Criteria {
 
     private StringFilter ambiente;
 
-    private BooleanFilter ativo;
+    private BooleanFilter inativo;
 
     public AmbienteCriteria() {}
 
     public AmbienteCriteria(AmbienteCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.ambiente = other.ambiente == null ? null : other.ambiente.copy();
-        this.ativo = other.ativo == null ? null : other.ativo.copy();
+        this.inativo = other.inativo == null ? null : other.inativo.copy();
     }
 
     @Override
@@ -73,19 +73,19 @@ public class AmbienteCriteria implements Serializable, Criteria {
         this.ambiente = ambiente;
     }
 
-    public BooleanFilter getAtivo() {
-        return ativo;
+    public BooleanFilter getInativo() {
+        return inativo;
     }
 
-    public BooleanFilter ativo() {
-        if (ativo == null) {
-            ativo = new BooleanFilter();
+    public BooleanFilter inativo() {
+        if (inativo == null) {
+            inativo = new BooleanFilter();
         }
-        return ativo;
+        return inativo;
     }
 
-    public void setAtivo(BooleanFilter ativo) {
-        this.ativo = ativo;
+    public void setInativo(BooleanFilter inativo) {
+        this.inativo = inativo;
     }
 
     @Override
@@ -97,12 +97,12 @@ public class AmbienteCriteria implements Serializable, Criteria {
             return false;
         }
         final AmbienteCriteria that = (AmbienteCriteria) o;
-        return Objects.equals(id, that.id) && Objects.equals(ambiente, that.ambiente) && Objects.equals(ativo, that.ativo);
+        return Objects.equals(id, that.id) && Objects.equals(ambiente, that.ambiente) && Objects.equals(inativo, that.inativo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ambiente, ativo);
+        return Objects.hash(id, ambiente, inativo);
     }
 
     // prettier-ignore
@@ -111,7 +111,7 @@ public class AmbienteCriteria implements Serializable, Criteria {
         return "AmbienteCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (ambiente != null ? "ambiente=" + ambiente + ", " : "") +
-            (ativo != null ? "ativo=" + ativo + ", " : "") +
+            (inativo != null ? "inativo=" + inativo + ", " : "") +
             "}";
     }
 }

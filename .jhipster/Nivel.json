@@ -1,0 +1,35 @@
+{
+  "name": "Nivel",
+  "fields": [
+    {
+      "fieldName": "nivel",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "250"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Nivel de classificacao"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "nivel",
+      "relationshipName": "obra"
+    }
+  ],
+  "javadoc": "Entidade: Nivel\\nNivel de classificacao geral da obra",
+  "entityTableName": "nivel",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045501"
+}

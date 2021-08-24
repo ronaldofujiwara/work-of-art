@@ -21,7 +21,16 @@
       "cidade": "Cidade",
       "estado": "Estado",
       "pais": "Pais",
-      "contato": "Contato"
+      "cidadeUFPais": "Cidade UF Pais",
+      "estadoPais": "Estado Pais",
+      "inativo": "Inativo",
+      "empresa": "Empresa",
+      "artistaNasc": "Artista Nasc",
+      "artistaFalesc": "Artista Falesc",
+      "contato": "Contato",
+      "help": {
+        "inativo": "Registro inativo?"
+      }
     }
   }
 }

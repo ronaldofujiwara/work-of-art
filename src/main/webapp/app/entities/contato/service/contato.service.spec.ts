@@ -44,7 +44,7 @@ describe('Service Tests', () => {
         site: 'AAAAAAA',
         observacoes: 'AAAAAAA',
         dataAtualizacao: currentDate,
-        ativo: false,
+        inativo: false,
       };
     });
 
@@ -109,7 +109,7 @@ describe('Service Tests', () => {
             site: 'BBBBBB',
             observacoes: 'BBBBBB',
             dataAtualizacao: currentDate.format(DATE_TIME_FORMAT),
-            ativo: true,
+            inativo: true,
           },
           elemDefault
         );
@@ -137,7 +137,7 @@ describe('Service Tests', () => {
             email: 'BBBBBB',
             site: 'BBBBBB',
             dataAtualizacao: currentDate.format(DATE_TIME_FORMAT),
-            ativo: true,
+            inativo: true,
           },
           new Contato()
         );
@@ -180,7 +180,7 @@ describe('Service Tests', () => {
             site: 'BBBBBB',
             observacoes: 'BBBBBB',
             dataAtualizacao: currentDate.format(DATE_TIME_FORMAT),
-            ativo: true,
+            inativo: true,
           },
           elemDefault
         );

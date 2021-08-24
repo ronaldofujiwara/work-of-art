@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="funcaoArtista">
+      <h2 data-cy="funcaoArtistaDetailsHeading"><span jhiTranslate="artesApp.funcaoArtista.detail.title">Funcao Artista</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ funcaoArtista.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.funcaoArtista.funcaoArtista">Funcao Artista</span></dt>
+        <dd>
+          <span>{{ funcaoArtista.funcaoArtista }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="artesApp.funcaoArtista.inativo" [ngbTooltip]="'artesApp.funcaoArtista.help.inativo' | translate"
+            >Inativo</span
+          >
+        </dt>
+        <dd>
+          <span>{{ funcaoArtista.inativo }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/funcao-artista', funcaoArtista.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,12 @@
 export interface IAmbiente {
   id?: number;
   ambiente?: string;
-  ativo?: boolean | null;
+  inativo?: boolean | null;
 }
 
 export class Ambiente implements IAmbiente {
-  constructor(public id?: number, public ambiente?: string, public ativo?: boolean | null) {
-    this.ativo = this.ativo ?? false;
+  constructor(public id?: number, public ambiente?: string, public inativo?: boolean | null) {
+    this.inativo = this.inativo ?? false;
   }
 }
 

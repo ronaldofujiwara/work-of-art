@@ -1,0 +1,162 @@
+<div>
+  <h2 id="page-heading" data-cy="EmpresaHeading">
+    <span jhiTranslate="artesApp.empresa.home.title">Empresas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="artesApp.empresa.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-empresa"
+        [routerLink]="['/empresa/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="artesApp.empresa.home.createLabel"> Create a new Empresa </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="empresas?.length === 0">
+    <span jhiTranslate="artesApp.empresa.home.notFound">No empresas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="empresas && empresas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nomeEmpresa">
+            <span jhiTranslate="artesApp.empresa.nomeEmpresa">Nome Empresa</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="codigoBrad">
+            <span jhiTranslate="artesApp.empresa.codigoBrad">Codigo Brad</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="empresa">
+            <span jhiTranslate="artesApp.empresa.empresa">Empresa</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nome"><span jhiTranslate="artesApp.empresa.nome">Nome</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="funcao"><span jhiTranslate="artesApp.empresa.funcao">Funcao</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cNPJ"><span jhiTranslate="artesApp.empresa.cNPJ">C NPJ</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="inscricaoEstadual">
+            <span jhiTranslate="artesApp.empresa.inscricaoEstadual">Inscricao Estadual</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="obs"><span jhiTranslate="artesApp.empresa.obs">Obs</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="rua"><span jhiTranslate="artesApp.empresa.rua">Rua</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="numero"><span jhiTranslate="artesApp.empresa.numero">Numero</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bairro"><span jhiTranslate="artesApp.empresa.bairro">Bairro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="complemento">
+            <span jhiTranslate="artesApp.empresa.complemento">Complemento</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cEP"><span jhiTranslate="artesApp.empresa.cEP">C EP</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="telefone">
+            <span jhiTranslate="artesApp.empresa.telefone">Telefone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="fax"><span jhiTranslate="artesApp.empresa.fax">Fax</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="celular">
+            <span jhiTranslate="artesApp.empresa.celular">Celular</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="email"><span jhiTranslate="artesApp.empresa.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="credito">
+            <span jhiTranslate="artesApp.empresa.credito">Credito</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.empresa.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="genEmail">
+            <span jhiTranslate="artesApp.empresa.genEmail">Gen Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cidade.cidade">
+            <span jhiTranslate="artesApp.empresa.cidade">Cidade</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empresa of empresas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/empresa', empresa.id, 'view']">{{ empresa.id }}</a>
+          </td>
+          <td>{{ empresa.nomeEmpresa }}</td>
+          <td>{{ empresa.codigoBrad }}</td>
+          <td>{{ empresa.empresa }}</td>
+          <td>{{ empresa.nome }}</td>
+          <td>{{ empresa.funcao }}</td>
+          <td>{{ empresa.cNPJ }}</td>
+          <td>{{ empresa.inscricaoEstadual }}</td>
+          <td>{{ empresa.obs }}</td>
+          <td>{{ empresa.rua }}</td>
+          <td>{{ empresa.numero }}</td>
+          <td>{{ empresa.bairro }}</td>
+          <td>{{ empresa.complemento }}</td>
+          <td>{{ empresa.cEP }}</td>
+          <td>{{ empresa.telefone }}</td>
+          <td>{{ empresa.fax }}</td>
+          <td>{{ empresa.celular }}</td>
+          <td>{{ empresa.email }}</td>
+          <td>{{ empresa.credito }}</td>
+          <td>{{ empresa.inativo }}</td>
+          <td>{{ empresa.genEmail }}</td>
+          <td>
+            <div *ngIf="empresa.cidade">
+              <a [routerLink]="['/cidade', empresa.cidade?.id, 'view']">{{ empresa.cidade?.cidade }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/empresa', empresa.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/empresa', empresa.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(empresa)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="empresas && empresas.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

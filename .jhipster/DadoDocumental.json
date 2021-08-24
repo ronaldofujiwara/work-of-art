@@ -1,0 +1,71 @@
+{
+  "name": "DadoDocumental",
+  "fields": [
+    {
+      "fieldName": "data",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "emissor",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "60"
+    },
+    {
+      "fieldName": "receptor",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "obs",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "transcricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "finalizado",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "genTranscricao",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tipoDocumento",
+      "otherEntityRelationshipName": "dadoDocumental",
+      "relationshipName": "tipoDocumento",
+      "otherEntityField": "tipoDocumento"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "dadoDocumental",
+      "relationshipName": "obra",
+      "otherEntityField": "tombo",
+      "ownerSide": false
+    }
+  ],
+  "javadoc": "Dados Documentais das Obras",
+  "entityTableName": "dado_documental",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045455"
+}

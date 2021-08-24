@@ -3,6 +3,8 @@ package br.com.nhw.std.artes.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -128,16 +130,56 @@ public class Contato implements Serializable {
     @Column(name = "data_atualizacao")
     private Instant dataAtualizacao;
 
-    @Column(name = "ativo")
-    private Boolean ativo;
+    @Column(name = "inativo")
+    private Boolean inativo;
+
+    @OneToMany(mappedBy = "fotografo")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "dadoDocumentals",
+            "artista",
+            "categoria",
+            "tecnica",
+            "nivel",
+            "data",
+            "empresa",
+            "moeda",
+            "seguro",
+            "responsavel",
+            "acervoatual",
+            "fotografo",
+            "andarMapa",
+        },
+        allowSetters = true
+    )
+    private Set<Obra> obras = new HashSet<>();
+
+    @OneToMany(mappedBy = "contatoSeg")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "obras", "contatoSeg", "contatoCor", "moeda" }, allowSetters = true)
+    private Set<Seguro> seguroSegs = new HashSet<>();
+
+    @OneToMany(mappedBy = "contatoCor")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "obras", "contatoSeg", "contatoCor", "moeda" }, allowSetters = true)
+    private Set<Seguro> seguroCors = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "contatoes" }, allowSetters = true)
     private AreaDepto area;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "contatoes" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "empresas", "artistaNascs", "artistaFalescs", "contatoes" }, allowSetters = true)
     private Cidade cidade;
+
+    @ManyToMany(mappedBy = "contatoes")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = { "obras", "contatoes", "cidadeNasc", "cidadeFalesc", "respVerbete", "funcaoArtista" },
+        allowSetters = true
+    )
+    private Set<Artista> artistas = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -387,17 +429,110 @@ public class Contato implements Serializable {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public Boolean getAtivo() {
-        return this.ativo;
+    public Boolean getInativo() {
+        return this.inativo;
     }
 
-    public Contato ativo(Boolean ativo) {
-        this.ativo = ativo;
+    public Contato inativo(Boolean inativo) {
+        this.inativo = inativo;
         return this;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
+    }
+
+    public Set<Obra> getObras() {
+        return this.obras;
+    }
+
+    public Contato obras(Set<Obra> obras) {
+        this.setObras(obras);
+        return this;
+    }
+
+    public Contato addObra(Obra obra) {
+        this.obras.add(obra);
+        obra.setFotografo(this);
+        return this;
+    }
+
+    public Contato removeObra(Obra obra) {
+        this.obras.remove(obra);
+        obra.setFotografo(null);
+        return this;
+    }
+
+    public void setObras(Set<Obra> obras) {
+        if (this.obras != null) {
+            this.obras.forEach(i -> i.setFotografo(null));
+        }
+        if (obras != null) {
+            obras.forEach(i -> i.setFotografo(this));
+        }
+        this.obras = obras;
+    }
+
+    public Set<Seguro> getSeguroSegs() {
+        return this.seguroSegs;
+    }
+
+    public Contato seguroSegs(Set<Seguro> seguros) {
+        this.setSeguroSegs(seguros);
+        return this;
+    }
+
+    public Contato addSeguroSeg(Seguro seguro) {
+        this.seguroSegs.add(seguro);
+        seguro.setContatoSeg(this);
+        return this;
+    }
+
+    public Contato removeSeguroSeg(Seguro seguro) {
+        this.seguroSegs.remove(seguro);
+        seguro.setContatoSeg(null);
+        return this;
+    }
+
+    public void setSeguroSegs(Set<Seguro> seguros) {
+        if (this.seguroSegs != null) {
+            this.seguroSegs.forEach(i -> i.setContatoSeg(null));
+        }
+        if (seguros != null) {
+            seguros.forEach(i -> i.setContatoSeg(this));
+        }
+        this.seguroSegs = seguros;
+    }
+
+    public Set<Seguro> getSeguroCors() {
+        return this.seguroCors;
+    }
+
+    public Contato seguroCors(Set<Seguro> seguros) {
+        this.setSeguroCors(seguros);
+        return this;
+    }
+
+    public Contato addSeguroCor(Seguro seguro) {
+        this.seguroCors.add(seguro);
+        seguro.setContatoCor(this);
+        return this;
+    }
+
+    public Contato removeSeguroCor(Seguro seguro) {
+        this.seguroCors.remove(seguro);
+        seguro.setContatoCor(null);
+        return this;
+    }
+
+    public void setSeguroCors(Set<Seguro> seguros) {
+        if (this.seguroCors != null) {
+            this.seguroCors.forEach(i -> i.setContatoCor(null));
+        }
+        if (seguros != null) {
+            seguros.forEach(i -> i.setContatoCor(this));
+        }
+        this.seguroCors = seguros;
     }
 
     public AreaDepto getArea() {
@@ -424,6 +559,37 @@ public class Contato implements Serializable {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+
+    public Set<Artista> getArtistas() {
+        return this.artistas;
+    }
+
+    public Contato artistas(Set<Artista> artistas) {
+        this.setArtistas(artistas);
+        return this;
+    }
+
+    public Contato addArtista(Artista artista) {
+        this.artistas.add(artista);
+        artista.getContatoes().add(this);
+        return this;
+    }
+
+    public Contato removeArtista(Artista artista) {
+        this.artistas.remove(artista);
+        artista.getContatoes().remove(this);
+        return this;
+    }
+
+    public void setArtistas(Set<Artista> artistas) {
+        if (this.artistas != null) {
+            this.artistas.forEach(i -> i.removeContato(this));
+        }
+        if (artistas != null) {
+            artistas.forEach(i -> i.addContato(this));
+        }
+        this.artistas = artistas;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -468,7 +634,7 @@ public class Contato implements Serializable {
             ", site='" + getSite() + "'" +
             ", observacoes='" + getObservacoes() + "'" +
             ", dataAtualizacao='" + getDataAtualizacao() + "'" +
-            ", ativo='" + getAtivo() + "'" +
+            ", inativo='" + getInativo() + "'" +
             "}";
     }
 }

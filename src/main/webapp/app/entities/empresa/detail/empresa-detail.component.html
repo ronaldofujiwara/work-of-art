@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="empresa">
+      <h2 data-cy="empresaDetailsHeading"><span jhiTranslate="artesApp.empresa.detail.title">Empresa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ empresa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.nomeEmpresa">Nome Empresa</span></dt>
+        <dd>
+          <span>{{ empresa.nomeEmpresa }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.codigoBrad">Codigo Brad</span></dt>
+        <dd>
+          <span>{{ empresa.codigoBrad }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.empresa">Empresa</span></dt>
+        <dd>
+          <span>{{ empresa.empresa }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.nome">Nome</span></dt>
+        <dd>
+          <span>{{ empresa.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.funcao">Funcao</span></dt>
+        <dd>
+          <span>{{ empresa.funcao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.cNPJ">C NPJ</span></dt>
+        <dd>
+          <span>{{ empresa.cNPJ }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.inscricaoEstadual">Inscricao Estadual</span></dt>
+        <dd>
+          <span>{{ empresa.inscricaoEstadual }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.obs">Obs</span></dt>
+        <dd>
+          <span>{{ empresa.obs }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.rua">Rua</span></dt>
+        <dd>
+          <span>{{ empresa.rua }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.numero">Numero</span></dt>
+        <dd>
+          <span>{{ empresa.numero }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.bairro">Bairro</span></dt>
+        <dd>
+          <span>{{ empresa.bairro }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.complemento">Complemento</span></dt>
+        <dd>
+          <span>{{ empresa.complemento }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.cEP">C EP</span></dt>
+        <dd>
+          <span>{{ empresa.cEP }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.telefone">Telefone</span></dt>
+        <dd>
+          <span>{{ empresa.telefone }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.fax">Fax</span></dt>
+        <dd>
+          <span>{{ empresa.fax }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.celular">Celular</span></dt>
+        <dd>
+          <span>{{ empresa.celular }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.email">Email</span></dt>
+        <dd>
+          <span>{{ empresa.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.credito">Credito</span></dt>
+        <dd>
+          <span>{{ empresa.credito }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.inativo">Inativo</span></dt>
+        <dd>
+          <span>{{ empresa.inativo }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.genEmail">Gen Email</span></dt>
+        <dd>
+          <span>{{ empresa.genEmail }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.empresa.cidade">Cidade</span></dt>
+        <dd>
+          <div *ngIf="empresa.cidade">
+            <a [routerLink]="['/cidade', empresa.cidade?.id, 'view']">{{ empresa.cidade?.cidade }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/empresa', empresa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

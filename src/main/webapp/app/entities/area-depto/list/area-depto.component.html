@@ -34,7 +34,9 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="area"><span jhiTranslate="artesApp.areaDepto.area">Area</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="ativo"><span jhiTranslate="artesApp.areaDepto.ativo">Ativo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.areaDepto.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -44,7 +46,7 @@
             <a [routerLink]="['/area-depto', areaDepto.id, 'view']">{{ areaDepto.id }}</a>
           </td>
           <td>{{ areaDepto.area }}</td>
-          <td>{{ areaDepto.ativo }}</td>
+          <td>{{ areaDepto.inativo }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

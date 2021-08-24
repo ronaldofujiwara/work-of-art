@@ -1,0 +1,45 @@
+{
+  "artesApp": {
+    "empresa": {
+      "home": {
+        "title": "Empresas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Empresa",
+        "createOrEditLabel": "Criar ou editar Empresa",
+        "notFound": "Nenhum Empresa encontrado"
+      },
+      "created": "Um novo Empresa foi criado com o identificador {{ param }}",
+      "updated": "Um Empresa foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Empresa foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Empresa {{ id }}?"
+      },
+      "detail": {
+        "title": "Empresa"
+      },
+      "id": "ID",
+      "nomeEmpresa": "Nome Empresa",
+      "codigoBrad": "Codigo Brad",
+      "empresa": "Empresa",
+      "nome": "Nome",
+      "funcao": "Funcao",
+      "cNPJ": "C NPJ",
+      "inscricaoEstadual": "Inscricao Estadual",
+      "obs": "Obs",
+      "rua": "Rua",
+      "numero": "Numero",
+      "bairro": "Bairro",
+      "complemento": "Complemento",
+      "cEP": "C EP",
+      "telefone": "Telefone",
+      "fax": "Fax",
+      "celular": "Celular",
+      "email": "Email",
+      "credito": "Credito",
+      "inativo": "Inativo",
+      "genEmail": "Gen Email",
+      "obra": "Obra",
+      "cidade": "Cidade"
+    }
+  }
+}

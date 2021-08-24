@@ -1,0 +1,129 @@
+{
+  "name": "Seguro",
+  "fields": [
+    {
+      "fieldName": "apolice",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "obsSeguro",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "contratoProposta",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "ciaSeguradora",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "cnpjSeguradora",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "susepSeguradora",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "corretora",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "cnpjCorretora",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "susepCorretora",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "dataInicio",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dataVenc",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "premio",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "txConversao",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "genStatusSeguro",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dataAtualSeguro",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "seguro",
+      "relationshipName": "obra"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "contato",
+      "otherEntityRelationshipName": "seguroSeg",
+      "relationshipName": "contatoSeg",
+      "otherEntityField": "nomeComp"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "contato",
+      "otherEntityRelationshipName": "seguroCor",
+      "relationshipName": "contatoCor",
+      "otherEntityField": "nomeComp"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "moeda",
+      "otherEntityRelationshipName": "seguro",
+      "relationshipName": "moeda",
+      "otherEntityField": "tipoMoeda"
+    }
+  ],
+  "javadoc": "Informações de seguro das obras",
+  "entityTableName": "seguro",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045504"
+}

@@ -63,11 +63,19 @@ public class ContatoCriteria implements Serializable, Criteria {
 
     private InstantFilter dataAtualizacao;
 
-    private BooleanFilter ativo;
+    private BooleanFilter inativo;
+
+    private LongFilter obraId;
+
+    private LongFilter seguroSegId;
+
+    private LongFilter seguroCorId;
 
     private LongFilter areaId;
 
     private LongFilter cidadeId;
+
+    private LongFilter artistaId;
 
     public ContatoCriteria() {}
 
@@ -91,9 +99,13 @@ public class ContatoCriteria implements Serializable, Criteria {
         this.site = other.site == null ? null : other.site.copy();
         this.observacoes = other.observacoes == null ? null : other.observacoes.copy();
         this.dataAtualizacao = other.dataAtualizacao == null ? null : other.dataAtualizacao.copy();
-        this.ativo = other.ativo == null ? null : other.ativo.copy();
+        this.inativo = other.inativo == null ? null : other.inativo.copy();
+        this.obraId = other.obraId == null ? null : other.obraId.copy();
+        this.seguroSegId = other.seguroSegId == null ? null : other.seguroSegId.copy();
+        this.seguroCorId = other.seguroCorId == null ? null : other.seguroCorId.copy();
         this.areaId = other.areaId == null ? null : other.areaId.copy();
         this.cidadeId = other.cidadeId == null ? null : other.cidadeId.copy();
+        this.artistaId = other.artistaId == null ? null : other.artistaId.copy();
     }
 
     @Override
@@ -386,19 +398,64 @@ public class ContatoCriteria implements Serializable, Criteria {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public BooleanFilter getAtivo() {
-        return ativo;
+    public BooleanFilter getInativo() {
+        return inativo;
     }
 
-    public BooleanFilter ativo() {
-        if (ativo == null) {
-            ativo = new BooleanFilter();
+    public BooleanFilter inativo() {
+        if (inativo == null) {
+            inativo = new BooleanFilter();
         }
-        return ativo;
+        return inativo;
     }
 
-    public void setAtivo(BooleanFilter ativo) {
-        this.ativo = ativo;
+    public void setInativo(BooleanFilter inativo) {
+        this.inativo = inativo;
+    }
+
+    public LongFilter getObraId() {
+        return obraId;
+    }
+
+    public LongFilter obraId() {
+        if (obraId == null) {
+            obraId = new LongFilter();
+        }
+        return obraId;
+    }
+
+    public void setObraId(LongFilter obraId) {
+        this.obraId = obraId;
+    }
+
+    public LongFilter getSeguroSegId() {
+        return seguroSegId;
+    }
+
+    public LongFilter seguroSegId() {
+        if (seguroSegId == null) {
+            seguroSegId = new LongFilter();
+        }
+        return seguroSegId;
+    }
+
+    public void setSeguroSegId(LongFilter seguroSegId) {
+        this.seguroSegId = seguroSegId;
+    }
+
+    public LongFilter getSeguroCorId() {
+        return seguroCorId;
+    }
+
+    public LongFilter seguroCorId() {
+        if (seguroCorId == null) {
+            seguroCorId = new LongFilter();
+        }
+        return seguroCorId;
+    }
+
+    public void setSeguroCorId(LongFilter seguroCorId) {
+        this.seguroCorId = seguroCorId;
     }
 
     public LongFilter getAreaId() {
@@ -431,6 +488,21 @@ public class ContatoCriteria implements Serializable, Criteria {
         this.cidadeId = cidadeId;
     }
 
+    public LongFilter getArtistaId() {
+        return artistaId;
+    }
+
+    public LongFilter artistaId() {
+        if (artistaId == null) {
+            artistaId = new LongFilter();
+        }
+        return artistaId;
+    }
+
+    public void setArtistaId(LongFilter artistaId) {
+        this.artistaId = artistaId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -460,9 +532,13 @@ public class ContatoCriteria implements Serializable, Criteria {
             Objects.equals(site, that.site) &&
             Objects.equals(observacoes, that.observacoes) &&
             Objects.equals(dataAtualizacao, that.dataAtualizacao) &&
-            Objects.equals(ativo, that.ativo) &&
+            Objects.equals(inativo, that.inativo) &&
+            Objects.equals(obraId, that.obraId) &&
+            Objects.equals(seguroSegId, that.seguroSegId) &&
+            Objects.equals(seguroCorId, that.seguroCorId) &&
             Objects.equals(areaId, that.areaId) &&
-            Objects.equals(cidadeId, that.cidadeId)
+            Objects.equals(cidadeId, that.cidadeId) &&
+            Objects.equals(artistaId, that.artistaId)
         );
     }
 
@@ -488,9 +564,13 @@ public class ContatoCriteria implements Serializable, Criteria {
             site,
             observacoes,
             dataAtualizacao,
-            ativo,
+            inativo,
+            obraId,
+            seguroSegId,
+            seguroCorId,
             areaId,
-            cidadeId
+            cidadeId,
+            artistaId
         );
     }
 
@@ -517,9 +597,13 @@ public class ContatoCriteria implements Serializable, Criteria {
             (site != null ? "site=" + site + ", " : "") +
             (observacoes != null ? "observacoes=" + observacoes + ", " : "") +
             (dataAtualizacao != null ? "dataAtualizacao=" + dataAtualizacao + ", " : "") +
-            (ativo != null ? "ativo=" + ativo + ", " : "") +
+            (inativo != null ? "inativo=" + inativo + ", " : "") +
+            (obraId != null ? "obraId=" + obraId + ", " : "") +
+            (seguroSegId != null ? "seguroSegId=" + seguroSegId + ", " : "") +
+            (seguroCorId != null ? "seguroCorId=" + seguroCorId + ", " : "") +
             (areaId != null ? "areaId=" + areaId + ", " : "") +
             (cidadeId != null ? "cidadeId=" + cidadeId + ", " : "") +
+            (artistaId != null ? "artistaId=" + artistaId + ", " : "") +
             "}";
     }
 }

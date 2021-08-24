@@ -1,0 +1,29 @@
+{
+  "artesApp": {
+    "acervoAtual": {
+      "home": {
+        "title": "Acervo Atuals",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Acervo Atual",
+        "createOrEditLabel": "Criar ou editar Acervo Atual",
+        "notFound": "Nenhum Acervo Atual encontrado"
+      },
+      "created": "Um novo Acervo Atual foi criado com o identificador {{ param }}",
+      "updated": "Um Acervo Atual foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Acervo Atual foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Acervo Atual {{ id }}?"
+      },
+      "detail": {
+        "title": "Acervo Atual"
+      },
+      "id": "ID",
+      "acervoAtual": "Acervo Atual",
+      "inativo": "Inativo",
+      "obra": "Obra",
+      "help": {
+        "inativo": "Acervo Atual"
+      }
+    }
+  }
+}

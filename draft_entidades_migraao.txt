@@ -1,0 +1,247 @@
+entity TblObras {
+	tombo String maxlength(8) required,  /** Nº Tombo da Obras */
+	multiplo String maxlength(1),   /** (M) - Indica Obra Multipla: (-)=multiplo; (.)="cópia */
+	numeroRegistro String maxlength(50),  /** Número do Registro existente no Bradesco = ATIP */
+	outrosTitulos String maxlength(200),  /** Outros Títulos da obra */
+	tituloOriginal String maxlength(200),  /** Título da original da obra */
+	origem String maxlength(100),  /** Local de origem onde foi feita a obra */
+	descricao String maxlength(16777216),  /** Descrição da obra */
+	assinatura Boolean,  /** Se a obra é assinada ou não */
+	localAssinatura String maxlength(16777216),   /** Localização da assinatura do artista na obra */
+	marcaInscrObra String maxlength(16777216),  /** Marcas e/ou Inscrições que se encontram na obra */
+	marcaInscrSuporte String maxlength(16777216),  /** Marcas e/ou Inscrições que se encontram no suporte/moldura da obra */
+	MedidasAprox Boolean,  /** Indica se as medidas são aproximadas ou se reais */
+	alturaObra BigDecimal, /** Altura da Obra s/suporte ou moldura (precisão 2 decimais) */
+	largObra BigDecimal ,  /** Largura da Obra s/suporte ou moldura (precisão 2 decimais) */
+	profObra BigDecimal,   /** Profundidade da Obra s/suporte ou moldura (precisão 2 decimais) */
+	diametrObra String maxlength(6), /** Diâmetro da Obra s/suporte ou moldura */
+	alturaMold BigDecimal, /** Altura da Obra c/Moldura (precisão 2 decimais) */
+	largMold BigDecimal,   /** Largura da Obra c/Moldura (precisão 2 decimais) */
+	profMold BigDecimal,   /** Profundidade da Obra c/Moldura (precisão 2 decimais) */
+	diametroMold String maxlength(10), /** Diâmetro da Obra s/suporte ou moldura */
+	dimensAdic String maxlength(150),   /** Dimensões adicionais da obra */
+	pesObra String maxlength(10),  /** Peso da Obra */
+	atribuido Boolean,  /** Autoria é atribuída ou não */
+	*nFoto String maxlength(10),   /** Nome e ou número da foto correspondente a obra */
+	conjunto Boolean,  /** Faz parte de um conjunto? */
+	conjTombo String maxlength(100),  /** Nº Tombos que formam o  conjunto */
+	valorSeguro BigDecimal,  /** Valor do Seguro (precisão 4 decimais) */
+	valorSeguroReal BigDecimal, /** Valor do Seguro convertido em Reais (precisão 4 decimais) */ 
+	dataconversao LocalDate,  /** Data da conversão da moeda */
+	dataAlterApolice LocalDate,   /** Data que a obra foi Incluida/Excluida na Apólice */
+	*localAtual String maxlength(100),  /** Localização atual da obra - relacionada com QryLocalização */
+	*localAtualNOVO String maxlength(200),  /** Localização atual da obra - relacionada com QryLocalizaçãoNOVA */
+	*codParametro String maxlength(50),  /** Categorias da tblParametros para associarmos com a obra */
+	obs String maxlength(16777216),   /** Observações gerais da obra */
+	tiragem String maxlength(16777216),  /** Tiragem da gravura */
+	serie String maxlength(200),  /** Título da Série da gravura */
+	selo Integer,  /** Classificação da obra quanto ao uso, designado pelos pesquisadores */
+	tomboAnterio String maxlength(50),   /** Número da antiga catalogação */
+	verbete String maxlength(16777216),  /** Dados específicos sobre a obra */
+	livro Boolean,  /** Selecionar caso a obra esteja participando da última publicação da coleção */
+	imagemAlta Boolean,  /** Selecionar caso a obra possua imagem digital em alta resolução */
+	apabex Boolean,  /** Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino à APABEX */
+	bunkyo Boolean,  /** Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino ao BUNKYO */
+	faseDepuração String maxlength(255),  /** Indique em qual fase a obra será destinada à Apabex ou ao Bunkyo */
+	paraAvaliação Boolean,  /** Selecionar caso a obra necessite ser encaminhada para avaliação de mercado */
+	paraRestauração Boolean,  /** Selecionar caso a obra necessite ser encaminhada para restauração */
+	paraMoldura Boolean,  /** Selecionar caso a obra necessite ser encaminhada para confecção de moldura */
+	paraLegenda Boolean,  /** Selecionar caso a obra necessite ser encaminhada para confecção de legenda */
+	tempField*0 Boolean,  /** Selecionar caso a obra necessite ser encaminhada para foto em alta */
+	selecaoListaAvulsa Boolean,  /** Selecionar para incluir a obra em uma eventual seleção avulsa */
+	dominioPubl Boolean,  /** É de domínio público  */
+	dtVencFoto LocalDate,  /** Data de vencimento de uso de imagem do Fotografo */
+	obsUsoFoto String maxlength(255),  /** Observações de uso de imagem do Fotografo */
+	localFotoAlta String maxlength(255),  /** Localização da FotoAlta */
+	dataInclusao LocalDate,  /** Data que a obra foi inserida */
+	dataExclusao LocalDate,  /** Data que a obra foi excluida */
+	bookX Integer,  /** Posicao do Eixo X no book */
+	bookY Integer,  /** Posicao do Eixo Y no book */
+	gen_Descricao Integer,  /**    */
+	gen_Field1 Integer,  /**    */
+	paraFotografia Boolean,  /** Selecionar caso a obra necessite ser encaminhada para foto em alta  */
+	gen_MarcaInscrObra Integer,  /**   */
+	palavrasChave String maxlength(16777216),  /** Palavras-chave relacionadas à obra, para pesquisa mais detalhada */
+	gen_MarcaInscrSuporte Integer,  /**   */
+	gen_Obs Integer,  /**   */
+	gen_Verbete Integer  /**   */
+}
+
+/* Relacionamentos: */
+	codCategoria Integer,  /** OK - Categorias - tabela relacionada */
+	codTecnicas Integer,  /** OK - Técnicas e ou materiais que constituem a obra. - tabela relacionada */
+	nivel Integer,  	  /** OK - Nível - tabela relacionada */
+	codData Integer,  /** OK - Data da execução da obra. - tabela relacionada */
+	codArtista Integer,  /** OK - Nome artístico do artista. - tabela relacionada */
+	codEmpresa Integer,   /** OK - Nome da Empresa proprietária das obras - tabela relacionada */
+	codTipoMoeda Integer,  /** OK - Qual moeda utilizada - tabela relacionada */
+	codSeguro Integer,  /** OK - Nº Apólice do seguro - tabela relacionada */
+	codExpomus Integer,  /** OK - Responsável pela digitação da ficha de obra - tabela relacionada */
+	codAcervo Integer,  /** OK - Acervo Atual - classificação interna do  Bradesco em relacao as obras */
+	codFotografo Integer,  /** OK - Fotografo - tabela relacionada */
+	codAndar Integer,  /** OK - Andar onde a obra se encontra - Usado para carregar a imagem de fundo no book */
+
+	codDimensoes Integer,  /** DUVIDA - Lista de dimensoes das partes (novo) - DUVIDA */
+	dirFoto Integer,  /** Codigo ref a TblFoto (tbl com registros do caminho físico da foto) */
+
+	*nFoto String maxlength(10),   /** Nome e ou número da foto correspondente a obra */
+	*localAtual String maxlength(100),  /** MOVER - Localização atual da obra - relacionada com QryLocalização */
+	*localAtualNOVO String maxlength(200),  /** MOVER -Localização atual da obra - relacionada com QryLocalizaçãoNOVA */
+	*codParametro String maxlength(50),  /** MOVER - Categorias da tblParametros para associarmos com a obra */
+
+
+	
+
+relationship OneToMany {
+  AreaDepto to Contato{area(area)},
+  Cidade to Contato{cidade(cidade)},
+  Categoria to Contato{categoria(categoria)},	
+  Cidade to Contato{cidade(cidade)}
+  
+  Artista to Obras{artista(nome)}
+}
+
+/** Entidade: Artista  
+    Artistas autores das obras */
+entity Artista {
+	nome String maxlength(255) required,   /** Nome artístico */
+	dataNasc String maxlength(255),   /** Data do Nascimento */
+	dataFalec String maxlength(255),   /** Data do Falecimento */
+	biografia String maxlength(16777216),   /** Texto memorando para biografia do artista */
+	verbete String maxlength(16777216),   /** Texto memorando para verbete sobre o artista */
+	dataAtualBio LocalDate,   /** Data de atualização da biografia */
+	dataAtualVerb LocalDate,   /** Data de atualização do verbete */
+	possuiBio Boolean,   /** Possui biografia? */
+	possuiVerb Boolean,   /** Possui verbete? */
+	fonteBio String maxlength(255),   /** Fonte da biografia */
+	obrasNoAcervo String maxlength(255),   /** Número de Tombo das obras do artista no acervo?? */
+	inativo Boolean,   /** Registro inativo? */
+	agradecimentos String maxlength(16777216),   /** Agradecimentos (Direitos de Uso) */
+	copyright String maxlength(16777216),   /** Copyright (Direitos de Uso) */
+	obsUso String maxlength(255)   /** ObsUso (Direitos de Uso) */
+}	
+/** campos descartados do Access na entidade Artista: */
+	usoImagPublInst Boolean,   /** Autorização uso de imagem Publicação e divulgação institucional
+	usoImagImpInst Boolean,   /**
+	usoImagComInst Boolean,   /**
+	usoImagEducInst Boolean,   /**
+	cctoUsoImagInst String maxlength(255),   /**
+	obsUsoImagInst String maxlength(16777216),   /**
+	usoImagPublEsp Boolean,   /**
+	usoImagImpEsp Boolean,   /**
+	usoImagComEsp Boolean,   /**
+	usoImagEducEsp Boolean,   /**
+	vctoUsoImagEsp String maxlength(255),   /**
+	obsUsoImagPublEsp String maxlength(16777216),   /**
+	gen_Biografia Integer,   /**
+	gen_ObsUsoImagInst Integer,   /**
+	gen_ObsUsoImagPublEsp Integer,   /**
+	gen_Verbete Integer,   /**
+	/** Fim dos campos descartados */
+	
+	
+	
+/** Entidade: Responsavel  */
+/** Colaborador responsavel pelo verbete/registro - Obs: no Access -> tabela Expomus */	
+entity  Responsavel {
+	nome String required maxlength(150),  /** Colaborador responsavel pelo verbete */
+	inativo Boolean  /** Registro inativo? */
+}
+
+	
+/** Entidade: Funcao do Artista  */
+entity  FuncaoArtista {
+	funcaoArtista String required maxlength(40),  /** Funcao do artista */
+	inativo Boolean   /** Registro inativo? */
+}
+
+/** Entidade: Cidade  */
+/** Cidade/UF/Pais - Obs: no Access -> tabela: Cid/UF/Pais1 */		
+entity  Cidade {
+	cidade String required maxlength(255),
+	estado String maxlength(255),
+    pais String maxlength(255)
+	cidadeUFPais String maxlength(255),
+    estadoPais String maxlength(255),
+	inativo Boolean   /** Registro inativo? */
+}
+
+relationship OneToMany {
+  Cidade to Artista{cidadeNasc(cidade)},
+  Cidade to Artista{cidadeFalesc(cidade)},
+  Responsavel to Artista{respVerbete(nome)}
+  FuncaoArtista to Artista{funcaoArtista(funcaoArtista)}
+  
+  Cidade to Empresa{cidade(cidade)},
+ }
+
+relationship ManyToMany {
+  Artista{contato} to Contato{artista},
+ }
+
+
+/** Entidade: Empresa  */
+/** Empresas do Grupo	*/	
+entity  Empresa {
+	nomeEmpresa String maxlength(100) required,  /* Nome da Empresa - o grupo Santander envolve várias empresas */
+	codigoBrad Integer,   /* Código da Empresa */
+	empresa String maxlength(50),  /* União dos campos código Santander e nome empresa */
+	nome String maxlength(50),  /* Nome de representante da Empresa */
+	funcao String maxlength(50),  /* Cargo */
+	CNPJ String maxlength(20),  /* Documento CNPJ de pessoa Jurídica */
+	inscricaoEstadual String maxlength(10),  /* Inscricao Estadual de Pessoa Jurídica */
+	obs String maxlength(150),  /* Outros endereços e/ou outros */
+	rua String maxlength(50),  /* Rua */
+	numero String maxlength(5),  /* Nº */
+	bairro String maxlength(30),  /* Bairro */
+	complemento String maxlength(30),  /* Complemento */
+	CEP String maxlength(8),  /* CEP */
+	telefone String maxlength(50),  /* Telefones comerciais */
+	fax String maxlength(50),  /* Fax comercial */
+	celular String maxlength(30),  /* Celular */
+	email String maxlength(16777216),  /* Email para contato */
+	credito String maxlength(150),  /* Crédito da Coleção */
+	inativo Boolean ,  /* Registro Inativo?  */
+	gen_Email Integer,  
+}
+
+/** Entidade: Seguro  */
+/** Informações de seguro das obras	*/
+entity Seguro {
+	apolice String maxlength(200),  /* Nº da apólice de seguro */
+	obsSeguro String maxlength(30),  /* Observações específicas sobre o tipo de seguro */
+	contratoProposta String maxlength(255),  /* Nº Contrato e Proposta da contratação da apólice */
+	ciaSeguradora String maxlength(50),  /* Companhia Seguradora */
+	cnpjSeguradora String maxlength(255),  /* CNPJ da Cia Seguradora */
+	susepSeguradora String maxlength(255),  /* Cód. SUSEP da Cia Seguradora */
+	corretora String maxlength(50),  /* Corretora utilizada */
+	cnpjCorretora String maxlength(255),  /* CNPJ da Corretora utilizada */
+	susepCorretora String maxlength(255),  /* Cód. SUSEP da Corretora utilizada */
+	dataInicio LocalDate,  /* Data do início do período de cobertura */
+	dataVenc LocalDate,  /* Data do final do período de cobertura */
+	Inativo Boolean ,  /* Registro Inativo?  */
+	premio String maxlength(255),  /* Valor do Prêmio Total */
+	txConversao BigDecimal,  /* Taxa de conversão da apólice - precisao: (100,7) */
+	genStatusSeguro Integer,  
+	dataAtualSeguro LocalDate  /* Data da atualização do status */
+}
+
+relationship OneToMany {
+	Contato to Seguro{contatoSeg(nomecomp)},
+	Contato to Seguro{contatoCor(nomecomp)},
+	Moeda to Seguro{moeda(tipoMoeda)}
+}
+
+/** Entidade: Dado Documental  */
+/** Dados Documentais das Obras */
+entity DadoDocumental {
+	data String maxlength(50), /* Datação do documento */
+	emissor String maxlength(60), /* Emissor do documento */
+	receptor String maxlength(30), /* Receptor do documento */
+	obs String maxlength(200), /* Observações gerais */
+	transcricao String maxlength(16777216), /* Transcrição do documento */
+	finalizado Boolean, /* Status do Projeto */
+	genTranscricao Integer
+}
+
+	CodTipoDocumento Integer,

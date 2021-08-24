@@ -15,7 +15,7 @@ public class AreaDeptoDTO implements Serializable {
     @Size(max = 100)
     private String area;
 
-    private Boolean ativo;
+    private Boolean inativo;
 
     public Long getId() {
         return id;
@@ -33,12 +33,12 @@ public class AreaDeptoDTO implements Serializable {
         this.area = area;
     }
 
-    public Boolean getAtivo() {
-        return ativo;
+    public Boolean getInativo() {
+        return inativo;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AreaDeptoDTO implements Serializable {
         return "AreaDeptoDTO{" +
             "id=" + getId() +
             ", area='" + getArea() + "'" +
-            ", ativo='" + getAtivo() + "'" +
+            ", inativo='" + getInativo() + "'" +
             "}";
     }
 }

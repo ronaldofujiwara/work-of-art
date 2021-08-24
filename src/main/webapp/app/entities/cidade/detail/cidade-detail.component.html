@@ -26,6 +26,18 @@
         <dd>
           <span>{{ cidade.pais }}</span>
         </dd>
+        <dt><span jhiTranslate="artesApp.cidade.cidadeUFPais">Cidade UF Pais</span></dt>
+        <dd>
+          <span>{{ cidade.cidadeUFPais }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.cidade.estadoPais">Estado Pais</span></dt>
+        <dd>
+          <span>{{ cidade.estadoPais }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.cidade.inativo" [ngbTooltip]="'artesApp.cidade.help.inativo' | translate">Inativo</span></dt>
+        <dd>
+          <span>{{ cidade.inativo }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

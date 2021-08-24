@@ -1,0 +1,32 @@
+{
+  "artesApp": {
+    "dadoDocumental": {
+      "home": {
+        "title": "Dado Documentals",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Dado Documental",
+        "createOrEditLabel": "Criar ou editar Dado Documental",
+        "notFound": "Nenhum Dado Documental encontrado"
+      },
+      "created": "Um novo Dado Documental foi criado com o identificador {{ param }}",
+      "updated": "Um Dado Documental foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Dado Documental foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Dado Documental {{ id }}?"
+      },
+      "detail": {
+        "title": "Dado Documental"
+      },
+      "id": "ID",
+      "data": "Data",
+      "emissor": "Emissor",
+      "receptor": "Receptor",
+      "obs": "Obs",
+      "transcricao": "Transcricao",
+      "finalizado": "Finalizado",
+      "genTranscricao": "Gen Transcricao",
+      "tipoDocumento": "Tipo Documento",
+      "obra": "Obra"
+    }
+  }
+}

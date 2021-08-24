@@ -1,0 +1,43 @@
+{
+  "artesApp": {
+    "seguro": {
+      "home": {
+        "title": "Seguros",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Seguro",
+        "createOrEditLabel": "Criar ou editar Seguro",
+        "notFound": "Nenhum Seguro encontrado"
+      },
+      "created": "Um novo Seguro foi criado com o identificador {{ param }}",
+      "updated": "Um Seguro foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Seguro foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Seguro {{ id }}?"
+      },
+      "detail": {
+        "title": "Seguro"
+      },
+      "id": "ID",
+      "apolice": "Apolice",
+      "obsSeguro": "Obs Seguro",
+      "contratoProposta": "Contrato Proposta",
+      "ciaSeguradora": "Cia Seguradora",
+      "cnpjSeguradora": "Cnpj Seguradora",
+      "susepSeguradora": "Susep Seguradora",
+      "corretora": "Corretora",
+      "cnpjCorretora": "Cnpj Corretora",
+      "susepCorretora": "Susep Corretora",
+      "dataInicio": "Data Inicio",
+      "dataVenc": "Data Venc",
+      "inativo": "Inativo",
+      "premio": "Premio",
+      "txConversao": "Tx Conversao",
+      "genStatusSeguro": "Gen Status Seguro",
+      "dataAtualSeguro": "Data Atual Seguro",
+      "obra": "Obra",
+      "contatoSeg": "Contato Seg",
+      "contatoCor": "Contato Cor",
+      "moeda": "Moeda"
+    }
+  }
+}

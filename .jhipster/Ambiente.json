@@ -8,7 +8,7 @@
       "fieldValidateRulesMaxlength": "50"
     },
     {
-      "fieldName": "ativo",
+      "fieldName": "inativo",
       "fieldType": "Boolean"
     }
   ],

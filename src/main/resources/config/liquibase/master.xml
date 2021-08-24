@@ -19,8 +19,30 @@
     <include file="config/liquibase/changelog/20210817042854_added_entity_AreaDepto.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210817042855_added_entity_Cidade.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210817042856_added_entity_Contato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045451_added_entity_AcervoAtual.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045452_added_entity_AndarMapa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045453_added_entity_Artista.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045454_added_entity_Categoria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045455_added_entity_DadoDocumental.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045456_added_entity_Data.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045457_added_entity_Empresa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045458_added_entity_Espaco.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045459_added_entity_FuncaoArtista.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045500_added_entity_Moeda.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045501_added_entity_Nivel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045502_added_entity_Obra.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045503_added_entity_Responsavel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045504_added_entity_Seguro.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045505_added_entity_Tecnica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045506_added_entity_TipoDocumento.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210817042856_added_entity_constraints_Contato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045452_added_entity_constraints_AndarMapa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045453_added_entity_constraints_Artista.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045455_added_entity_constraints_DadoDocumental.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045457_added_entity_constraints_Empresa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045502_added_entity_constraints_Obra.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210819045504_added_entity_constraints_Seguro.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

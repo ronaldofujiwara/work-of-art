@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Artista.
+    -->
+    <changeSet id="20210819045453-1" author="jhipster">
+        <createTable tableName="artista" remarks="Artistas autores das obras">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="data_nasc" type="varchar(255)" remarks="Nome artístico">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_falec" type="varchar(255)" remarks="Data do Nascimento">
+                <constraints nullable="true" />
+            </column>
+            <column name="biografia" type="varchar(64000)" remarks="Data do Falecimento">
+                <constraints nullable="true" />
+            </column>
+            <column name="verbete" type="varchar(64000)" remarks="Texto memorando para biografia do artista">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_atual_bio" type="date" remarks="Texto memorando para verbete sobre o artista">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_atual_verb" type="date" remarks="Data de atualização da biografia">
+                <constraints nullable="true" />
+            </column>
+            <column name="possui_bio" type="boolean" remarks="Data de atualização do verbete">
+                <constraints nullable="true" />
+            </column>
+            <column name="possui_verb" type="boolean" remarks="Possui biografia?">
+                <constraints nullable="true" />
+            </column>
+            <column name="fonte_bio" type="varchar(255)" remarks="Possui verbete?">
+                <constraints nullable="true" />
+            </column>
+            <column name="obras_no_acervo" type="varchar(255)" remarks="Fonte da biografia">
+                <constraints nullable="true" />
+            </column>
+            <column name="inativo" type="boolean" remarks="Número de Tombo das obras do artista no acervo??">
+                <constraints nullable="true" />
+            </column>
+            <column name="agradecimentos" type="varchar(64000)" remarks="Registro inativo?">
+                <constraints nullable="true" />
+            </column>
+            <column name="copyright" type="varchar(64000)" remarks="Agradecimentos (Direitos de Uso)">
+                <constraints nullable="true" />
+            </column>
+            <column name="obs_uso" type="varchar(255)" remarks="Copyright (Direitos de Uso)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cidade_nasc_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="cidade_falesc_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="resp_verbete_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="funcao_artista_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210819045453-1-relations" author="jhipster">
+
+        <createTable tableName="rel_artista__contato">
+            <column name="contato_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="artista_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="artista_id, contato_id" tableName="rel_artista__contato"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210819045453-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/artista.csv"
+                  separator=";"
+                  tableName="artista">
+            <column name="id" type="numeric"/>
+            <column name="nome" type="string"/>
+            <column name="data_nasc" type="string"/>
+            <column name="data_falec" type="string"/>
+            <column name="biografia" type="string"/>
+            <column name="verbete" type="string"/>
+            <column name="data_atual_bio" type="date"/>
+            <column name="data_atual_verb" type="date"/>
+            <column name="possui_bio" type="boolean"/>
+            <column name="possui_verb" type="boolean"/>
+            <column name="fonte_bio" type="string"/>
+            <column name="obras_no_acervo" type="string"/>
+            <column name="inativo" type="boolean"/>
+            <column name="agradecimentos" type="string"/>
+            <column name="copyright" type="string"/>
+            <column name="obs_uso" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

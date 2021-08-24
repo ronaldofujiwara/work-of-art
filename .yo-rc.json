@@ -43,7 +43,28 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "languages": ["pt-br", "en"],
-    "entities": ["Ambiente", "AreaDepto", "Cidade", "Contato"],
-    "lastLiquibaseTimestamp": 1629174536000
+    "entities": [
+      "Ambiente",
+      "AreaDepto",
+      "Cidade",
+      "Contato",
+      "AcervoAtual",
+      "AndarMapa",
+      "Artista",
+      "Categoria",
+      "DadoDocumental",
+      "Data",
+      "Empresa",
+      "Espaco",
+      "FuncaoArtista",
+      "Moeda",
+      "Nivel",
+      "Obra",
+      "Responsavel",
+      "Seguro",
+      "Tecnica",
+      "TipoDocumento"
+    ],
+    "lastLiquibaseTimestamp": 1629348906000
   }
 }

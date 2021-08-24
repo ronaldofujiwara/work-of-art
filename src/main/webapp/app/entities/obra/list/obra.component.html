@@ -1,0 +1,412 @@
+<div>
+  <h2 id="page-heading" data-cy="ObraHeading">
+    <span jhiTranslate="artesApp.obra.home.title">Obras</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="artesApp.obra.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-obra"
+        [routerLink]="['/obra/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="artesApp.obra.home.createLabel"> Create a new Obra </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="obras?.length === 0">
+    <span jhiTranslate="artesApp.obra.home.notFound">No obras found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="obras && obras.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tombo"><span jhiTranslate="artesApp.obra.tombo">Tombo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="multiplo">
+            <span jhiTranslate="artesApp.obra.multiplo">Multiplo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="numeroRegistro">
+            <span jhiTranslate="artesApp.obra.numeroRegistro">Numero Registro</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="outrosTitulos">
+            <span jhiTranslate="artesApp.obra.outrosTitulos">Outros Titulos</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tituloOriginal">
+            <span jhiTranslate="artesApp.obra.tituloOriginal">Titulo Original</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="origem"><span jhiTranslate="artesApp.obra.origem">Origem</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="descricao">
+            <span jhiTranslate="artesApp.obra.descricao">Descricao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="assinatura">
+            <span jhiTranslate="artesApp.obra.assinatura">Assinatura</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="localAssinatura">
+            <span jhiTranslate="artesApp.obra.localAssinatura">Local Assinatura</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="marcaInscrObra">
+            <span jhiTranslate="artesApp.obra.marcaInscrObra">Marca Inscr Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="marcaInscrSuporte">
+            <span jhiTranslate="artesApp.obra.marcaInscrSuporte">Marca Inscr Suporte</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="medidasAprox">
+            <span jhiTranslate="artesApp.obra.medidasAprox">Medidas Aprox</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="alturaObra">
+            <span jhiTranslate="artesApp.obra.alturaObra">Altura Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="largObra">
+            <span jhiTranslate="artesApp.obra.largObra">Larg Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profObra">
+            <span jhiTranslate="artesApp.obra.profObra">Prof Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="diametrObra">
+            <span jhiTranslate="artesApp.obra.diametrObra">Diametr Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="alturaMold">
+            <span jhiTranslate="artesApp.obra.alturaMold">Altura Mold</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="largMold">
+            <span jhiTranslate="artesApp.obra.largMold">Larg Mold</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profMold">
+            <span jhiTranslate="artesApp.obra.profMold">Prof Mold</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="diametroMold">
+            <span jhiTranslate="artesApp.obra.diametroMold">Diametro Mold</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dimensAdic">
+            <span jhiTranslate="artesApp.obra.dimensAdic">Dimens Adic</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="pesObra">
+            <span jhiTranslate="artesApp.obra.pesObra">Pes Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="atribuido">
+            <span jhiTranslate="artesApp.obra.atribuido">Atribuido</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nFoto"><span jhiTranslate="artesApp.obra.nFoto">N Foto</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="conjunto">
+            <span jhiTranslate="artesApp.obra.conjunto">Conjunto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="conjTombo">
+            <span jhiTranslate="artesApp.obra.conjTombo">Conj Tombo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valorSeguro">
+            <span jhiTranslate="artesApp.obra.valorSeguro">Valor Seguro</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valorSeguroReal">
+            <span jhiTranslate="artesApp.obra.valorSeguroReal">Valor Seguro Real</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataconversao">
+            <span jhiTranslate="artesApp.obra.dataconversao">Dataconversao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataAlterApolice">
+            <span jhiTranslate="artesApp.obra.dataAlterApolice">Data Alter Apolice</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="localAtual">
+            <span jhiTranslate="artesApp.obra.localAtual">Local Atual</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="localAtualNovo">
+            <span jhiTranslate="artesApp.obra.localAtualNovo">Local Atual Novo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="codParametro">
+            <span jhiTranslate="artesApp.obra.codParametro">Cod Parametro</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="obs"><span jhiTranslate="artesApp.obra.obs">Obs</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tiragem"><span jhiTranslate="artesApp.obra.tiragem">Tiragem</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="serie"><span jhiTranslate="artesApp.obra.serie">Serie</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="selo"><span jhiTranslate="artesApp.obra.selo">Selo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tomboAnterio">
+            <span jhiTranslate="artesApp.obra.tomboAnterio">Tombo Anterio</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="verbete"><span jhiTranslate="artesApp.obra.verbete">Verbete</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="livro"><span jhiTranslate="artesApp.obra.livro">Livro</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="imagemAlta">
+            <span jhiTranslate="artesApp.obra.imagemAlta">Imagem Alta</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="apabex"><span jhiTranslate="artesApp.obra.apabex">Apabex</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bunkyo"><span jhiTranslate="artesApp.obra.bunkyo">Bunkyo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="faseDepuracao">
+            <span jhiTranslate="artesApp.obra.faseDepuracao">Fase Depuracao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="paraAvaliacao">
+            <span jhiTranslate="artesApp.obra.paraAvaliacao">Para Avaliacao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="paraRestauracao">
+            <span jhiTranslate="artesApp.obra.paraRestauracao">Para Restauracao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="paraMoldura">
+            <span jhiTranslate="artesApp.obra.paraMoldura">Para Moldura</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="paraLegenda">
+            <span jhiTranslate="artesApp.obra.paraLegenda">Para Legenda</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tempField">
+            <span jhiTranslate="artesApp.obra.tempField">Temp Field</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="selecaoListaAvulsa">
+            <span jhiTranslate="artesApp.obra.selecaoListaAvulsa">Selecao Lista Avulsa</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dominioPubl">
+            <span jhiTranslate="artesApp.obra.dominioPubl">Dominio Publ</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dtVencFoto">
+            <span jhiTranslate="artesApp.obra.dtVencFoto">Dt Venc Foto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="obsUsoFoto">
+            <span jhiTranslate="artesApp.obra.obsUsoFoto">Obs Uso Foto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="localFotoAlta">
+            <span jhiTranslate="artesApp.obra.localFotoAlta">Local Foto Alta</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataInclusao">
+            <span jhiTranslate="artesApp.obra.dataInclusao">Data Inclusao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataExclusao">
+            <span jhiTranslate="artesApp.obra.dataExclusao">Data Exclusao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bookX"><span jhiTranslate="artesApp.obra.bookX">Book X</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bookY"><span jhiTranslate="artesApp.obra.bookY">Book Y</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="genDescricao">
+            <span jhiTranslate="artesApp.obra.genDescricao">Gen Descricao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="genField1">
+            <span jhiTranslate="artesApp.obra.genField1">Gen Field 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="paraFotografia">
+            <span jhiTranslate="artesApp.obra.paraFotografia">Para Fotografia</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="genMarcaInscrObra">
+            <span jhiTranslate="artesApp.obra.genMarcaInscrObra">Gen Marca Inscr Obra</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="palavrasChave">
+            <span jhiTranslate="artesApp.obra.palavrasChave">Palavras Chave</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="genMarcaInscrSuporte">
+            <span jhiTranslate="artesApp.obra.genMarcaInscrSuporte">Gen Marca Inscr Suporte</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="genObs"><span jhiTranslate="artesApp.obra.genObs">Gen Obs</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="genVerbete">
+            <span jhiTranslate="artesApp.obra.genVerbete">Gen Verbete</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="artista.nome">
+            <span jhiTranslate="artesApp.obra.artista">Artista</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="categoria.categoria">
+            <span jhiTranslate="artesApp.obra.categoria">Categoria</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tecnica.tecnica">
+            <span jhiTranslate="artesApp.obra.tecnica">Tecnica</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nivel.nivel"><span jhiTranslate="artesApp.obra.nivel">Nivel</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="data.data"><span jhiTranslate="artesApp.obra.data">Data</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="empresa.empresa">
+            <span jhiTranslate="artesApp.obra.empresa">Empresa</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="moeda.tipoMoeda">
+            <span jhiTranslate="artesApp.obra.moeda">Moeda</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="seguro.apolice">
+            <span jhiTranslate="artesApp.obra.seguro">Seguro</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="responsavel.nome">
+            <span jhiTranslate="artesApp.obra.responsavel">Responsavel</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="acervoatual.acervoAtual">
+            <span jhiTranslate="artesApp.obra.acervoatual">Acervoatual</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="fotografo.nomeComp">
+            <span jhiTranslate="artesApp.obra.fotografo">Fotografo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="andarMapa.id">
+            <span jhiTranslate="artesApp.obra.andarMapa">Andar Mapa</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obra of obras; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/obra', obra.id, 'view']">{{ obra.id }}</a>
+          </td>
+          <td>{{ obra.tombo }}</td>
+          <td>{{ obra.multiplo }}</td>
+          <td>{{ obra.numeroRegistro }}</td>
+          <td>{{ obra.outrosTitulos }}</td>
+          <td>{{ obra.tituloOriginal }}</td>
+          <td>{{ obra.origem }}</td>
+          <td>{{ obra.descricao }}</td>
+          <td>{{ obra.assinatura }}</td>
+          <td>{{ obra.localAssinatura }}</td>
+          <td>{{ obra.marcaInscrObra }}</td>
+          <td>{{ obra.marcaInscrSuporte }}</td>
+          <td>{{ obra.medidasAprox }}</td>
+          <td>{{ obra.alturaObra }}</td>
+          <td>{{ obra.largObra }}</td>
+          <td>{{ obra.profObra }}</td>
+          <td>{{ obra.diametrObra }}</td>
+          <td>{{ obra.alturaMold }}</td>
+          <td>{{ obra.largMold }}</td>
+          <td>{{ obra.profMold }}</td>
+          <td>{{ obra.diametroMold }}</td>
+          <td>{{ obra.dimensAdic }}</td>
+          <td>{{ obra.pesObra }}</td>
+          <td>{{ obra.atribuido }}</td>
+          <td>{{ obra.nFoto }}</td>
+          <td>{{ obra.conjunto }}</td>
+          <td>{{ obra.conjTombo }}</td>
+          <td>{{ obra.valorSeguro }}</td>
+          <td>{{ obra.valorSeguroReal }}</td>
+          <td>{{ obra.dataconversao | formatMediumDate }}</td>
+          <td>{{ obra.dataAlterApolice | formatMediumDate }}</td>
+          <td>{{ obra.localAtual }}</td>
+          <td>{{ obra.localAtualNovo }}</td>
+          <td>{{ obra.codParametro }}</td>
+          <td>{{ obra.obs }}</td>
+          <td>{{ obra.tiragem }}</td>
+          <td>{{ obra.serie }}</td>
+          <td>{{ obra.selo }}</td>
+          <td>{{ obra.tomboAnterio }}</td>
+          <td>{{ obra.verbete }}</td>
+          <td>{{ obra.livro }}</td>
+          <td>{{ obra.imagemAlta }}</td>
+          <td>{{ obra.apabex }}</td>
+          <td>{{ obra.bunkyo }}</td>
+          <td>{{ obra.faseDepuracao }}</td>
+          <td>{{ obra.paraAvaliacao }}</td>
+          <td>{{ obra.paraRestauracao }}</td>
+          <td>{{ obra.paraMoldura }}</td>
+          <td>{{ obra.paraLegenda }}</td>
+          <td>{{ obra.tempField }}</td>
+          <td>{{ obra.selecaoListaAvulsa }}</td>
+          <td>{{ obra.dominioPubl }}</td>
+          <td>{{ obra.dtVencFoto | formatMediumDate }}</td>
+          <td>{{ obra.obsUsoFoto }}</td>
+          <td>{{ obra.localFotoAlta }}</td>
+          <td>{{ obra.dataInclusao | formatMediumDate }}</td>
+          <td>{{ obra.dataExclusao | formatMediumDate }}</td>
+          <td>{{ obra.bookX }}</td>
+          <td>{{ obra.bookY }}</td>
+          <td>{{ obra.genDescricao }}</td>
+          <td>{{ obra.genField1 }}</td>
+          <td>{{ obra.paraFotografia }}</td>
+          <td>{{ obra.genMarcaInscrObra }}</td>
+          <td>{{ obra.palavrasChave }}</td>
+          <td>{{ obra.genMarcaInscrSuporte }}</td>
+          <td>{{ obra.genObs }}</td>
+          <td>{{ obra.genVerbete }}</td>
+          <td>
+            <div *ngIf="obra.artista">
+              <a [routerLink]="['/artista', obra.artista?.id, 'view']">{{ obra.artista?.nome }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.categoria">
+              <a [routerLink]="['/categoria', obra.categoria?.id, 'view']">{{ obra.categoria?.categoria }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.tecnica">
+              <a [routerLink]="['/tecnica', obra.tecnica?.id, 'view']">{{ obra.tecnica?.tecnica }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.nivel">
+              <a [routerLink]="['/nivel', obra.nivel?.id, 'view']">{{ obra.nivel?.nivel }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.data">
+              <a [routerLink]="['/data', obra.data?.id, 'view']">{{ obra.data?.data }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.empresa">
+              <a [routerLink]="['/empresa', obra.empresa?.id, 'view']">{{ obra.empresa?.empresa }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.moeda">
+              <a [routerLink]="['/moeda', obra.moeda?.id, 'view']">{{ obra.moeda?.tipoMoeda }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.seguro">
+              <a [routerLink]="['/seguro', obra.seguro?.id, 'view']">{{ obra.seguro?.apolice }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.responsavel">
+              <a [routerLink]="['/responsavel', obra.responsavel?.id, 'view']">{{ obra.responsavel?.nome }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.acervoatual">
+              <a [routerLink]="['/acervo-atual', obra.acervoatual?.id, 'view']">{{ obra.acervoatual?.acervoAtual }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.fotografo">
+              <a [routerLink]="['/contato', obra.fotografo?.id, 'view']">{{ obra.fotografo?.nomeComp }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="obra.andarMapa">
+              <a [routerLink]="['/andar-mapa', obra.andarMapa?.id, 'view']">{{ obra.andarMapa?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/obra', obra.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/obra', obra.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(obra)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="obras && obras.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

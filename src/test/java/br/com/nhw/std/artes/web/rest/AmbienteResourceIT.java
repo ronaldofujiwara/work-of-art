@@ -35,8 +35,8 @@ class AmbienteResourceIT {
     private static final String DEFAULT_AMBIENTE = "AAAAAAAAAA";
     private static final String UPDATED_AMBIENTE = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_ATIVO = false;
-    private static final Boolean UPDATED_ATIVO = true;
+    private static final Boolean DEFAULT_INATIVO = false;
+    private static final Boolean UPDATED_INATIVO = true;
 
     private static final String ENTITY_API_URL = "/api/ambientes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -65,7 +65,7 @@ class AmbienteResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Ambiente createEntity(EntityManager em) {
-        Ambiente ambiente = new Ambiente().ambiente(DEFAULT_AMBIENTE).ativo(DEFAULT_ATIVO);
+        Ambiente ambiente = new Ambiente().ambiente(DEFAULT_AMBIENTE).inativo(DEFAULT_INATIVO);
         return ambiente;
     }
 
@@ -76,7 +76,7 @@ class AmbienteResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Ambiente createUpdatedEntity(EntityManager em) {
-        Ambiente ambiente = new Ambiente().ambiente(UPDATED_AMBIENTE).ativo(UPDATED_ATIVO);
+        Ambiente ambiente = new Ambiente().ambiente(UPDATED_AMBIENTE).inativo(UPDATED_INATIVO);
         return ambiente;
     }
 
@@ -100,7 +100,7 @@ class AmbienteResourceIT {
         assertThat(ambienteList).hasSize(databaseSizeBeforeCreate + 1);
         Ambiente testAmbiente = ambienteList.get(ambienteList.size() - 1);
         assertThat(testAmbiente.getAmbiente()).isEqualTo(DEFAULT_AMBIENTE);
-        assertThat(testAmbiente.getAtivo()).isEqualTo(DEFAULT_ATIVO);
+        assertThat(testAmbiente.getInativo()).isEqualTo(DEFAULT_INATIVO);
     }
 
     @Test
@@ -153,7 +153,7 @@ class AmbienteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ambiente.getId().intValue())))
             .andExpect(jsonPath("$.[*].ambiente").value(hasItem(DEFAULT_AMBIENTE)))
-            .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
     }
 
     @Test
@@ -169,7 +169,7 @@ class AmbienteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(ambiente.getId().intValue()))
             .andExpect(jsonPath("$.ambiente").value(DEFAULT_AMBIENTE))
-            .andExpect(jsonPath("$.ativo").value(DEFAULT_ATIVO.booleanValue()));
+            .andExpect(jsonPath("$.inativo").value(DEFAULT_INATIVO.booleanValue()));
     }
 
     @Test
@@ -270,54 +270,54 @@ class AmbienteResourceIT {
 
     @Test
     @Transactional
-    void getAllAmbientesByAtivoIsEqualToSomething() throws Exception {
+    void getAllAmbientesByInativoIsEqualToSomething() throws Exception {
         // Initialize the database
         ambienteRepository.saveAndFlush(ambiente);
 
-        // Get all the ambienteList where ativo equals to DEFAULT_ATIVO
-        defaultAmbienteShouldBeFound("ativo.equals=" + DEFAULT_ATIVO);
+        // Get all the ambienteList where inativo equals to DEFAULT_INATIVO
+        defaultAmbienteShouldBeFound("inativo.equals=" + DEFAULT_INATIVO);
 
-        // Get all the ambienteList where ativo equals to UPDATED_ATIVO
-        defaultAmbienteShouldNotBeFound("ativo.equals=" + UPDATED_ATIVO);
+        // Get all the ambienteList where inativo equals to UPDATED_INATIVO
+        defaultAmbienteShouldNotBeFound("inativo.equals=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllAmbientesByAtivoIsNotEqualToSomething() throws Exception {
+    void getAllAmbientesByInativoIsNotEqualToSomething() throws Exception {
         // Initialize the database
         ambienteRepository.saveAndFlush(ambiente);
 
-        // Get all the ambienteList where ativo not equals to DEFAULT_ATIVO
-        defaultAmbienteShouldNotBeFound("ativo.notEquals=" + DEFAULT_ATIVO);
+        // Get all the ambienteList where inativo not equals to DEFAULT_INATIVO
+        defaultAmbienteShouldNotBeFound("inativo.notEquals=" + DEFAULT_INATIVO);
 
-        // Get all the ambienteList where ativo not equals to UPDATED_ATIVO
-        defaultAmbienteShouldBeFound("ativo.notEquals=" + UPDATED_ATIVO);
+        // Get all the ambienteList where inativo not equals to UPDATED_INATIVO
+        defaultAmbienteShouldBeFound("inativo.notEquals=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllAmbientesByAtivoIsInShouldWork() throws Exception {
+    void getAllAmbientesByInativoIsInShouldWork() throws Exception {
         // Initialize the database
         ambienteRepository.saveAndFlush(ambiente);
 
-        // Get all the ambienteList where ativo in DEFAULT_ATIVO or UPDATED_ATIVO
-        defaultAmbienteShouldBeFound("ativo.in=" + DEFAULT_ATIVO + "," + UPDATED_ATIVO);
+        // Get all the ambienteList where inativo in DEFAULT_INATIVO or UPDATED_INATIVO
+        defaultAmbienteShouldBeFound("inativo.in=" + DEFAULT_INATIVO + "," + UPDATED_INATIVO);
 
-        // Get all the ambienteList where ativo equals to UPDATED_ATIVO
-        defaultAmbienteShouldNotBeFound("ativo.in=" + UPDATED_ATIVO);
+        // Get all the ambienteList where inativo equals to UPDATED_INATIVO
+        defaultAmbienteShouldNotBeFound("inativo.in=" + UPDATED_INATIVO);
     }
 
     @Test
     @Transactional
-    void getAllAmbientesByAtivoIsNullOrNotNull() throws Exception {
+    void getAllAmbientesByInativoIsNullOrNotNull() throws Exception {
         // Initialize the database
         ambienteRepository.saveAndFlush(ambiente);
 
-        // Get all the ambienteList where ativo is not null
-        defaultAmbienteShouldBeFound("ativo.specified=true");
+        // Get all the ambienteList where inativo is not null
+        defaultAmbienteShouldBeFound("inativo.specified=true");
 
-        // Get all the ambienteList where ativo is null
-        defaultAmbienteShouldNotBeFound("ativo.specified=false");
+        // Get all the ambienteList where inativo is null
+        defaultAmbienteShouldNotBeFound("inativo.specified=false");
     }
 
     /**
@@ -330,7 +330,7 @@ class AmbienteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ambiente.getId().intValue())))
             .andExpect(jsonPath("$.[*].ambiente").value(hasItem(DEFAULT_AMBIENTE)))
-            .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.booleanValue())));
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
 
         // Check, that the count call also returns 1
         restAmbienteMockMvc
@@ -378,7 +378,7 @@ class AmbienteResourceIT {
         Ambiente updatedAmbiente = ambienteRepository.findById(ambiente.getId()).get();
         // Disconnect from session so that the updates on updatedAmbiente are not directly saved in db
         em.detach(updatedAmbiente);
-        updatedAmbiente.ambiente(UPDATED_AMBIENTE).ativo(UPDATED_ATIVO);
+        updatedAmbiente.ambiente(UPDATED_AMBIENTE).inativo(UPDATED_INATIVO);
         AmbienteDTO ambienteDTO = ambienteMapper.toDto(updatedAmbiente);
 
         restAmbienteMockMvc
@@ -394,7 +394,7 @@ class AmbienteResourceIT {
         assertThat(ambienteList).hasSize(databaseSizeBeforeUpdate);
         Ambiente testAmbiente = ambienteList.get(ambienteList.size() - 1);
         assertThat(testAmbiente.getAmbiente()).isEqualTo(UPDATED_AMBIENTE);
-        assertThat(testAmbiente.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testAmbiente.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -474,7 +474,7 @@ class AmbienteResourceIT {
         Ambiente partialUpdatedAmbiente = new Ambiente();
         partialUpdatedAmbiente.setId(ambiente.getId());
 
-        partialUpdatedAmbiente.ativo(UPDATED_ATIVO);
+        partialUpdatedAmbiente.inativo(UPDATED_INATIVO);
 
         restAmbienteMockMvc
             .perform(
@@ -489,7 +489,7 @@ class AmbienteResourceIT {
         assertThat(ambienteList).hasSize(databaseSizeBeforeUpdate);
         Ambiente testAmbiente = ambienteList.get(ambienteList.size() - 1);
         assertThat(testAmbiente.getAmbiente()).isEqualTo(DEFAULT_AMBIENTE);
-        assertThat(testAmbiente.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testAmbiente.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -504,7 +504,7 @@ class AmbienteResourceIT {
         Ambiente partialUpdatedAmbiente = new Ambiente();
         partialUpdatedAmbiente.setId(ambiente.getId());
 
-        partialUpdatedAmbiente.ambiente(UPDATED_AMBIENTE).ativo(UPDATED_ATIVO);
+        partialUpdatedAmbiente.ambiente(UPDATED_AMBIENTE).inativo(UPDATED_INATIVO);
 
         restAmbienteMockMvc
             .perform(
@@ -519,7 +519,7 @@ class AmbienteResourceIT {
         assertThat(ambienteList).hasSize(databaseSizeBeforeUpdate);
         Ambiente testAmbiente = ambienteList.get(ambienteList.size() - 1);
         assertThat(testAmbiente.getAmbiente()).isEqualTo(UPDATED_AMBIENTE);
-        assertThat(testAmbiente.getAtivo()).isEqualTo(UPDATED_ATIVO);
+        assertThat(testAmbiente.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test

@@ -1,0 +1,26 @@
+{
+  "artesApp": {
+    "andarMapa": {
+      "home": {
+        "title": "Andar Mapas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Andar Mapa",
+        "createOrEditLabel": "Criar ou editar Andar Mapa",
+        "notFound": "Nenhum Andar Mapa encontrado"
+      },
+      "created": "Um novo Andar Mapa foi criado com o identificador {{ param }}",
+      "updated": "Um Andar Mapa foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Andar Mapa foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Andar Mapa {{ id }}?"
+      },
+      "detail": {
+        "title": "Andar Mapa"
+      },
+      "id": "ID",
+      "imagemMapa": "Imagem Mapa",
+      "obra": "Obra",
+      "espaco": "Espaco"
+    }
+  }
+}

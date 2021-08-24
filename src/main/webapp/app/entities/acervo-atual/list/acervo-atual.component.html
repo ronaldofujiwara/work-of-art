@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="AcervoAtualHeading">
+    <span jhiTranslate="artesApp.acervoAtual.home.title">Acervo Atuals</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="artesApp.acervoAtual.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-acervo-atual"
+        [routerLink]="['/acervo-atual/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="artesApp.acervoAtual.home.createLabel"> Create a new Acervo Atual </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="acervoAtuals?.length === 0">
+    <span jhiTranslate="artesApp.acervoAtual.home.notFound">No acervoAtuals found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="acervoAtuals && acervoAtuals.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="acervoAtual">
+            <span jhiTranslate="artesApp.acervoAtual.acervoAtual">Acervo Atual</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.acervoAtual.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let acervoAtual of acervoAtuals; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/acervo-atual', acervoAtual.id, 'view']">{{ acervoAtual.id }}</a>
+          </td>
+          <td>{{ acervoAtual.acervoAtual }}</td>
+          <td>{{ acervoAtual.inativo }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/acervo-atual', acervoAtual.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/acervo-atual', acervoAtual.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(acervoAtual)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="acervoAtuals && acervoAtuals.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

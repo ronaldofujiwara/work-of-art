@@ -95,6 +95,39 @@ public class CidadeQueryService extends QueryService<Cidade> {
             if (criteria.getPais() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPais(), Cidade_.pais));
             }
+            if (criteria.getCidadeUFPais() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCidadeUFPais(), Cidade_.cidadeUFPais));
+            }
+            if (criteria.getEstadoPais() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEstadoPais(), Cidade_.estadoPais));
+            }
+            if (criteria.getInativo() != null) {
+                specification = specification.and(buildSpecification(criteria.getInativo(), Cidade_.inativo));
+            }
+            if (criteria.getEmpresaId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getEmpresaId(), root -> root.join(Cidade_.empresas, JoinType.LEFT).get(Empresa_.id))
+                    );
+            }
+            if (criteria.getArtistaNascId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getArtistaNascId(),
+                            root -> root.join(Cidade_.artistaNascs, JoinType.LEFT).get(Artista_.id)
+                        )
+                    );
+            }
+            if (criteria.getArtistaFalescId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getArtistaFalescId(),
+                            root -> root.join(Cidade_.artistaFalescs, JoinType.LEFT).get(Artista_.id)
+                        )
+                    );
+            }
             if (criteria.getContatoId() != null) {
                 specification =
                     specification.and(

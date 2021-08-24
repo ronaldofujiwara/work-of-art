@@ -1,0 +1,35 @@
+{
+  "name": "TipoDocumento",
+  "fields": [
+    {
+      "fieldName": "tipoDocumento",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Técnicas ou materiais que constituem a obra"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dadoDocumental",
+      "otherEntityRelationshipName": "tipoDocumento",
+      "relationshipName": "dadoDocumental"
+    }
+  ],
+  "javadoc": "Entidade: TipoDocumento\\nTipos de Documentos",
+  "entityTableName": "tipo_documento",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045506"
+}

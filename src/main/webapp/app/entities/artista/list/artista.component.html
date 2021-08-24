@@ -1,0 +1,184 @@
+<div>
+  <h2 id="page-heading" data-cy="ArtistaHeading">
+    <span jhiTranslate="artesApp.artista.home.title">Artistas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="artesApp.artista.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-artista"
+        [routerLink]="['/artista/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="artesApp.artista.home.createLabel"> Create a new Artista </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="artistas?.length === 0">
+    <span jhiTranslate="artesApp.artista.home.notFound">No artistas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="artistas && artistas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nome"><span jhiTranslate="artesApp.artista.nome">Nome</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dataNasc">
+            <span jhiTranslate="artesApp.artista.dataNasc">Data Nasc</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataFalec">
+            <span jhiTranslate="artesApp.artista.dataFalec">Data Falec</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="biografia">
+            <span jhiTranslate="artesApp.artista.biografia">Biografia</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="verbete">
+            <span jhiTranslate="artesApp.artista.verbete">Verbete</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataAtualBio">
+            <span jhiTranslate="artesApp.artista.dataAtualBio">Data Atual Bio</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dataAtualVerb">
+            <span jhiTranslate="artesApp.artista.dataAtualVerb">Data Atual Verb</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="possuiBio">
+            <span jhiTranslate="artesApp.artista.possuiBio">Possui Bio</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="possuiVerb">
+            <span jhiTranslate="artesApp.artista.possuiVerb">Possui Verb</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="fonteBio">
+            <span jhiTranslate="artesApp.artista.fonteBio">Fonte Bio</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="obrasNoAcervo">
+            <span jhiTranslate="artesApp.artista.obrasNoAcervo">Obras No Acervo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.artista.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="agradecimentos">
+            <span jhiTranslate="artesApp.artista.agradecimentos">Agradecimentos</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="copyright">
+            <span jhiTranslate="artesApp.artista.copyright">Copyright</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="obsUso">
+            <span jhiTranslate="artesApp.artista.obsUso">Obs Uso</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cidadeNasc.cidade">
+            <span jhiTranslate="artesApp.artista.cidadeNasc">Cidade Nasc</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cidadeFalesc.cidade">
+            <span jhiTranslate="artesApp.artista.cidadeFalesc">Cidade Falesc</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="respVerbete.nome">
+            <span jhiTranslate="artesApp.artista.respVerbete">Resp Verbete</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="funcaoArtista.funcaoArtista">
+            <span jhiTranslate="artesApp.artista.funcaoArtista">Funcao Artista</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let artista of artistas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/artista', artista.id, 'view']">{{ artista.id }}</a>
+          </td>
+          <td>{{ artista.nome }}</td>
+          <td>{{ artista.dataNasc }}</td>
+          <td>{{ artista.dataFalec }}</td>
+          <td>{{ artista.biografia }}</td>
+          <td>{{ artista.verbete }}</td>
+          <td>{{ artista.dataAtualBio | formatMediumDate }}</td>
+          <td>{{ artista.dataAtualVerb | formatMediumDate }}</td>
+          <td>{{ artista.possuiBio }}</td>
+          <td>{{ artista.possuiVerb }}</td>
+          <td>{{ artista.fonteBio }}</td>
+          <td>{{ artista.obrasNoAcervo }}</td>
+          <td>{{ artista.inativo }}</td>
+          <td>{{ artista.agradecimentos }}</td>
+          <td>{{ artista.copyright }}</td>
+          <td>{{ artista.obsUso }}</td>
+          <td>
+            <div *ngIf="artista.cidadeNasc">
+              <a [routerLink]="['/cidade', artista.cidadeNasc?.id, 'view']">{{ artista.cidadeNasc?.cidade }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="artista.cidadeFalesc">
+              <a [routerLink]="['/cidade', artista.cidadeFalesc?.id, 'view']">{{ artista.cidadeFalesc?.cidade }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="artista.respVerbete">
+              <a [routerLink]="['/responsavel', artista.respVerbete?.id, 'view']">{{ artista.respVerbete?.nome }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="artista.funcaoArtista">
+              <a [routerLink]="['/funcao-artista', artista.funcaoArtista?.id, 'view']">{{ artista.funcaoArtista?.funcaoArtista }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/artista', artista.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/artista', artista.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(artista)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="artistas && artistas.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

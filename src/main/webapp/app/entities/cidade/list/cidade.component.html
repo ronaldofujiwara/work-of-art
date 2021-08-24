@@ -36,6 +36,15 @@
           <th scope="col" jhiSortBy="cidade"><span jhiTranslate="artesApp.cidade.cidade">Cidade</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="estado"><span jhiTranslate="artesApp.cidade.estado">Estado</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="pais"><span jhiTranslate="artesApp.cidade.pais">Pais</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cidadeUFPais">
+            <span jhiTranslate="artesApp.cidade.cidadeUFPais">Cidade UF Pais</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="estadoPais">
+            <span jhiTranslate="artesApp.cidade.estadoPais">Estado Pais</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.cidade.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,6 +56,9 @@
           <td>{{ cidade.cidade }}</td>
           <td>{{ cidade.estado }}</td>
           <td>{{ cidade.pais }}</td>
+          <td>{{ cidade.cidadeUFPais }}</td>
+          <td>{{ cidade.estadoPais }}</td>
+          <td>{{ cidade.inativo }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/cidade', cidade.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

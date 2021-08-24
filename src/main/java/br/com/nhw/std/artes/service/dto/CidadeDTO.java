@@ -1,5 +1,7 @@
 package br.com.nhw.std.artes.service.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.*;
@@ -7,6 +9,7 @@ import javax.validation.constraints.*;
 /**
  * A DTO for the {@link br.com.nhw.std.artes.domain.Cidade} entity.
  */
+@ApiModel(description = "Cidade-UF-Pais - Obs: no Access -> tabela: Cid-UF-Pais1")
 public class CidadeDTO implements Serializable {
 
     private Long id;
@@ -20,6 +23,18 @@ public class CidadeDTO implements Serializable {
 
     @Size(max = 255)
     private String pais;
+
+    @Size(max = 255)
+    private String cidadeUFPais;
+
+    @Size(max = 255)
+    private String estadoPais;
+
+    /**
+     * Registro inativo?
+     */
+    @ApiModelProperty(value = "Registro inativo?")
+    private Boolean inativo;
 
     public Long getId() {
         return id;
@@ -53,6 +68,30 @@ public class CidadeDTO implements Serializable {
         this.pais = pais;
     }
 
+    public String getCidadeUFPais() {
+        return cidadeUFPais;
+    }
+
+    public void setCidadeUFPais(String cidadeUFPais) {
+        this.cidadeUFPais = cidadeUFPais;
+    }
+
+    public String getEstadoPais() {
+        return estadoPais;
+    }
+
+    public void setEstadoPais(String estadoPais) {
+        this.estadoPais = estadoPais;
+    }
+
+    public Boolean getInativo() {
+        return inativo;
+    }
+
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -82,6 +121,9 @@ public class CidadeDTO implements Serializable {
             ", cidade='" + getCidade() + "'" +
             ", estado='" + getEstado() + "'" +
             ", pais='" + getPais() + "'" +
+            ", cidadeUFPais='" + getCidadeUFPais() + "'" +
+            ", estadoPais='" + getEstadoPais() + "'" +
+            ", inativo='" + getInativo() + "'" +
             "}";
     }
 }

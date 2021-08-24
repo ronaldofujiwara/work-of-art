@@ -89,8 +89,8 @@ public class AmbienteQueryService extends QueryService<Ambiente> {
             if (criteria.getAmbiente() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getAmbiente(), Ambiente_.ambiente));
             }
-            if (criteria.getAtivo() != null) {
-                specification = specification.and(buildSpecification(criteria.getAtivo(), Ambiente_.ativo));
+            if (criteria.getInativo() != null) {
+                specification = specification.and(buildSpecification(criteria.getInativo(), Ambiente_.inativo));
             }
         }
         return specification;

@@ -1,0 +1,29 @@
+{
+  "artesApp": {
+    "funcaoArtista": {
+      "home": {
+        "title": "Funcao Artistas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Funcao Artista",
+        "createOrEditLabel": "Create or edit a Funcao Artista",
+        "notFound": "No Funcao Artistas found"
+      },
+      "created": "A new Funcao Artista is created with identifier {{ param }}",
+      "updated": "A Funcao Artista is updated with identifier {{ param }}",
+      "deleted": "A Funcao Artista is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Funcao Artista {{ id }}?"
+      },
+      "detail": {
+        "title": "Funcao Artista"
+      },
+      "id": "ID",
+      "funcaoArtista": "Funcao Artista",
+      "inativo": "Inativo",
+      "artista": "Artista",
+      "help": {
+        "inativo": "Funcao do artista"
+      }
+    }
+  }
+}

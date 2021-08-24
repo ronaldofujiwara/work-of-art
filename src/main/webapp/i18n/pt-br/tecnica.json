@@ -1,0 +1,29 @@
+{
+  "artesApp": {
+    "tecnica": {
+      "home": {
+        "title": "Tecnicas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Tecnica",
+        "createOrEditLabel": "Criar ou editar Tecnica",
+        "notFound": "Nenhum Tecnica encontrado"
+      },
+      "created": "Um novo Tecnica foi criado com o identificador {{ param }}",
+      "updated": "Um Tecnica foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Tecnica foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Tecnica {{ id }}?"
+      },
+      "detail": {
+        "title": "Tecnica"
+      },
+      "id": "ID",
+      "tecnica": "Tecnica",
+      "inativo": "Inativo",
+      "obra": "Obra",
+      "help": {
+        "inativo": "Técnicas ou materiais que constituem a obra"
+      }
+    }
+  }
+}

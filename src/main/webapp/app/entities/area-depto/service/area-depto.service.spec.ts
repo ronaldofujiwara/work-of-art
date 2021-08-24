@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       elemDefault = {
         id: 0,
         area: 'AAAAAAA',
-        ativo: false,
+        inativo: false,
       };
     });
 
@@ -60,7 +60,7 @@ describe('Service Tests', () => {
           {
             id: 1,
             area: 'BBBBBB',
-            ativo: true,
+            inativo: true,
           },
           elemDefault
         );
@@ -77,7 +77,7 @@ describe('Service Tests', () => {
       it('should partial update a AreaDepto', () => {
         const patchObject = Object.assign(
           {
-            ativo: true,
+            inativo: true,
           },
           new AreaDepto()
         );
@@ -98,7 +98,7 @@ describe('Service Tests', () => {
           {
             id: 1,
             area: 'BBBBBB',
-            ativo: true,
+            inativo: true,
           },
           elemDefault
         );

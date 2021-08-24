@@ -6,8 +6,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import br.com.nhw.std.artes.IntegrationTest;
+import br.com.nhw.std.artes.domain.Artista;
 import br.com.nhw.std.artes.domain.Cidade;
 import br.com.nhw.std.artes.domain.Contato;
+import br.com.nhw.std.artes.domain.Empresa;
 import br.com.nhw.std.artes.repository.CidadeRepository;
 import br.com.nhw.std.artes.service.criteria.CidadeCriteria;
 import br.com.nhw.std.artes.service.dto.CidadeDTO;
@@ -42,6 +44,15 @@ class CidadeResourceIT {
     private static final String DEFAULT_PAIS = "AAAAAAAAAA";
     private static final String UPDATED_PAIS = "BBBBBBBBBB";
 
+    private static final String DEFAULT_CIDADE_UF_PAIS = "AAAAAAAAAA";
+    private static final String UPDATED_CIDADE_UF_PAIS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ESTADO_PAIS = "AAAAAAAAAA";
+    private static final String UPDATED_ESTADO_PAIS = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_INATIVO = false;
+    private static final Boolean UPDATED_INATIVO = true;
+
     private static final String ENTITY_API_URL = "/api/cidades";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -69,7 +80,13 @@ class CidadeResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Cidade createEntity(EntityManager em) {
-        Cidade cidade = new Cidade().cidade(DEFAULT_CIDADE).estado(DEFAULT_ESTADO).pais(DEFAULT_PAIS);
+        Cidade cidade = new Cidade()
+            .cidade(DEFAULT_CIDADE)
+            .estado(DEFAULT_ESTADO)
+            .pais(DEFAULT_PAIS)
+            .cidadeUFPais(DEFAULT_CIDADE_UF_PAIS)
+            .estadoPais(DEFAULT_ESTADO_PAIS)
+            .inativo(DEFAULT_INATIVO);
         return cidade;
     }
 
@@ -80,7 +97,13 @@ class CidadeResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Cidade createUpdatedEntity(EntityManager em) {
-        Cidade cidade = new Cidade().cidade(UPDATED_CIDADE).estado(UPDATED_ESTADO).pais(UPDATED_PAIS);
+        Cidade cidade = new Cidade()
+            .cidade(UPDATED_CIDADE)
+            .estado(UPDATED_ESTADO)
+            .pais(UPDATED_PAIS)
+            .cidadeUFPais(UPDATED_CIDADE_UF_PAIS)
+            .estadoPais(UPDATED_ESTADO_PAIS)
+            .inativo(UPDATED_INATIVO);
         return cidade;
     }
 
@@ -106,6 +129,9 @@ class CidadeResourceIT {
         assertThat(testCidade.getCidade()).isEqualTo(DEFAULT_CIDADE);
         assertThat(testCidade.getEstado()).isEqualTo(DEFAULT_ESTADO);
         assertThat(testCidade.getPais()).isEqualTo(DEFAULT_PAIS);
+        assertThat(testCidade.getCidadeUFPais()).isEqualTo(DEFAULT_CIDADE_UF_PAIS);
+        assertThat(testCidade.getEstadoPais()).isEqualTo(DEFAULT_ESTADO_PAIS);
+        assertThat(testCidade.getInativo()).isEqualTo(DEFAULT_INATIVO);
     }
 
     @Test
@@ -159,7 +185,10 @@ class CidadeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(cidade.getId().intValue())))
             .andExpect(jsonPath("$.[*].cidade").value(hasItem(DEFAULT_CIDADE)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO)))
-            .andExpect(jsonPath("$.[*].pais").value(hasItem(DEFAULT_PAIS)));
+            .andExpect(jsonPath("$.[*].pais").value(hasItem(DEFAULT_PAIS)))
+            .andExpect(jsonPath("$.[*].cidadeUFPais").value(hasItem(DEFAULT_CIDADE_UF_PAIS)))
+            .andExpect(jsonPath("$.[*].estadoPais").value(hasItem(DEFAULT_ESTADO_PAIS)))
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
     }
 
     @Test
@@ -176,7 +205,10 @@ class CidadeResourceIT {
             .andExpect(jsonPath("$.id").value(cidade.getId().intValue()))
             .andExpect(jsonPath("$.cidade").value(DEFAULT_CIDADE))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO))
-            .andExpect(jsonPath("$.pais").value(DEFAULT_PAIS));
+            .andExpect(jsonPath("$.pais").value(DEFAULT_PAIS))
+            .andExpect(jsonPath("$.cidadeUFPais").value(DEFAULT_CIDADE_UF_PAIS))
+            .andExpect(jsonPath("$.estadoPais").value(DEFAULT_ESTADO_PAIS))
+            .andExpect(jsonPath("$.inativo").value(DEFAULT_INATIVO.booleanValue()));
     }
 
     @Test
@@ -433,6 +465,271 @@ class CidadeResourceIT {
 
     @Test
     @Transactional
+    void getAllCidadesByCidadeUFPaisIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where cidadeUFPais equals to DEFAULT_CIDADE_UF_PAIS
+        defaultCidadeShouldBeFound("cidadeUFPais.equals=" + DEFAULT_CIDADE_UF_PAIS);
+
+        // Get all the cidadeList where cidadeUFPais equals to UPDATED_CIDADE_UF_PAIS
+        defaultCidadeShouldNotBeFound("cidadeUFPais.equals=" + UPDATED_CIDADE_UF_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByCidadeUFPaisIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where cidadeUFPais not equals to DEFAULT_CIDADE_UF_PAIS
+        defaultCidadeShouldNotBeFound("cidadeUFPais.notEquals=" + DEFAULT_CIDADE_UF_PAIS);
+
+        // Get all the cidadeList where cidadeUFPais not equals to UPDATED_CIDADE_UF_PAIS
+        defaultCidadeShouldBeFound("cidadeUFPais.notEquals=" + UPDATED_CIDADE_UF_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByCidadeUFPaisIsInShouldWork() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where cidadeUFPais in DEFAULT_CIDADE_UF_PAIS or UPDATED_CIDADE_UF_PAIS
+        defaultCidadeShouldBeFound("cidadeUFPais.in=" + DEFAULT_CIDADE_UF_PAIS + "," + UPDATED_CIDADE_UF_PAIS);
+
+        // Get all the cidadeList where cidadeUFPais equals to UPDATED_CIDADE_UF_PAIS
+        defaultCidadeShouldNotBeFound("cidadeUFPais.in=" + UPDATED_CIDADE_UF_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByCidadeUFPaisIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where cidadeUFPais is not null
+        defaultCidadeShouldBeFound("cidadeUFPais.specified=true");
+
+        // Get all the cidadeList where cidadeUFPais is null
+        defaultCidadeShouldNotBeFound("cidadeUFPais.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByCidadeUFPaisContainsSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where cidadeUFPais contains DEFAULT_CIDADE_UF_PAIS
+        defaultCidadeShouldBeFound("cidadeUFPais.contains=" + DEFAULT_CIDADE_UF_PAIS);
+
+        // Get all the cidadeList where cidadeUFPais contains UPDATED_CIDADE_UF_PAIS
+        defaultCidadeShouldNotBeFound("cidadeUFPais.contains=" + UPDATED_CIDADE_UF_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByCidadeUFPaisNotContainsSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where cidadeUFPais does not contain DEFAULT_CIDADE_UF_PAIS
+        defaultCidadeShouldNotBeFound("cidadeUFPais.doesNotContain=" + DEFAULT_CIDADE_UF_PAIS);
+
+        // Get all the cidadeList where cidadeUFPais does not contain UPDATED_CIDADE_UF_PAIS
+        defaultCidadeShouldBeFound("cidadeUFPais.doesNotContain=" + UPDATED_CIDADE_UF_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEstadoPaisIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where estadoPais equals to DEFAULT_ESTADO_PAIS
+        defaultCidadeShouldBeFound("estadoPais.equals=" + DEFAULT_ESTADO_PAIS);
+
+        // Get all the cidadeList where estadoPais equals to UPDATED_ESTADO_PAIS
+        defaultCidadeShouldNotBeFound("estadoPais.equals=" + UPDATED_ESTADO_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEstadoPaisIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where estadoPais not equals to DEFAULT_ESTADO_PAIS
+        defaultCidadeShouldNotBeFound("estadoPais.notEquals=" + DEFAULT_ESTADO_PAIS);
+
+        // Get all the cidadeList where estadoPais not equals to UPDATED_ESTADO_PAIS
+        defaultCidadeShouldBeFound("estadoPais.notEquals=" + UPDATED_ESTADO_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEstadoPaisIsInShouldWork() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where estadoPais in DEFAULT_ESTADO_PAIS or UPDATED_ESTADO_PAIS
+        defaultCidadeShouldBeFound("estadoPais.in=" + DEFAULT_ESTADO_PAIS + "," + UPDATED_ESTADO_PAIS);
+
+        // Get all the cidadeList where estadoPais equals to UPDATED_ESTADO_PAIS
+        defaultCidadeShouldNotBeFound("estadoPais.in=" + UPDATED_ESTADO_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEstadoPaisIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where estadoPais is not null
+        defaultCidadeShouldBeFound("estadoPais.specified=true");
+
+        // Get all the cidadeList where estadoPais is null
+        defaultCidadeShouldNotBeFound("estadoPais.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEstadoPaisContainsSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where estadoPais contains DEFAULT_ESTADO_PAIS
+        defaultCidadeShouldBeFound("estadoPais.contains=" + DEFAULT_ESTADO_PAIS);
+
+        // Get all the cidadeList where estadoPais contains UPDATED_ESTADO_PAIS
+        defaultCidadeShouldNotBeFound("estadoPais.contains=" + UPDATED_ESTADO_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEstadoPaisNotContainsSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where estadoPais does not contain DEFAULT_ESTADO_PAIS
+        defaultCidadeShouldNotBeFound("estadoPais.doesNotContain=" + DEFAULT_ESTADO_PAIS);
+
+        // Get all the cidadeList where estadoPais does not contain UPDATED_ESTADO_PAIS
+        defaultCidadeShouldBeFound("estadoPais.doesNotContain=" + UPDATED_ESTADO_PAIS);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByInativoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where inativo equals to DEFAULT_INATIVO
+        defaultCidadeShouldBeFound("inativo.equals=" + DEFAULT_INATIVO);
+
+        // Get all the cidadeList where inativo equals to UPDATED_INATIVO
+        defaultCidadeShouldNotBeFound("inativo.equals=" + UPDATED_INATIVO);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByInativoIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where inativo not equals to DEFAULT_INATIVO
+        defaultCidadeShouldNotBeFound("inativo.notEquals=" + DEFAULT_INATIVO);
+
+        // Get all the cidadeList where inativo not equals to UPDATED_INATIVO
+        defaultCidadeShouldBeFound("inativo.notEquals=" + UPDATED_INATIVO);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByInativoIsInShouldWork() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where inativo in DEFAULT_INATIVO or UPDATED_INATIVO
+        defaultCidadeShouldBeFound("inativo.in=" + DEFAULT_INATIVO + "," + UPDATED_INATIVO);
+
+        // Get all the cidadeList where inativo equals to UPDATED_INATIVO
+        defaultCidadeShouldNotBeFound("inativo.in=" + UPDATED_INATIVO);
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByInativoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+
+        // Get all the cidadeList where inativo is not null
+        defaultCidadeShouldBeFound("inativo.specified=true");
+
+        // Get all the cidadeList where inativo is null
+        defaultCidadeShouldNotBeFound("inativo.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByEmpresaIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+        Empresa empresa = EmpresaResourceIT.createEntity(em);
+        em.persist(empresa);
+        em.flush();
+        cidade.addEmpresa(empresa);
+        cidadeRepository.saveAndFlush(cidade);
+        Long empresaId = empresa.getId();
+
+        // Get all the cidadeList where empresa equals to empresaId
+        defaultCidadeShouldBeFound("empresaId.equals=" + empresaId);
+
+        // Get all the cidadeList where empresa equals to (empresaId + 1)
+        defaultCidadeShouldNotBeFound("empresaId.equals=" + (empresaId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByArtistaNascIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+        Artista artistaNasc = ArtistaResourceIT.createEntity(em);
+        em.persist(artistaNasc);
+        em.flush();
+        cidade.addArtistaNasc(artistaNasc);
+        cidadeRepository.saveAndFlush(cidade);
+        Long artistaNascId = artistaNasc.getId();
+
+        // Get all the cidadeList where artistaNasc equals to artistaNascId
+        defaultCidadeShouldBeFound("artistaNascId.equals=" + artistaNascId);
+
+        // Get all the cidadeList where artistaNasc equals to (artistaNascId + 1)
+        defaultCidadeShouldNotBeFound("artistaNascId.equals=" + (artistaNascId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllCidadesByArtistaFalescIsEqualToSomething() throws Exception {
+        // Initialize the database
+        cidadeRepository.saveAndFlush(cidade);
+        Artista artistaFalesc = ArtistaResourceIT.createEntity(em);
+        em.persist(artistaFalesc);
+        em.flush();
+        cidade.addArtistaFalesc(artistaFalesc);
+        cidadeRepository.saveAndFlush(cidade);
+        Long artistaFalescId = artistaFalesc.getId();
+
+        // Get all the cidadeList where artistaFalesc equals to artistaFalescId
+        defaultCidadeShouldBeFound("artistaFalescId.equals=" + artistaFalescId);
+
+        // Get all the cidadeList where artistaFalesc equals to (artistaFalescId + 1)
+        defaultCidadeShouldNotBeFound("artistaFalescId.equals=" + (artistaFalescId + 1));
+    }
+
+    @Test
+    @Transactional
     void getAllCidadesByContatoIsEqualToSomething() throws Exception {
         // Initialize the database
         cidadeRepository.saveAndFlush(cidade);
@@ -461,7 +758,10 @@ class CidadeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(cidade.getId().intValue())))
             .andExpect(jsonPath("$.[*].cidade").value(hasItem(DEFAULT_CIDADE)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO)))
-            .andExpect(jsonPath("$.[*].pais").value(hasItem(DEFAULT_PAIS)));
+            .andExpect(jsonPath("$.[*].pais").value(hasItem(DEFAULT_PAIS)))
+            .andExpect(jsonPath("$.[*].cidadeUFPais").value(hasItem(DEFAULT_CIDADE_UF_PAIS)))
+            .andExpect(jsonPath("$.[*].estadoPais").value(hasItem(DEFAULT_ESTADO_PAIS)))
+            .andExpect(jsonPath("$.[*].inativo").value(hasItem(DEFAULT_INATIVO.booleanValue())));
 
         // Check, that the count call also returns 1
         restCidadeMockMvc
@@ -509,7 +809,13 @@ class CidadeResourceIT {
         Cidade updatedCidade = cidadeRepository.findById(cidade.getId()).get();
         // Disconnect from session so that the updates on updatedCidade are not directly saved in db
         em.detach(updatedCidade);
-        updatedCidade.cidade(UPDATED_CIDADE).estado(UPDATED_ESTADO).pais(UPDATED_PAIS);
+        updatedCidade
+            .cidade(UPDATED_CIDADE)
+            .estado(UPDATED_ESTADO)
+            .pais(UPDATED_PAIS)
+            .cidadeUFPais(UPDATED_CIDADE_UF_PAIS)
+            .estadoPais(UPDATED_ESTADO_PAIS)
+            .inativo(UPDATED_INATIVO);
         CidadeDTO cidadeDTO = cidadeMapper.toDto(updatedCidade);
 
         restCidadeMockMvc
@@ -527,6 +833,9 @@ class CidadeResourceIT {
         assertThat(testCidade.getCidade()).isEqualTo(UPDATED_CIDADE);
         assertThat(testCidade.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testCidade.getPais()).isEqualTo(UPDATED_PAIS);
+        assertThat(testCidade.getCidadeUFPais()).isEqualTo(UPDATED_CIDADE_UF_PAIS);
+        assertThat(testCidade.getEstadoPais()).isEqualTo(UPDATED_ESTADO_PAIS);
+        assertThat(testCidade.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test
@@ -606,7 +915,7 @@ class CidadeResourceIT {
         Cidade partialUpdatedCidade = new Cidade();
         partialUpdatedCidade.setId(cidade.getId());
 
-        partialUpdatedCidade.estado(UPDATED_ESTADO).pais(UPDATED_PAIS);
+        partialUpdatedCidade.estado(UPDATED_ESTADO).pais(UPDATED_PAIS).cidadeUFPais(UPDATED_CIDADE_UF_PAIS);
 
         restCidadeMockMvc
             .perform(
@@ -623,6 +932,9 @@ class CidadeResourceIT {
         assertThat(testCidade.getCidade()).isEqualTo(DEFAULT_CIDADE);
         assertThat(testCidade.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testCidade.getPais()).isEqualTo(UPDATED_PAIS);
+        assertThat(testCidade.getCidadeUFPais()).isEqualTo(UPDATED_CIDADE_UF_PAIS);
+        assertThat(testCidade.getEstadoPais()).isEqualTo(DEFAULT_ESTADO_PAIS);
+        assertThat(testCidade.getInativo()).isEqualTo(DEFAULT_INATIVO);
     }
 
     @Test
@@ -637,7 +949,13 @@ class CidadeResourceIT {
         Cidade partialUpdatedCidade = new Cidade();
         partialUpdatedCidade.setId(cidade.getId());
 
-        partialUpdatedCidade.cidade(UPDATED_CIDADE).estado(UPDATED_ESTADO).pais(UPDATED_PAIS);
+        partialUpdatedCidade
+            .cidade(UPDATED_CIDADE)
+            .estado(UPDATED_ESTADO)
+            .pais(UPDATED_PAIS)
+            .cidadeUFPais(UPDATED_CIDADE_UF_PAIS)
+            .estadoPais(UPDATED_ESTADO_PAIS)
+            .inativo(UPDATED_INATIVO);
 
         restCidadeMockMvc
             .perform(
@@ -654,6 +972,9 @@ class CidadeResourceIT {
         assertThat(testCidade.getCidade()).isEqualTo(UPDATED_CIDADE);
         assertThat(testCidade.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testCidade.getPais()).isEqualTo(UPDATED_PAIS);
+        assertThat(testCidade.getCidadeUFPais()).isEqualTo(UPDATED_CIDADE_UF_PAIS);
+        assertThat(testCidade.getEstadoPais()).isEqualTo(UPDATED_ESTADO_PAIS);
+        assertThat(testCidade.getInativo()).isEqualTo(UPDATED_INATIVO);
     }
 
     @Test

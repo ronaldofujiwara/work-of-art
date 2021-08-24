@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tecnica">
+      <h2 data-cy="tecnicaDetailsHeading"><span jhiTranslate="artesApp.tecnica.detail.title">Tecnica</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tecnica.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.tecnica.tecnica">Tecnica</span></dt>
+        <dd>
+          <span>{{ tecnica.tecnica }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.tecnica.inativo" [ngbTooltip]="'artesApp.tecnica.help.inativo' | translate">Inativo</span></dt>
+        <dd>
+          <span>{{ tecnica.inativo }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tecnica', tecnica.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

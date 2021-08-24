@@ -15,7 +15,7 @@ public class AmbienteDTO implements Serializable {
     @Size(max = 50)
     private String ambiente;
 
-    private Boolean ativo;
+    private Boolean inativo;
 
     public Long getId() {
         return id;
@@ -33,12 +33,12 @@ public class AmbienteDTO implements Serializable {
         this.ambiente = ambiente;
     }
 
-    public Boolean getAtivo() {
-        return ativo;
+    public Boolean getInativo() {
+        return inativo;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AmbienteDTO implements Serializable {
         return "AmbienteDTO{" +
             "id=" + getId() +
             ", ambiente='" + getAmbiente() + "'" +
-            ", ativo='" + getAtivo() + "'" +
+            ", inativo='" + getInativo() + "'" +
             "}";
     }
 }

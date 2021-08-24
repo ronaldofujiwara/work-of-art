@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Obra.
+    -->
+    <changeSet id="20210819045502-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="obra_id"
+                                 baseTableName="rel_obra__dado_documental"
+                                 constraintName="fk_rel_obra__dado_documental__obra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="obra"/>
+
+        <addForeignKeyConstraint baseColumnNames="dado_documental_id"
+                                 baseTableName="rel_obra__dado_documental"
+                                 constraintName="fk_rel_obra__dado_documental__dado_documental_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dado_documental"/>
+
+        <addForeignKeyConstraint baseColumnNames="artista_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__artista_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artista"/>
+
+        <addForeignKeyConstraint baseColumnNames="categoria_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__categoria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categoria"/>
+
+        <addForeignKeyConstraint baseColumnNames="tecnica_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__tecnica_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tecnica"/>
+
+        <addForeignKeyConstraint baseColumnNames="nivel_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__nivel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nivel"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__data_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="empresa"/>
+
+        <addForeignKeyConstraint baseColumnNames="moeda_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__moeda_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="moeda"/>
+
+        <addForeignKeyConstraint baseColumnNames="seguro_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__seguro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="seguro"/>
+
+        <addForeignKeyConstraint baseColumnNames="responsavel_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__responsavel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="responsavel"/>
+
+        <addForeignKeyConstraint baseColumnNames="acervoatual_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__acervoatual_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="acervo_atual"/>
+
+        <addForeignKeyConstraint baseColumnNames="fotografo_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__fotografo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contato"/>
+
+        <addForeignKeyConstraint baseColumnNames="andar_mapa_id"
+                                 baseTableName="obra"
+                                 constraintName="fk_obra__andar_mapa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="andar_mapa"/>
+    </changeSet>
+</databaseChangeLog>

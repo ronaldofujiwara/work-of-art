@@ -1,0 +1,489 @@
+{
+  "name": "Obra",
+  "fields": [
+    {
+      "fieldName": "tombo",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "8"
+    },
+    {
+      "fieldName": "multiplo",
+      "fieldType": "String",
+      "javadoc": "Nº Tombo da Obras",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1"
+    },
+    {
+      "fieldName": "numeroRegistro",
+      "fieldType": "String",
+      "javadoc": "(M) - Indica Obra Multipla: (-)=multiplo; (.)=cópia",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "outrosTitulos",
+      "fieldType": "String",
+      "javadoc": "Número do Registro existente no Bradesco = ATIP",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "tituloOriginal",
+      "fieldType": "String",
+      "javadoc": "Outros Títulos da obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "origem",
+      "fieldType": "String",
+      "javadoc": "Título da original da obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "javadoc": "Local de origem onde foi feita a obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "assinatura",
+      "fieldType": "Boolean",
+      "javadoc": "Descrição da obra"
+    },
+    {
+      "fieldName": "localAssinatura",
+      "fieldType": "String",
+      "javadoc": "Se a obra é assinada ou não",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "marcaInscrObra",
+      "fieldType": "String",
+      "javadoc": "Localização da assinatura do artista na obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "marcaInscrSuporte",
+      "fieldType": "String",
+      "javadoc": "Marcas e/ou Inscrições que se encontram na obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "medidasAprox",
+      "fieldType": "Boolean",
+      "javadoc": "Marcas e/ou Inscrições que se encontram no suporte/moldura da obra"
+    },
+    {
+      "fieldName": "alturaObra",
+      "fieldType": "BigDecimal",
+      "javadoc": "Indica se as medidas são aproximadas ou se reais"
+    },
+    {
+      "fieldName": "largObra",
+      "fieldType": "BigDecimal",
+      "javadoc": "Altura da Obra s/suporte ou moldura (precisão 2 decimais)"
+    },
+    {
+      "fieldName": "profObra",
+      "fieldType": "BigDecimal",
+      "javadoc": "Largura da Obra s/suporte ou moldura (precisão 2 decimais)"
+    },
+    {
+      "fieldName": "diametrObra",
+      "fieldType": "String",
+      "javadoc": "Profundidade da Obra s/suporte ou moldura (precisão 2 decimais)",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "6"
+    },
+    {
+      "fieldName": "alturaMold",
+      "fieldType": "BigDecimal",
+      "javadoc": "Diâmetro da Obra s/suporte ou moldura"
+    },
+    {
+      "fieldName": "largMold",
+      "fieldType": "BigDecimal",
+      "javadoc": "Altura da Obra c/Moldura (precisão 2 decimais)"
+    },
+    {
+      "fieldName": "profMold",
+      "fieldType": "BigDecimal",
+      "javadoc": "Largura da Obra c/Moldura (precisão 2 decimais)"
+    },
+    {
+      "fieldName": "diametroMold",
+      "fieldType": "String",
+      "javadoc": "Profundidade da Obra c/Moldura (precisão 2 decimais)",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "dimensAdic",
+      "fieldType": "String",
+      "javadoc": "Diâmetro da Obra s/suporte ou moldura",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "pesObra",
+      "fieldType": "String",
+      "javadoc": "Dimensões adicionais da obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "atribuido",
+      "fieldType": "Boolean",
+      "javadoc": "Peso da Obra"
+    },
+    {
+      "fieldName": "nFoto",
+      "fieldType": "String",
+      "javadoc": "Autoria é atribuída ou não",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "conjunto",
+      "fieldType": "Boolean",
+      "javadoc": "Nome e ou número da foto correspondente a obra"
+    },
+    {
+      "fieldName": "conjTombo",
+      "fieldType": "String",
+      "javadoc": "Faz parte de um conjunto?",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "valorSeguro",
+      "fieldType": "BigDecimal",
+      "javadoc": "Nº Tombos que formam o  conjunto"
+    },
+    {
+      "fieldName": "valorSeguroReal",
+      "fieldType": "BigDecimal",
+      "javadoc": "Valor do Seguro (precisão 4 decimais)"
+    },
+    {
+      "fieldName": "dataconversao",
+      "fieldType": "LocalDate",
+      "javadoc": "Valor do Seguro convertido em Reais (precisão 4 decimais)"
+    },
+    {
+      "fieldName": "dataAlterApolice",
+      "fieldType": "LocalDate",
+      "javadoc": "Data da conversão da moeda"
+    },
+    {
+      "fieldName": "localAtual",
+      "fieldType": "String",
+      "javadoc": "Data que a obra foi Incluida/Excluida na Apólice",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "localAtualNovo",
+      "fieldType": "String",
+      "javadoc": "Localização atual da obra - relacionada com QryLocalização",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "codParametro",
+      "fieldType": "String",
+      "javadoc": "Localização atual da obra - relacionada com QryLocalizaçãoNOVA",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "obs",
+      "fieldType": "String",
+      "javadoc": "Categorias da tblParametros para associarmos com a obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "tiragem",
+      "fieldType": "String",
+      "javadoc": "Observações gerais da obra",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "serie",
+      "fieldType": "String",
+      "javadoc": "Tiragem da gravura",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "selo",
+      "fieldType": "Integer",
+      "javadoc": "Título da Série da gravura"
+    },
+    {
+      "fieldName": "tomboAnterio",
+      "fieldType": "String",
+      "javadoc": "Classificação da obra quanto ao uso, designado pelos pesquisadores",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "verbete",
+      "fieldType": "String",
+      "javadoc": "Número da antiga catalogação",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "livro",
+      "fieldType": "Boolean",
+      "javadoc": "Dados específicos sobre a obra"
+    },
+    {
+      "fieldName": "imagemAlta",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra esteja participando da última publicação da coleção"
+    },
+    {
+      "fieldName": "apabex",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra possua imagem digital em alta resolução"
+    },
+    {
+      "fieldName": "bunkyo",
+      "fieldType": "Boolean",
+      "javadoc": "Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino à APABEX"
+    },
+    {
+      "fieldName": "faseDepuracao",
+      "fieldType": "String",
+      "javadoc": "Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino ao BUNKYO",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "paraAvaliacao",
+      "fieldType": "Boolean",
+      "javadoc": "Indique em qual fase a obra será destinada à Apabex ou ao Bunkyo"
+    },
+    {
+      "fieldName": "paraRestauracao",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra necessite ser encaminhada para avaliação de mercado"
+    },
+    {
+      "fieldName": "paraMoldura",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra necessite ser encaminhada para restauração"
+    },
+    {
+      "fieldName": "paraLegenda",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra necessite ser encaminhada para confecção de moldura"
+    },
+    {
+      "fieldName": "tempField",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra necessite ser encaminhada para confecção de legenda"
+    },
+    {
+      "fieldName": "selecaoListaAvulsa",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar caso a obra necessite ser encaminhada para foto em alta"
+    },
+    {
+      "fieldName": "dominioPubl",
+      "fieldType": "Boolean",
+      "javadoc": "Selecionar para incluir a obra em uma eventual seleção avulsa"
+    },
+    {
+      "fieldName": "dtVencFoto",
+      "fieldType": "LocalDate",
+      "javadoc": "É de domínio público"
+    },
+    {
+      "fieldName": "obsUsoFoto",
+      "fieldType": "String",
+      "javadoc": "Data de vencimento de uso de imagem do Fotografo",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "localFotoAlta",
+      "fieldType": "String",
+      "javadoc": "Observações de uso de imagem do Fotografo",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "dataInclusao",
+      "fieldType": "LocalDate",
+      "javadoc": "Localização da FotoAlta"
+    },
+    {
+      "fieldName": "dataExclusao",
+      "fieldType": "LocalDate",
+      "javadoc": "Data que a obra foi inserida"
+    },
+    {
+      "fieldName": "bookX",
+      "fieldType": "Integer",
+      "javadoc": "Data que a obra foi excluida"
+    },
+    {
+      "fieldName": "bookY",
+      "fieldType": "Integer",
+      "javadoc": "Posicao do Eixo X no book"
+    },
+    {
+      "fieldName": "genDescricao",
+      "fieldType": "Integer",
+      "javadoc": "Posicao do Eixo Y no book"
+    },
+    {
+      "fieldName": "genField1",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "paraFotografia",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "genMarcaInscrObra",
+      "fieldType": "Integer",
+      "javadoc": "Selecionar caso a obra necessite ser encaminhada para foto em alta"
+    },
+    {
+      "fieldName": "palavrasChave",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64000"
+    },
+    {
+      "fieldName": "genMarcaInscrSuporte",
+      "fieldType": "Integer",
+      "javadoc": "Palavras-chave relacionadas à obra, para pesquisa mais detalhada"
+    },
+    {
+      "fieldName": "genObs",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "genVerbete",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "dadoDocumental",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "dadoDocumental",
+      "otherEntityField": "data",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "artista",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "artista",
+      "otherEntityField": "nome"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categoria",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "categoria",
+      "otherEntityField": "categoria"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tecnica",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "tecnica",
+      "otherEntityField": "tecnica"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "nivel",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "nivel",
+      "otherEntityField": "nivel"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "data",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "data",
+      "otherEntityField": "data"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "empresa",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "empresa",
+      "otherEntityField": "empresa"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "moeda",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "moeda",
+      "otherEntityField": "tipoMoeda"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "seguro",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "seguro",
+      "otherEntityField": "apolice"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "responsavel",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "responsavel",
+      "otherEntityField": "nome"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "acervoAtual",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "acervoatual",
+      "otherEntityField": "acervoAtual"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "contato",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "fotografo",
+      "otherEntityField": "nomeComp"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "andarMapa",
+      "otherEntityRelationshipName": "obra",
+      "relationshipName": "andarMapa"
+    }
+  ],
+  "javadoc": "Entidade: Obra\\nDados principais das obras do Acervo de Arte",
+  "entityTableName": "obra",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045502"
+}

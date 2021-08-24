@@ -1,0 +1,35 @@
+{
+  "name": "FuncaoArtista",
+  "fields": [
+    {
+      "fieldName": "funcaoArtista",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean",
+      "javadoc": "Funcao do artista"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "artista",
+      "otherEntityRelationshipName": "funcaoArtista",
+      "relationshipName": "artista"
+    }
+  ],
+  "javadoc": "Entidade: Funcao do Artista",
+  "entityTableName": "funcao_artista",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045459"
+}

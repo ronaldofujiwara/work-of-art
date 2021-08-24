@@ -1,0 +1,486 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="ronal (generated)" id="1629357861206-14">
+        <createTable tableName="acervo_atual">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="acervo_atualPK"/>
+            </column>
+            <column name="acervo_atual" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-15">
+        <createTable tableName="andar_mapa">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="andar_mapaPK"/>
+            </column>
+            <column name="imagem_mapa" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="espaco_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-16">
+        <createTable tableName="artista">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="artistaPK"/>
+            </column>
+            <column name="agradecimentos" type="VARCHAR(64000)"/>
+            <column name="biografia" type="VARCHAR(64000)"/>
+            <column name="copyright" type="VARCHAR(64000)"/>
+            <column name="data_atual_bio" type="date"/>
+            <column name="data_atual_verb" type="date"/>
+            <column name="data_falec" type="VARCHAR(255)"/>
+            <column name="data_nasc" type="VARCHAR(255)"/>
+            <column name="fonte_bio" type="VARCHAR(255)"/>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="nome" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="obras_no_acervo" type="VARCHAR(255)"/>
+            <column name="obs_uso" type="VARCHAR(255)"/>
+            <column name="possui_bio" type="BOOLEAN"/>
+            <column name="possui_verb" type="BOOLEAN"/>
+            <column name="verbete" type="VARCHAR(64000)"/>
+            <column name="cidade_falesc_id" type="BIGINT"/>
+            <column name="cidade_nasc_id" type="BIGINT"/>
+            <column name="funcao_artista_id" type="BIGINT"/>
+            <column name="resp_verbete_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-17">
+        <createTable tableName="categoria">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="categoriaPK"/>
+            </column>
+            <column name="categoria" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-18">
+        <createTable tableName="dado_documental">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dado_documentalPK"/>
+            </column>
+            <column name="data" type="VARCHAR(50)"/>
+            <column name="emissor" type="VARCHAR(60)"/>
+            <column name="finalizado" type="BOOLEAN"/>
+            <column name="gen_transcricao" type="INT"/>
+            <column name="obs" type="VARCHAR(200)"/>
+            <column name="receptor" type="VARCHAR(30)"/>
+            <column name="transcricao" type="VARCHAR(64000)"/>
+            <column name="tipo_documento_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-19">
+        <createTable tableName="data">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dataPK"/>
+            </column>
+            <column name="data" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-20">
+        <createTable tableName="empresa">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="empresaPK"/>
+            </column>
+            <column name="bairro" type="VARCHAR(30)"/>
+            <column name="c_ep" type="VARCHAR(8)"/>
+            <column name="c_npj" type="VARCHAR(20)"/>
+            <column name="celular" type="VARCHAR(30)"/>
+            <column name="codigo_brad" type="INT"/>
+            <column name="complemento" type="VARCHAR(30)"/>
+            <column name="credito" type="VARCHAR(150)"/>
+            <column name="email" type="VARCHAR(64000)"/>
+            <column name="empresa" type="VARCHAR(50)"/>
+            <column name="fax" type="VARCHAR(50)"/>
+            <column name="funcao" type="VARCHAR(50)"/>
+            <column name="gen_email" type="INT"/>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="inscricao_estadual" type="VARCHAR(10)"/>
+            <column name="nome" type="VARCHAR(50)"/>
+            <column name="nome_empresa" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero" type="VARCHAR(5)"/>
+            <column name="obs" type="VARCHAR(150)"/>
+            <column name="rua" type="VARCHAR(50)"/>
+            <column name="telefone" type="VARCHAR(50)"/>
+            <column name="cidade_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-21">
+        <createTable tableName="espaco">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="espacoPK"/>
+            </column>
+            <column name="espaco" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-22">
+        <createTable tableName="funcao_artista">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="funcao_artistaPK"/>
+            </column>
+            <column name="funcao_artista" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-23">
+        <createTable tableName="moeda">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="moedaPK"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="tipo_moeda" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-24">
+        <createTable tableName="nivel">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="nivelPK"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="nivel" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-25">
+        <createTable tableName="obra">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="obraPK"/>
+            </column>
+            <column name="altura_mold" type="DECIMAL(21, 2)"/>
+            <column name="altura_obra" type="DECIMAL(21, 2)"/>
+            <column name="apabex" type="BOOLEAN"/>
+            <column name="assinatura" type="BOOLEAN"/>
+            <column name="atribuido" type="BOOLEAN"/>
+            <column name="book_x" type="INT"/>
+            <column name="book_y" type="INT"/>
+            <column name="bunkyo" type="BOOLEAN"/>
+            <column name="cod_parametro" type="VARCHAR(50)"/>
+            <column name="conj_tombo" type="VARCHAR(100)"/>
+            <column name="conjunto" type="BOOLEAN"/>
+            <column name="data_alter_apolice" type="date"/>
+            <column name="data_exclusao" type="date"/>
+            <column name="data_inclusao" type="date"/>
+            <column name="dataconversao" type="date"/>
+            <column name="descricao" type="VARCHAR(64000)"/>
+            <column name="diametr_obra" type="VARCHAR(6)"/>
+            <column name="diametro_mold" type="VARCHAR(10)"/>
+            <column name="dimens_adic" type="VARCHAR(150)"/>
+            <column name="dominio_publ" type="BOOLEAN"/>
+            <column name="dt_venc_foto" type="date"/>
+            <column name="fase_depuracao" type="VARCHAR(255)"/>
+            <column name="gen_descricao" type="INT"/>
+            <column name="gen_field_1" type="INT"/>
+            <column name="gen_marca_inscr_obra" type="INT"/>
+            <column name="gen_marca_inscr_suporte" type="INT"/>
+            <column name="gen_obs" type="INT"/>
+            <column name="gen_verbete" type="INT"/>
+            <column name="imagem_alta" type="BOOLEAN"/>
+            <column name="larg_mold" type="DECIMAL(21, 2)"/>
+            <column name="larg_obra" type="DECIMAL(21, 2)"/>
+            <column name="livro" type="BOOLEAN"/>
+            <column name="local_assinatura" type="VARCHAR(64000)"/>
+            <column name="local_atual" type="VARCHAR(100)"/>
+            <column name="local_atual_novo" type="VARCHAR(200)"/>
+            <column name="local_foto_alta" type="VARCHAR(255)"/>
+            <column name="marca_inscr_obra" type="VARCHAR(64000)"/>
+            <column name="marca_inscr_suporte" type="VARCHAR(64000)"/>
+            <column name="medidas_aprox" type="BOOLEAN"/>
+            <column name="multiplo" type="VARCHAR(1)"/>
+            <column name="n_foto" type="VARCHAR(10)"/>
+            <column name="numero_registro" type="VARCHAR(50)"/>
+            <column name="obs" type="VARCHAR(64000)"/>
+            <column name="obs_uso_foto" type="VARCHAR(255)"/>
+            <column name="origem" type="VARCHAR(100)"/>
+            <column name="outros_titulos" type="VARCHAR(200)"/>
+            <column name="palavras_chave" type="VARCHAR(64000)"/>
+            <column name="para_avaliacao" type="BOOLEAN"/>
+            <column name="para_fotografia" type="BOOLEAN"/>
+            <column name="para_legenda" type="BOOLEAN"/>
+            <column name="para_moldura" type="BOOLEAN"/>
+            <column name="para_restauracao" type="BOOLEAN"/>
+            <column name="pes_obra" type="VARCHAR(10)"/>
+            <column name="prof_mold" type="DECIMAL(21, 2)"/>
+            <column name="prof_obra" type="DECIMAL(21, 2)"/>
+            <column name="selecao_lista_avulsa" type="BOOLEAN"/>
+            <column name="selo" type="INT"/>
+            <column name="serie" type="VARCHAR(200)"/>
+            <column name="temp_field" type="BOOLEAN"/>
+            <column name="tiragem" type="VARCHAR(64000)"/>
+            <column name="titulo_original" type="VARCHAR(200)"/>
+            <column name="tombo" type="VARCHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tombo_anterio" type="VARCHAR(50)"/>
+            <column name="valor_seguro" type="DECIMAL(21, 2)"/>
+            <column name="valor_seguro_real" type="DECIMAL(21, 2)"/>
+            <column name="verbete" type="VARCHAR(64000)"/>
+            <column name="acervoatual_id" type="BIGINT"/>
+            <column name="andar_mapa_id" type="BIGINT"/>
+            <column name="artista_id" type="BIGINT"/>
+            <column name="categoria_id" type="BIGINT"/>
+            <column name="data_id" type="BIGINT"/>
+            <column name="empresa_id" type="BIGINT"/>
+            <column name="fotografo_id" type="BIGINT"/>
+            <column name="moeda_id" type="BIGINT"/>
+            <column name="nivel_id" type="BIGINT"/>
+            <column name="responsavel_id" type="BIGINT"/>
+            <column name="seguro_id" type="BIGINT"/>
+            <column name="tecnica_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-26">
+        <createTable tableName="rel_artista__contato">
+            <column name="artista_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="contato_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-27">
+        <createTable tableName="rel_obra__dado_documental">
+            <column name="obra_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="dado_documental_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-28">
+        <createTable tableName="responsavel">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="responsavelPK"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="nome" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-29">
+        <createTable tableName="seguro">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="seguroPK"/>
+            </column>
+            <column name="apolice" type="VARCHAR(200)"/>
+            <column name="cia_seguradora" type="VARCHAR(50)"/>
+            <column name="cnpj_corretora" type="VARCHAR(255)"/>
+            <column name="cnpj_seguradora" type="VARCHAR(255)"/>
+            <column name="contrato_proposta" type="VARCHAR(255)"/>
+            <column name="corretora" type="VARCHAR(50)"/>
+            <column name="data_atual_seguro" type="date"/>
+            <column name="data_inicio" type="date"/>
+            <column name="data_venc" type="date"/>
+            <column name="gen_status_seguro" type="INT"/>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="obs_seguro" type="VARCHAR(30)"/>
+            <column name="premio" type="VARCHAR(255)"/>
+            <column name="susep_corretora" type="VARCHAR(255)"/>
+            <column name="susep_seguradora" type="VARCHAR(255)"/>
+            <column name="tx_conversao" type="DECIMAL(21, 2)"/>
+            <column name="contato_cor_id" type="BIGINT"/>
+            <column name="contato_seg_id" type="BIGINT"/>
+            <column name="moeda_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-30">
+        <createTable tableName="tecnica">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tecnicaPK"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="tecnica" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-31">
+        <createTable tableName="tipo_documento">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tipo_documentoPK"/>
+            </column>
+            <column name="inativo" type="BOOLEAN"/>
+            <column name="tipo_documento" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-32">
+        <addColumn tableName="cidade">
+            <column name="cidade_uf_pais" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-33">
+        <addColumn tableName="cidade">
+            <column name="estado_pais" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-34">
+        <addColumn tableName="ambiente">
+            <column name="inativo" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-35">
+        <addColumn tableName="area_depto">
+            <column name="inativo" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-36">
+        <addColumn tableName="cidade">
+            <column name="inativo" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-37">
+        <addColumn tableName="contato">
+            <column name="inativo" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-38">
+        <addForeignKeyConstraint baseColumnNames="seguro_id" baseTableName="obra" constraintName="FK19re5jjrj1osh4ohy9ao7a4ed" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="seguro" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-39">
+        <addForeignKeyConstraint baseColumnNames="contato_cor_id" baseTableName="seguro" constraintName="FK4fiekld1a96y5u38d5iakkv16" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contato" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-40">
+        <addForeignKeyConstraint baseColumnNames="dado_documental_id" baseTableName="rel_obra__dado_documental" constraintName="FK5dehix399wq6p2a26q1ob22sy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="dado_documental" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-41">
+        <addForeignKeyConstraint baseColumnNames="tipo_documento_id" baseTableName="dado_documental" constraintName="FK6ldyq6k6japetltdpq8vgsmit" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tipo_documento" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-42">
+        <addForeignKeyConstraint baseColumnNames="fotografo_id" baseTableName="obra" constraintName="FK8d8w98scax18jhdwse93gcle2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contato" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-43">
+        <addForeignKeyConstraint baseColumnNames="contato_id" baseTableName="rel_artista__contato" constraintName="FK8mexaepswkidgbyt2uumftq4x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contato" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-44">
+        <addForeignKeyConstraint baseColumnNames="tecnica_id" baseTableName="obra" constraintName="FK8yspjk98on6uj2irwmm8stw2f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tecnica" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-45">
+        <addForeignKeyConstraint baseColumnNames="moeda_id" baseTableName="seguro" constraintName="FK98rnvuwibjdfnydgin8g1l2qr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="moeda" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-46">
+        <addForeignKeyConstraint baseColumnNames="responsavel_id" baseTableName="obra" constraintName="FKbqyvclxgqi6hsr2ecj3xif4sx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="responsavel" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-47">
+        <addForeignKeyConstraint baseColumnNames="moeda_id" baseTableName="obra" constraintName="FKc9tei5a7ieluyxu3cpjkvviwl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="moeda" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-48">
+        <addForeignKeyConstraint baseColumnNames="funcao_artista_id" baseTableName="artista" constraintName="FKcgauavi6xp2mjr5mqiq39dxo0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="funcao_artista" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-49">
+        <addForeignKeyConstraint baseColumnNames="data_id" baseTableName="obra" constraintName="FKd91xpmnduq59p13a3vss03hnl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="data" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-50">
+        <addForeignKeyConstraint baseColumnNames="cidade_falesc_id" baseTableName="artista" constraintName="FKh7l01kge0x5suebf61nnx2ux9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cidade" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-51">
+        <addForeignKeyConstraint baseColumnNames="categoria_id" baseTableName="obra" constraintName="FKhg2qyhiqjvj2jel64fmvm4mjp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="categoria" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-52">
+        <addForeignKeyConstraint baseColumnNames="contato_seg_id" baseTableName="seguro" constraintName="FKhlkgas4ogfygqurrudxf2ax0p" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contato" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-53">
+        <addForeignKeyConstraint baseColumnNames="resp_verbete_id" baseTableName="artista" constraintName="FKmkd0mv7fkn0r1yi2f00uo4xro" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="responsavel" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-54">
+        <addForeignKeyConstraint baseColumnNames="cidade_id" baseTableName="empresa" constraintName="FKmwu5vrlfrn44ja26d5h4tcodh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cidade" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-55">
+        <addForeignKeyConstraint baseColumnNames="cidade_nasc_id" baseTableName="artista" constraintName="FKn2l632115htapdt98dsa2fb3j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cidade" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-56">
+        <addForeignKeyConstraint baseColumnNames="empresa_id" baseTableName="obra" constraintName="FKox29e18x7e4b6pppu3em9x003" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-57">
+        <addForeignKeyConstraint baseColumnNames="espaco_id" baseTableName="andar_mapa" constraintName="FKpraijwoeclwwl7vqdvjjcxogo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="espaco" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-58">
+        <addForeignKeyConstraint baseColumnNames="acervoatual_id" baseTableName="obra" constraintName="FKqpcundqfhsajjto3t745dikqf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="acervo_atual" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-59">
+        <addForeignKeyConstraint baseColumnNames="artista_id" baseTableName="rel_artista__contato" constraintName="FKqqw6f6bx28uxpmvu86cfajjnu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="artista" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-60">
+        <addForeignKeyConstraint baseColumnNames="artista_id" baseTableName="obra" constraintName="FKrbf8hmthphkuhrw4ud26ifqmf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="artista" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-61">
+        <addForeignKeyConstraint baseColumnNames="andar_mapa_id" baseTableName="obra" constraintName="FKro0wn1mke8y6bvsxbwq5ta7t5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="andar_mapa" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-62">
+        <addForeignKeyConstraint baseColumnNames="nivel_id" baseTableName="obra" constraintName="FKrvfrl37tstvlkyeg8nvanu33j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="nivel" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-63">
+        <addForeignKeyConstraint baseColumnNames="obra_id" baseTableName="rel_obra__dado_documental" constraintName="FKsgvymwvryecl7c59ryermjg9y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="obra" validate="true"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-64">
+        <dropColumn columnName="ATIVO" tableName="AMBIENTE"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-65">
+        <dropColumn columnName="ATIVO" tableName="AREA_DEPTO"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-66">
+        <dropColumn columnName="ATIVO" tableName="CONTATO"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-1">
+        <alterSequence incrementBy="50" sequenceName="sequence_generator"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-2">
+        <setTableRemarks tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-3">
+        <setColumnRemarks columnName="cpf" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-4">
+        <setColumnRemarks columnName="empresa" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-5">
+        <setColumnRemarks columnName="end_bairro" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-6">
+        <setColumnRemarks columnName="end_cep" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-7">
+        <setColumnRemarks columnName="end_complemento" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-8">
+        <setColumnRemarks columnName="end_numero" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-9">
+        <setColumnRemarks columnName="end_rua" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-10">
+        <setColumnRemarks columnName="funcao" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-11">
+        <setColumnRemarks columnName="info_contato" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-12">
+        <setColumnRemarks columnName="rg" tableName="contato"/>
+    </changeSet>
+    <changeSet author="ronal (generated)" id="1629357861206-13">
+        <setColumnRemarks columnName="telefone" tableName="contato"/>
+    </changeSet>
+</databaseChangeLog>

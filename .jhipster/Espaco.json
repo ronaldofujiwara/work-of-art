@@ -1,0 +1,34 @@
+{
+  "name": "Espaco",
+  "fields": [
+    {
+      "fieldName": "espaco",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "inativo",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "andarMapa",
+      "otherEntityRelationshipName": "espaco",
+      "relationshipName": "andarMapa"
+    }
+  ],
+  "javadoc": "Entidade: Espaco - Espacos expositivos",
+  "entityTableName": "espaco",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210819045458"
+}

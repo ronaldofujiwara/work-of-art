@@ -119,11 +119,29 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "ativo",
+      "fieldName": "inativo",
       "fieldType": "Boolean"
     }
   ],
   "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "obra",
+      "otherEntityRelationshipName": "fotografo",
+      "relationshipName": "obra"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "seguro",
+      "otherEntityRelationshipName": "contatoSeg",
+      "relationshipName": "seguroSeg"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "seguro",
+      "otherEntityRelationshipName": "contatoCor",
+      "relationshipName": "seguroCor"
+    },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "areaDepto",
@@ -137,6 +155,14 @@
       "otherEntityRelationshipName": "contato",
       "relationshipName": "cidade",
       "otherEntityField": "cidade"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "artista",
+      "otherEntityRelationshipName": "contato",
+      "relationshipName": "artista",
+      "otherEntityField": "nome",
+      "ownerSide": false
     }
   ],
   "javadoc": "Entidade: Contato\\nDados cadastrais de contatos relacionados ao Acervo Cultural",

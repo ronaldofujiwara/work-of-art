@@ -140,8 +140,26 @@ public class ContatoQueryService extends QueryService<Contato> {
             if (criteria.getDataAtualizacao() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDataAtualizacao(), Contato_.dataAtualizacao));
             }
-            if (criteria.getAtivo() != null) {
-                specification = specification.and(buildSpecification(criteria.getAtivo(), Contato_.ativo));
+            if (criteria.getInativo() != null) {
+                specification = specification.and(buildSpecification(criteria.getInativo(), Contato_.inativo));
+            }
+            if (criteria.getObraId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getObraId(), root -> root.join(Contato_.obras, JoinType.LEFT).get(Obra_.id))
+                    );
+            }
+            if (criteria.getSeguroSegId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getSeguroSegId(), root -> root.join(Contato_.seguroSegs, JoinType.LEFT).get(Seguro_.id))
+                    );
+            }
+            if (criteria.getSeguroCorId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getSeguroCorId(), root -> root.join(Contato_.seguroCors, JoinType.LEFT).get(Seguro_.id))
+                    );
             }
             if (criteria.getAreaId() != null) {
                 specification =
@@ -153,6 +171,12 @@ public class ContatoQueryService extends QueryService<Contato> {
                 specification =
                     specification.and(
                         buildSpecification(criteria.getCidadeId(), root -> root.join(Contato_.cidade, JoinType.LEFT).get(Cidade_.id))
+                    );
+            }
+            if (criteria.getArtistaId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getArtistaId(), root -> root.join(Contato_.artistas, JoinType.LEFT).get(Artista_.id))
                     );
             }
         }

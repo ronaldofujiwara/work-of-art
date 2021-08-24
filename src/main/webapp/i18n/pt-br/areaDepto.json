@@ -19,7 +19,7 @@
       },
       "id": "ID",
       "area": "Area",
-      "ativo": "Ativo",
+      "inativo": "Inativo",
       "contato": "Contato"
     }
   }

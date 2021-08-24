@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Obra.
+    -->
+    <changeSet id="20210819045502-1" author="jhipster">
+        <createTable tableName="obra" remarks="Entidade: Obra\nDados principais das obras do Acervo de Arte">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tombo" type="varchar(8)">
+                <constraints nullable="false" />
+            </column>
+            <column name="multiplo" type="varchar(1)" remarks="Nº Tombo da Obras">
+                <constraints nullable="true" />
+            </column>
+            <column name="numero_registro" type="varchar(50)" remarks="(M) - Indica Obra Multipla: (-)=multiplo; (.)=cópia">
+                <constraints nullable="true" />
+            </column>
+            <column name="outros_titulos" type="varchar(200)" remarks="Número do Registro existente no Bradesco = ATIP">
+                <constraints nullable="true" />
+            </column>
+            <column name="titulo_original" type="varchar(200)" remarks="Outros Títulos da obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="origem" type="varchar(100)" remarks="Título da original da obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="descricao" type="varchar(64000)" remarks="Local de origem onde foi feita a obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="assinatura" type="boolean" remarks="Descrição da obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="local_assinatura" type="varchar(64000)" remarks="Se a obra é assinada ou não">
+                <constraints nullable="true" />
+            </column>
+            <column name="marca_inscr_obra" type="varchar(64000)" remarks="Localização da assinatura do artista na obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="marca_inscr_suporte" type="varchar(64000)" remarks="Marcas e/ou Inscrições que se encontram na obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="medidas_aprox" type="boolean" remarks="Marcas e/ou Inscrições que se encontram no suporte/moldura da obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="altura_obra" type="decimal(21,2)" remarks="Indica se as medidas são aproximadas ou se reais">
+                <constraints nullable="true" />
+            </column>
+            <column name="larg_obra" type="decimal(21,2)" remarks="Altura da Obra s/suporte ou moldura (precisão 2 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prof_obra" type="decimal(21,2)" remarks="Largura da Obra s/suporte ou moldura (precisão 2 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="diametr_obra" type="varchar(6)" remarks="Profundidade da Obra s/suporte ou moldura (precisão 2 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="altura_mold" type="decimal(21,2)" remarks="Diâmetro da Obra s/suporte ou moldura">
+                <constraints nullable="true" />
+            </column>
+            <column name="larg_mold" type="decimal(21,2)" remarks="Altura da Obra c/Moldura (precisão 2 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prof_mold" type="decimal(21,2)" remarks="Largura da Obra c/Moldura (precisão 2 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="diametro_mold" type="varchar(10)" remarks="Profundidade da Obra c/Moldura (precisão 2 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dimens_adic" type="varchar(150)" remarks="Diâmetro da Obra s/suporte ou moldura">
+                <constraints nullable="true" />
+            </column>
+            <column name="pes_obra" type="varchar(10)" remarks="Dimensões adicionais da obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="atribuido" type="boolean" remarks="Peso da Obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="n_foto" type="varchar(10)" remarks="Autoria é atribuída ou não">
+                <constraints nullable="true" />
+            </column>
+            <column name="conjunto" type="boolean" remarks="Nome e ou número da foto correspondente a obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="conj_tombo" type="varchar(100)" remarks="Faz parte de um conjunto?">
+                <constraints nullable="true" />
+            </column>
+            <column name="valor_seguro" type="decimal(21,2)" remarks="Nº Tombos que formam o  conjunto">
+                <constraints nullable="true" />
+            </column>
+            <column name="valor_seguro_real" type="decimal(21,2)" remarks="Valor do Seguro (precisão 4 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dataconversao" type="date" remarks="Valor do Seguro convertido em Reais (precisão 4 decimais)">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_alter_apolice" type="date" remarks="Data da conversão da moeda">
+                <constraints nullable="true" />
+            </column>
+            <column name="local_atual" type="varchar(100)" remarks="Data que a obra foi Incluida/Excluida na Apólice">
+                <constraints nullable="true" />
+            </column>
+            <column name="local_atual_novo" type="varchar(200)" remarks="Localização atual da obra - relacionada com QryLocalização">
+                <constraints nullable="true" />
+            </column>
+            <column name="cod_parametro" type="varchar(50)" remarks="Localização atual da obra - relacionada com QryLocalizaçãoNOVA">
+                <constraints nullable="true" />
+            </column>
+            <column name="obs" type="varchar(64000)" remarks="Categorias da tblParametros para associarmos com a obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="tiragem" type="varchar(64000)" remarks="Observações gerais da obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="serie" type="varchar(200)" remarks="Tiragem da gravura">
+                <constraints nullable="true" />
+            </column>
+            <column name="selo" type="integer" remarks="Título da Série da gravura">
+                <constraints nullable="true" />
+            </column>
+            <column name="tombo_anterio" type="varchar(50)" remarks="Classificação da obra quanto ao uso, designado pelos pesquisadores">
+                <constraints nullable="true" />
+            </column>
+            <column name="verbete" type="varchar(64000)" remarks="Número da antiga catalogação">
+                <constraints nullable="true" />
+            </column>
+            <column name="livro" type="boolean" remarks="Dados específicos sobre a obra">
+                <constraints nullable="true" />
+            </column>
+            <column name="imagem_alta" type="boolean" remarks="Selecionar caso a obra esteja participando da última publicação da coleção">
+                <constraints nullable="true" />
+            </column>
+            <column name="apabex" type="boolean" remarks="Selecionar caso a obra possua imagem digital em alta resolução">
+                <constraints nullable="true" />
+            </column>
+            <column name="bunkyo" type="boolean" remarks="Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino à APABEX">
+                <constraints nullable="true" />
+            </column>
+            <column name="fase_depuracao" type="varchar(255)" remarks="Selecione caso a obra esteja incluída no projeto da Depuração da Coleção, com destino ao BUNKYO">
+                <constraints nullable="true" />
+            </column>
+            <column name="para_avaliacao" type="boolean" remarks="Indique em qual fase a obra será destinada à Apabex ou ao Bunkyo">
+                <constraints nullable="true" />
+            </column>
+            <column name="para_restauracao" type="boolean" remarks="Selecionar caso a obra necessite ser encaminhada para avaliação de mercado">
+                <constraints nullable="true" />
+            </column>
+            <column name="para_moldura" type="boolean" remarks="Selecionar caso a obra necessite ser encaminhada para restauração">
+                <constraints nullable="true" />
+            </column>
+            <column name="para_legenda" type="boolean" remarks="Selecionar caso a obra necessite ser encaminhada para confecção de moldura">
+                <constraints nullable="true" />
+            </column>
+            <column name="temp_field" type="boolean" remarks="Selecionar caso a obra necessite ser encaminhada para confecção de legenda">
+                <constraints nullable="true" />
+            </column>
+            <column name="selecao_lista_avulsa" type="boolean" remarks="Selecionar caso a obra necessite ser encaminhada para foto em alta">
+                <constraints nullable="true" />
+            </column>
+            <column name="dominio_publ" type="boolean" remarks="Selecionar para incluir a obra em uma eventual seleção avulsa">
+                <constraints nullable="true" />
+            </column>
+            <column name="dt_venc_foto" type="date" remarks="É de domínio público">
+                <constraints nullable="true" />
+            </column>
+            <column name="obs_uso_foto" type="varchar(255)" remarks="Data de vencimento de uso de imagem do Fotografo">
+                <constraints nullable="true" />
+            </column>
+            <column name="local_foto_alta" type="varchar(255)" remarks="Observações de uso de imagem do Fotografo">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_inclusao" type="date" remarks="Localização da FotoAlta">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_exclusao" type="date" remarks="Data que a obra foi inserida">
+                <constraints nullable="true" />
+            </column>
+            <column name="book_x" type="integer" remarks="Data que a obra foi excluida">
+                <constraints nullable="true" />
+            </column>
+            <column name="book_y" type="integer" remarks="Posicao do Eixo X no book">
+                <constraints nullable="true" />
+            </column>
+            <column name="gen_descricao" type="integer" remarks="Posicao do Eixo Y no book">
+                <constraints nullable="true" />
+            </column>
+            <column name="gen_field_1" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="para_fotografia" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="gen_marca_inscr_obra" type="integer" remarks="Selecionar caso a obra necessite ser encaminhada para foto em alta">
+                <constraints nullable="true" />
+            </column>
+            <column name="palavras_chave" type="varchar(64000)">
+                <constraints nullable="true" />
+            </column>
+            <column name="gen_marca_inscr_suporte" type="integer" remarks="Palavras-chave relacionadas à obra, para pesquisa mais detalhada">
+                <constraints nullable="true" />
+            </column>
+            <column name="gen_obs" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="gen_verbete" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="artista_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="categoria_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="tecnica_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="nivel_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="empresa_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="moeda_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="seguro_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsavel_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="acervoatual_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="fotografo_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="andar_mapa_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210819045502-1-relations" author="jhipster">
+
+        <createTable tableName="rel_obra__dado_documental">
+            <column name="dado_documental_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="obra_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="obra_id, dado_documental_id" tableName="rel_obra__dado_documental"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210819045502-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/obra.csv"
+                  separator=";"
+                  tableName="obra">
+            <column name="id" type="numeric"/>
+            <column name="tombo" type="string"/>
+            <column name="multiplo" type="string"/>
+            <column name="numero_registro" type="string"/>
+            <column name="outros_titulos" type="string"/>
+            <column name="titulo_original" type="string"/>
+            <column name="origem" type="string"/>
+            <column name="descricao" type="string"/>
+            <column name="assinatura" type="boolean"/>
+            <column name="local_assinatura" type="string"/>
+            <column name="marca_inscr_obra" type="string"/>
+            <column name="marca_inscr_suporte" type="string"/>
+            <column name="medidas_aprox" type="boolean"/>
+            <column name="altura_obra" type="numeric"/>
+            <column name="larg_obra" type="numeric"/>
+            <column name="prof_obra" type="numeric"/>
+            <column name="diametr_obra" type="string"/>
+            <column name="altura_mold" type="numeric"/>
+            <column name="larg_mold" type="numeric"/>
+            <column name="prof_mold" type="numeric"/>
+            <column name="diametro_mold" type="string"/>
+            <column name="dimens_adic" type="string"/>
+            <column name="pes_obra" type="string"/>
+            <column name="atribuido" type="boolean"/>
+            <column name="n_foto" type="string"/>
+            <column name="conjunto" type="boolean"/>
+            <column name="conj_tombo" type="string"/>
+            <column name="valor_seguro" type="numeric"/>
+            <column name="valor_seguro_real" type="numeric"/>
+            <column name="dataconversao" type="date"/>
+            <column name="data_alter_apolice" type="date"/>
+            <column name="local_atual" type="string"/>
+            <column name="local_atual_novo" type="string"/>
+            <column name="cod_parametro" type="string"/>
+            <column name="obs" type="string"/>
+            <column name="tiragem" type="string"/>
+            <column name="serie" type="string"/>
+            <column name="selo" type="numeric"/>
+            <column name="tombo_anterio" type="string"/>
+            <column name="verbete" type="string"/>
+            <column name="livro" type="boolean"/>
+            <column name="imagem_alta" type="boolean"/>
+            <column name="apabex" type="boolean"/>
+            <column name="bunkyo" type="boolean"/>
+            <column name="fase_depuracao" type="string"/>
+            <column name="para_avaliacao" type="boolean"/>
+            <column name="para_restauracao" type="boolean"/>
+            <column name="para_moldura" type="boolean"/>
+            <column name="para_legenda" type="boolean"/>
+            <column name="temp_field" type="boolean"/>
+            <column name="selecao_lista_avulsa" type="boolean"/>
+            <column name="dominio_publ" type="boolean"/>
+            <column name="dt_venc_foto" type="date"/>
+            <column name="obs_uso_foto" type="string"/>
+            <column name="local_foto_alta" type="string"/>
+            <column name="data_inclusao" type="date"/>
+            <column name="data_exclusao" type="date"/>
+            <column name="book_x" type="numeric"/>
+            <column name="book_y" type="numeric"/>
+            <column name="gen_descricao" type="numeric"/>
+            <column name="gen_field_1" type="numeric"/>
+            <column name="para_fotografia" type="boolean"/>
+            <column name="gen_marca_inscr_obra" type="numeric"/>
+            <column name="palavras_chave" type="string"/>
+            <column name="gen_marca_inscr_suporte" type="numeric"/>
+            <column name="gen_obs" type="numeric"/>
+            <column name="gen_verbete" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

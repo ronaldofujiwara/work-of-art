@@ -75,7 +75,9 @@
           <th scope="col" jhiSortBy="dataAtualizacao">
             <span jhiTranslate="artesApp.contato.dataAtualizacao">Data Atualizacao</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="ativo"><span jhiTranslate="artesApp.contato.ativo">Ativo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="inativo">
+            <span jhiTranslate="artesApp.contato.inativo">Inativo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="area.area"><span jhiTranslate="artesApp.contato.area">Area</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="cidade.cidade">
             <span jhiTranslate="artesApp.contato.cidade">Cidade</span> <fa-icon icon="sort"></fa-icon>
@@ -106,7 +108,7 @@
           <td>{{ contato.site }}</td>
           <td>{{ contato.observacoes }}</td>
           <td>{{ contato.dataAtualizacao | formatMediumDatetime }}</td>
-          <td>{{ contato.ativo }}</td>
+          <td>{{ contato.inativo }}</td>
           <td>
             <div *ngIf="contato.area">
               <a [routerLink]="['/area-depto', contato.area?.id, 'view']">{{ contato.area?.area }}</a>

@@ -1,0 +1,29 @@
+{
+  "artesApp": {
+    "funcaoArtista": {
+      "home": {
+        "title": "Funcao Artistas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Funcao Artista",
+        "createOrEditLabel": "Criar ou editar Funcao Artista",
+        "notFound": "Nenhum Funcao Artista encontrado"
+      },
+      "created": "Um novo Funcao Artista foi criado com o identificador {{ param }}",
+      "updated": "Um Funcao Artista foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Funcao Artista foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Funcao Artista {{ id }}?"
+      },
+      "detail": {
+        "title": "Funcao Artista"
+      },
+      "id": "ID",
+      "funcaoArtista": "Funcao Artista",
+      "inativo": "Inativo",
+      "artista": "Artista",
+      "help": {
+        "inativo": "Funcao do artista"
+      }
+    }
+  }
+}

@@ -1,0 +1,1559 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-obra-heading" data-cy="ObraCreateUpdateHeading" jhiTranslate="artesApp.obra.home.createOrEditLabel">
+        Create or edit a Obra
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.tombo" for="field_tombo">Tombo</label>
+          <input type="text" class="form-control" name="tombo" id="field_tombo" data-cy="tombo" formControlName="tombo" />
+          <div *ngIf="editForm.get('tombo')!.invalid && (editForm.get('tombo')!.dirty || editForm.get('tombo')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('tombo')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tombo')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 8 }"
+            >
+              This field cannot be longer than 8 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.multiplo"
+            for="field_multiplo"
+            [ngbTooltip]="'artesApp.obra.help.multiplo' | translate"
+            >Multiplo</label
+          >
+          <input type="text" class="form-control" name="multiplo" id="field_multiplo" data-cy="multiplo" formControlName="multiplo" />
+          <div *ngIf="editForm.get('multiplo')!.invalid && (editForm.get('multiplo')!.dirty || editForm.get('multiplo')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('multiplo')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1 }"
+            >
+              This field cannot be longer than 1 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.numeroRegistro"
+            for="field_numeroRegistro"
+            [ngbTooltip]="'artesApp.obra.help.numeroRegistro' | translate"
+            >Numero Registro</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroRegistro"
+            id="field_numeroRegistro"
+            data-cy="numeroRegistro"
+            formControlName="numeroRegistro"
+          />
+          <div
+            *ngIf="
+              editForm.get('numeroRegistro')!.invalid && (editForm.get('numeroRegistro')!.dirty || editForm.get('numeroRegistro')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroRegistro')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.outrosTitulos"
+            for="field_outrosTitulos"
+            [ngbTooltip]="'artesApp.obra.help.outrosTitulos' | translate"
+            >Outros Titulos</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="outrosTitulos"
+            id="field_outrosTitulos"
+            data-cy="outrosTitulos"
+            formControlName="outrosTitulos"
+          />
+          <div
+            *ngIf="
+              editForm.get('outrosTitulos')!.invalid && (editForm.get('outrosTitulos')!.dirty || editForm.get('outrosTitulos')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('outrosTitulos')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.tituloOriginal"
+            for="field_tituloOriginal"
+            [ngbTooltip]="'artesApp.obra.help.tituloOriginal' | translate"
+            >Titulo Original</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="tituloOriginal"
+            id="field_tituloOriginal"
+            data-cy="tituloOriginal"
+            formControlName="tituloOriginal"
+          />
+          <div
+            *ngIf="
+              editForm.get('tituloOriginal')!.invalid && (editForm.get('tituloOriginal')!.dirty || editForm.get('tituloOriginal')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tituloOriginal')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.origem"
+            for="field_origem"
+            [ngbTooltip]="'artesApp.obra.help.origem' | translate"
+            >Origem</label
+          >
+          <input type="text" class="form-control" name="origem" id="field_origem" data-cy="origem" formControlName="origem" />
+          <div *ngIf="editForm.get('origem')!.invalid && (editForm.get('origem')!.dirty || editForm.get('origem')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('origem')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.descricao"
+            for="field_descricao"
+            [ngbTooltip]="'artesApp.obra.help.descricao' | translate"
+            >Descricao</label
+          >
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+          <div *ngIf="editForm.get('descricao')!.invalid && (editForm.get('descricao')!.dirty || editForm.get('descricao')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('descricao')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.assinatura"
+            for="field_assinatura"
+            [ngbTooltip]="'artesApp.obra.help.assinatura' | translate"
+            >Assinatura</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="assinatura"
+            id="field_assinatura"
+            data-cy="assinatura"
+            formControlName="assinatura"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.localAssinatura"
+            for="field_localAssinatura"
+            [ngbTooltip]="'artesApp.obra.help.localAssinatura' | translate"
+            >Local Assinatura</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="localAssinatura"
+            id="field_localAssinatura"
+            data-cy="localAssinatura"
+            formControlName="localAssinatura"
+          />
+          <div
+            *ngIf="
+              editForm.get('localAssinatura')!.invalid &&
+              (editForm.get('localAssinatura')!.dirty || editForm.get('localAssinatura')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('localAssinatura')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.marcaInscrObra"
+            for="field_marcaInscrObra"
+            [ngbTooltip]="'artesApp.obra.help.marcaInscrObra' | translate"
+            >Marca Inscr Obra</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="marcaInscrObra"
+            id="field_marcaInscrObra"
+            data-cy="marcaInscrObra"
+            formControlName="marcaInscrObra"
+          />
+          <div
+            *ngIf="
+              editForm.get('marcaInscrObra')!.invalid && (editForm.get('marcaInscrObra')!.dirty || editForm.get('marcaInscrObra')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('marcaInscrObra')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.marcaInscrSuporte"
+            for="field_marcaInscrSuporte"
+            [ngbTooltip]="'artesApp.obra.help.marcaInscrSuporte' | translate"
+            >Marca Inscr Suporte</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="marcaInscrSuporte"
+            id="field_marcaInscrSuporte"
+            data-cy="marcaInscrSuporte"
+            formControlName="marcaInscrSuporte"
+          />
+          <div
+            *ngIf="
+              editForm.get('marcaInscrSuporte')!.invalid &&
+              (editForm.get('marcaInscrSuporte')!.dirty || editForm.get('marcaInscrSuporte')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('marcaInscrSuporte')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.medidasAprox"
+            for="field_medidasAprox"
+            [ngbTooltip]="'artesApp.obra.help.medidasAprox' | translate"
+            >Medidas Aprox</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="medidasAprox"
+            id="field_medidasAprox"
+            data-cy="medidasAprox"
+            formControlName="medidasAprox"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.alturaObra"
+            for="field_alturaObra"
+            [ngbTooltip]="'artesApp.obra.help.alturaObra' | translate"
+            >Altura Obra</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="alturaObra"
+            id="field_alturaObra"
+            data-cy="alturaObra"
+            formControlName="alturaObra"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.largObra"
+            for="field_largObra"
+            [ngbTooltip]="'artesApp.obra.help.largObra' | translate"
+            >Larg Obra</label
+          >
+          <input type="number" class="form-control" name="largObra" id="field_largObra" data-cy="largObra" formControlName="largObra" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.profObra"
+            for="field_profObra"
+            [ngbTooltip]="'artesApp.obra.help.profObra' | translate"
+            >Prof Obra</label
+          >
+          <input type="number" class="form-control" name="profObra" id="field_profObra" data-cy="profObra" formControlName="profObra" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.diametrObra"
+            for="field_diametrObra"
+            [ngbTooltip]="'artesApp.obra.help.diametrObra' | translate"
+            >Diametr Obra</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="diametrObra"
+            id="field_diametrObra"
+            data-cy="diametrObra"
+            formControlName="diametrObra"
+          />
+          <div *ngIf="editForm.get('diametrObra')!.invalid && (editForm.get('diametrObra')!.dirty || editForm.get('diametrObra')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('diametrObra')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 6 }"
+            >
+              This field cannot be longer than 6 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.alturaMold"
+            for="field_alturaMold"
+            [ngbTooltip]="'artesApp.obra.help.alturaMold' | translate"
+            >Altura Mold</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="alturaMold"
+            id="field_alturaMold"
+            data-cy="alturaMold"
+            formControlName="alturaMold"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.largMold"
+            for="field_largMold"
+            [ngbTooltip]="'artesApp.obra.help.largMold' | translate"
+            >Larg Mold</label
+          >
+          <input type="number" class="form-control" name="largMold" id="field_largMold" data-cy="largMold" formControlName="largMold" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.profMold"
+            for="field_profMold"
+            [ngbTooltip]="'artesApp.obra.help.profMold' | translate"
+            >Prof Mold</label
+          >
+          <input type="number" class="form-control" name="profMold" id="field_profMold" data-cy="profMold" formControlName="profMold" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.diametroMold"
+            for="field_diametroMold"
+            [ngbTooltip]="'artesApp.obra.help.diametroMold' | translate"
+            >Diametro Mold</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="diametroMold"
+            id="field_diametroMold"
+            data-cy="diametroMold"
+            formControlName="diametroMold"
+          />
+          <div
+            *ngIf="editForm.get('diametroMold')!.invalid && (editForm.get('diametroMold')!.dirty || editForm.get('diametroMold')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('diametroMold')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dimensAdic"
+            for="field_dimensAdic"
+            [ngbTooltip]="'artesApp.obra.help.dimensAdic' | translate"
+            >Dimens Adic</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dimensAdic"
+            id="field_dimensAdic"
+            data-cy="dimensAdic"
+            formControlName="dimensAdic"
+          />
+          <div *ngIf="editForm.get('dimensAdic')!.invalid && (editForm.get('dimensAdic')!.dirty || editForm.get('dimensAdic')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dimensAdic')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 150 }"
+            >
+              This field cannot be longer than 150 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.pesObra"
+            for="field_pesObra"
+            [ngbTooltip]="'artesApp.obra.help.pesObra' | translate"
+            >Pes Obra</label
+          >
+          <input type="text" class="form-control" name="pesObra" id="field_pesObra" data-cy="pesObra" formControlName="pesObra" />
+          <div *ngIf="editForm.get('pesObra')!.invalid && (editForm.get('pesObra')!.dirty || editForm.get('pesObra')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pesObra')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.atribuido"
+            for="field_atribuido"
+            [ngbTooltip]="'artesApp.obra.help.atribuido' | translate"
+            >Atribuido</label
+          >
+          <input type="checkbox" class="form-check" name="atribuido" id="field_atribuido" data-cy="atribuido" formControlName="atribuido" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.nFoto"
+            for="field_nFoto"
+            [ngbTooltip]="'artesApp.obra.help.nFoto' | translate"
+            >N Foto</label
+          >
+          <input type="text" class="form-control" name="nFoto" id="field_nFoto" data-cy="nFoto" formControlName="nFoto" />
+          <div *ngIf="editForm.get('nFoto')!.invalid && (editForm.get('nFoto')!.dirty || editForm.get('nFoto')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nFoto')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.conjunto"
+            for="field_conjunto"
+            [ngbTooltip]="'artesApp.obra.help.conjunto' | translate"
+            >Conjunto</label
+          >
+          <input type="checkbox" class="form-check" name="conjunto" id="field_conjunto" data-cy="conjunto" formControlName="conjunto" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.conjTombo"
+            for="field_conjTombo"
+            [ngbTooltip]="'artesApp.obra.help.conjTombo' | translate"
+            >Conj Tombo</label
+          >
+          <input type="text" class="form-control" name="conjTombo" id="field_conjTombo" data-cy="conjTombo" formControlName="conjTombo" />
+          <div *ngIf="editForm.get('conjTombo')!.invalid && (editForm.get('conjTombo')!.dirty || editForm.get('conjTombo')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('conjTombo')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.valorSeguro"
+            for="field_valorSeguro"
+            [ngbTooltip]="'artesApp.obra.help.valorSeguro' | translate"
+            >Valor Seguro</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="valorSeguro"
+            id="field_valorSeguro"
+            data-cy="valorSeguro"
+            formControlName="valorSeguro"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.valorSeguroReal"
+            for="field_valorSeguroReal"
+            [ngbTooltip]="'artesApp.obra.help.valorSeguroReal' | translate"
+            >Valor Seguro Real</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="valorSeguroReal"
+            id="field_valorSeguroReal"
+            data-cy="valorSeguroReal"
+            formControlName="valorSeguroReal"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dataconversao"
+            for="field_dataconversao"
+            [ngbTooltip]="'artesApp.obra.help.dataconversao' | translate"
+            >Dataconversao</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataconversao"
+              data-cy="dataconversao"
+              type="text"
+              class="form-control"
+              name="dataconversao"
+              ngbDatepicker
+              #dataconversaoDp="ngbDatepicker"
+              formControlName="dataconversao"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataconversaoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dataAlterApolice"
+            for="field_dataAlterApolice"
+            [ngbTooltip]="'artesApp.obra.help.dataAlterApolice' | translate"
+            >Data Alter Apolice</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataAlterApolice"
+              data-cy="dataAlterApolice"
+              type="text"
+              class="form-control"
+              name="dataAlterApolice"
+              ngbDatepicker
+              #dataAlterApoliceDp="ngbDatepicker"
+              formControlName="dataAlterApolice"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataAlterApoliceDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.localAtual"
+            for="field_localAtual"
+            [ngbTooltip]="'artesApp.obra.help.localAtual' | translate"
+            >Local Atual</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="localAtual"
+            id="field_localAtual"
+            data-cy="localAtual"
+            formControlName="localAtual"
+          />
+          <div *ngIf="editForm.get('localAtual')!.invalid && (editForm.get('localAtual')!.dirty || editForm.get('localAtual')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('localAtual')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.localAtualNovo"
+            for="field_localAtualNovo"
+            [ngbTooltip]="'artesApp.obra.help.localAtualNovo' | translate"
+            >Local Atual Novo</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="localAtualNovo"
+            id="field_localAtualNovo"
+            data-cy="localAtualNovo"
+            formControlName="localAtualNovo"
+          />
+          <div
+            *ngIf="
+              editForm.get('localAtualNovo')!.invalid && (editForm.get('localAtualNovo')!.dirty || editForm.get('localAtualNovo')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('localAtualNovo')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.codParametro"
+            for="field_codParametro"
+            [ngbTooltip]="'artesApp.obra.help.codParametro' | translate"
+            >Cod Parametro</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codParametro"
+            id="field_codParametro"
+            data-cy="codParametro"
+            formControlName="codParametro"
+          />
+          <div
+            *ngIf="editForm.get('codParametro')!.invalid && (editForm.get('codParametro')!.dirty || editForm.get('codParametro')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codParametro')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.obs"
+            for="field_obs"
+            [ngbTooltip]="'artesApp.obra.help.obs' | translate"
+            >Obs</label
+          >
+          <input type="text" class="form-control" name="obs" id="field_obs" data-cy="obs" formControlName="obs" />
+          <div *ngIf="editForm.get('obs')!.invalid && (editForm.get('obs')!.dirty || editForm.get('obs')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('obs')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.tiragem"
+            for="field_tiragem"
+            [ngbTooltip]="'artesApp.obra.help.tiragem' | translate"
+            >Tiragem</label
+          >
+          <input type="text" class="form-control" name="tiragem" id="field_tiragem" data-cy="tiragem" formControlName="tiragem" />
+          <div *ngIf="editForm.get('tiragem')!.invalid && (editForm.get('tiragem')!.dirty || editForm.get('tiragem')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tiragem')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.serie"
+            for="field_serie"
+            [ngbTooltip]="'artesApp.obra.help.serie' | translate"
+            >Serie</label
+          >
+          <input type="text" class="form-control" name="serie" id="field_serie" data-cy="serie" formControlName="serie" />
+          <div *ngIf="editForm.get('serie')!.invalid && (editForm.get('serie')!.dirty || editForm.get('serie')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('serie')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.selo"
+            for="field_selo"
+            [ngbTooltip]="'artesApp.obra.help.selo' | translate"
+            >Selo</label
+          >
+          <input type="number" class="form-control" name="selo" id="field_selo" data-cy="selo" formControlName="selo" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.tomboAnterio"
+            for="field_tomboAnterio"
+            [ngbTooltip]="'artesApp.obra.help.tomboAnterio' | translate"
+            >Tombo Anterio</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="tomboAnterio"
+            id="field_tomboAnterio"
+            data-cy="tomboAnterio"
+            formControlName="tomboAnterio"
+          />
+          <div
+            *ngIf="editForm.get('tomboAnterio')!.invalid && (editForm.get('tomboAnterio')!.dirty || editForm.get('tomboAnterio')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tomboAnterio')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.verbete"
+            for="field_verbete"
+            [ngbTooltip]="'artesApp.obra.help.verbete' | translate"
+            >Verbete</label
+          >
+          <input type="text" class="form-control" name="verbete" id="field_verbete" data-cy="verbete" formControlName="verbete" />
+          <div *ngIf="editForm.get('verbete')!.invalid && (editForm.get('verbete')!.dirty || editForm.get('verbete')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('verbete')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.livro"
+            for="field_livro"
+            [ngbTooltip]="'artesApp.obra.help.livro' | translate"
+            >Livro</label
+          >
+          <input type="checkbox" class="form-check" name="livro" id="field_livro" data-cy="livro" formControlName="livro" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.imagemAlta"
+            for="field_imagemAlta"
+            [ngbTooltip]="'artesApp.obra.help.imagemAlta' | translate"
+            >Imagem Alta</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="imagemAlta"
+            id="field_imagemAlta"
+            data-cy="imagemAlta"
+            formControlName="imagemAlta"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.apabex"
+            for="field_apabex"
+            [ngbTooltip]="'artesApp.obra.help.apabex' | translate"
+            >Apabex</label
+          >
+          <input type="checkbox" class="form-check" name="apabex" id="field_apabex" data-cy="apabex" formControlName="apabex" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.bunkyo"
+            for="field_bunkyo"
+            [ngbTooltip]="'artesApp.obra.help.bunkyo' | translate"
+            >Bunkyo</label
+          >
+          <input type="checkbox" class="form-check" name="bunkyo" id="field_bunkyo" data-cy="bunkyo" formControlName="bunkyo" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.faseDepuracao"
+            for="field_faseDepuracao"
+            [ngbTooltip]="'artesApp.obra.help.faseDepuracao' | translate"
+            >Fase Depuracao</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="faseDepuracao"
+            id="field_faseDepuracao"
+            data-cy="faseDepuracao"
+            formControlName="faseDepuracao"
+          />
+          <div
+            *ngIf="
+              editForm.get('faseDepuracao')!.invalid && (editForm.get('faseDepuracao')!.dirty || editForm.get('faseDepuracao')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('faseDepuracao')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.paraAvaliacao"
+            for="field_paraAvaliacao"
+            [ngbTooltip]="'artesApp.obra.help.paraAvaliacao' | translate"
+            >Para Avaliacao</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="paraAvaliacao"
+            id="field_paraAvaliacao"
+            data-cy="paraAvaliacao"
+            formControlName="paraAvaliacao"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.paraRestauracao"
+            for="field_paraRestauracao"
+            [ngbTooltip]="'artesApp.obra.help.paraRestauracao' | translate"
+            >Para Restauracao</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="paraRestauracao"
+            id="field_paraRestauracao"
+            data-cy="paraRestauracao"
+            formControlName="paraRestauracao"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.paraMoldura"
+            for="field_paraMoldura"
+            [ngbTooltip]="'artesApp.obra.help.paraMoldura' | translate"
+            >Para Moldura</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="paraMoldura"
+            id="field_paraMoldura"
+            data-cy="paraMoldura"
+            formControlName="paraMoldura"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.paraLegenda"
+            for="field_paraLegenda"
+            [ngbTooltip]="'artesApp.obra.help.paraLegenda' | translate"
+            >Para Legenda</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="paraLegenda"
+            id="field_paraLegenda"
+            data-cy="paraLegenda"
+            formControlName="paraLegenda"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.tempField"
+            for="field_tempField"
+            [ngbTooltip]="'artesApp.obra.help.tempField' | translate"
+            >Temp Field</label
+          >
+          <input type="checkbox" class="form-check" name="tempField" id="field_tempField" data-cy="tempField" formControlName="tempField" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.selecaoListaAvulsa"
+            for="field_selecaoListaAvulsa"
+            [ngbTooltip]="'artesApp.obra.help.selecaoListaAvulsa' | translate"
+            >Selecao Lista Avulsa</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="selecaoListaAvulsa"
+            id="field_selecaoListaAvulsa"
+            data-cy="selecaoListaAvulsa"
+            formControlName="selecaoListaAvulsa"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dominioPubl"
+            for="field_dominioPubl"
+            [ngbTooltip]="'artesApp.obra.help.dominioPubl' | translate"
+            >Dominio Publ</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="dominioPubl"
+            id="field_dominioPubl"
+            data-cy="dominioPubl"
+            formControlName="dominioPubl"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dtVencFoto"
+            for="field_dtVencFoto"
+            [ngbTooltip]="'artesApp.obra.help.dtVencFoto' | translate"
+            >Dt Venc Foto</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dtVencFoto"
+              data-cy="dtVencFoto"
+              type="text"
+              class="form-control"
+              name="dtVencFoto"
+              ngbDatepicker
+              #dtVencFotoDp="ngbDatepicker"
+              formControlName="dtVencFoto"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dtVencFotoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.obsUsoFoto"
+            for="field_obsUsoFoto"
+            [ngbTooltip]="'artesApp.obra.help.obsUsoFoto' | translate"
+            >Obs Uso Foto</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="obsUsoFoto"
+            id="field_obsUsoFoto"
+            data-cy="obsUsoFoto"
+            formControlName="obsUsoFoto"
+          />
+          <div *ngIf="editForm.get('obsUsoFoto')!.invalid && (editForm.get('obsUsoFoto')!.dirty || editForm.get('obsUsoFoto')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('obsUsoFoto')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.localFotoAlta"
+            for="field_localFotoAlta"
+            [ngbTooltip]="'artesApp.obra.help.localFotoAlta' | translate"
+            >Local Foto Alta</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="localFotoAlta"
+            id="field_localFotoAlta"
+            data-cy="localFotoAlta"
+            formControlName="localFotoAlta"
+          />
+          <div
+            *ngIf="
+              editForm.get('localFotoAlta')!.invalid && (editForm.get('localFotoAlta')!.dirty || editForm.get('localFotoAlta')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('localFotoAlta')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dataInclusao"
+            for="field_dataInclusao"
+            [ngbTooltip]="'artesApp.obra.help.dataInclusao' | translate"
+            >Data Inclusao</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataInclusao"
+              data-cy="dataInclusao"
+              type="text"
+              class="form-control"
+              name="dataInclusao"
+              ngbDatepicker
+              #dataInclusaoDp="ngbDatepicker"
+              formControlName="dataInclusao"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataInclusaoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.dataExclusao"
+            for="field_dataExclusao"
+            [ngbTooltip]="'artesApp.obra.help.dataExclusao' | translate"
+            >Data Exclusao</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataExclusao"
+              data-cy="dataExclusao"
+              type="text"
+              class="form-control"
+              name="dataExclusao"
+              ngbDatepicker
+              #dataExclusaoDp="ngbDatepicker"
+              formControlName="dataExclusao"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataExclusaoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.bookX"
+            for="field_bookX"
+            [ngbTooltip]="'artesApp.obra.help.bookX' | translate"
+            >Book X</label
+          >
+          <input type="number" class="form-control" name="bookX" id="field_bookX" data-cy="bookX" formControlName="bookX" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.bookY"
+            for="field_bookY"
+            [ngbTooltip]="'artesApp.obra.help.bookY' | translate"
+            >Book Y</label
+          >
+          <input type="number" class="form-control" name="bookY" id="field_bookY" data-cy="bookY" formControlName="bookY" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.genDescricao"
+            for="field_genDescricao"
+            [ngbTooltip]="'artesApp.obra.help.genDescricao' | translate"
+            >Gen Descricao</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="genDescricao"
+            id="field_genDescricao"
+            data-cy="genDescricao"
+            formControlName="genDescricao"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.genField1" for="field_genField1">Gen Field 1</label>
+          <input type="number" class="form-control" name="genField1" id="field_genField1" data-cy="genField1" formControlName="genField1" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.paraFotografia" for="field_paraFotografia">Para Fotografia</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="paraFotografia"
+            id="field_paraFotografia"
+            data-cy="paraFotografia"
+            formControlName="paraFotografia"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.genMarcaInscrObra"
+            for="field_genMarcaInscrObra"
+            [ngbTooltip]="'artesApp.obra.help.genMarcaInscrObra' | translate"
+            >Gen Marca Inscr Obra</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="genMarcaInscrObra"
+            id="field_genMarcaInscrObra"
+            data-cy="genMarcaInscrObra"
+            formControlName="genMarcaInscrObra"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.palavrasChave" for="field_palavrasChave">Palavras Chave</label>
+          <input
+            type="text"
+            class="form-control"
+            name="palavrasChave"
+            id="field_palavrasChave"
+            data-cy="palavrasChave"
+            formControlName="palavrasChave"
+          />
+          <div
+            *ngIf="
+              editForm.get('palavrasChave')!.invalid && (editForm.get('palavrasChave')!.dirty || editForm.get('palavrasChave')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('palavrasChave')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 64000 }"
+            >
+              This field cannot be longer than 64000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="artesApp.obra.genMarcaInscrSuporte"
+            for="field_genMarcaInscrSuporte"
+            [ngbTooltip]="'artesApp.obra.help.genMarcaInscrSuporte' | translate"
+            >Gen Marca Inscr Suporte</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="genMarcaInscrSuporte"
+            id="field_genMarcaInscrSuporte"
+            data-cy="genMarcaInscrSuporte"
+            formControlName="genMarcaInscrSuporte"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.genObs" for="field_genObs">Gen Obs</label>
+          <input type="number" class="form-control" name="genObs" id="field_genObs" data-cy="genObs" formControlName="genObs" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.genVerbete" for="field_genVerbete">Gen Verbete</label>
+          <input
+            type="number"
+            class="form-control"
+            name="genVerbete"
+            id="field_genVerbete"
+            data-cy="genVerbete"
+            formControlName="genVerbete"
+          />
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="artesApp.obra.dadoDocumental" for="field_dadoDocumentals">Dado Documental</label>
+          <select
+            class="form-control"
+            id="field_dadoDocumentals"
+            data-cy="dadoDocumental"
+            multiple
+            name="dadoDocumentals"
+            formControlName="dadoDocumentals"
+          >
+            <option
+              [ngValue]="getSelectedDadoDocumental(dadoDocumentalOption, editForm.get('dadoDocumentals')!.value)"
+              *ngFor="let dadoDocumentalOption of dadoDocumentalsSharedCollection; trackBy: trackDadoDocumentalById"
+            >
+              {{ dadoDocumentalOption.data }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.artista" for="field_artista">Artista</label>
+          <select class="form-control" id="field_artista" data-cy="artista" name="artista" formControlName="artista">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="artistaOption.id === editForm.get('artista')!.value?.id ? editForm.get('artista')!.value : artistaOption"
+              *ngFor="let artistaOption of artistasSharedCollection; trackBy: trackArtistaById"
+            >
+              {{ artistaOption.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.categoria" for="field_categoria">Categoria</label>
+          <select class="form-control" id="field_categoria" data-cy="categoria" name="categoria" formControlName="categoria">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="categoriaOption.id === editForm.get('categoria')!.value?.id ? editForm.get('categoria')!.value : categoriaOption"
+              *ngFor="let categoriaOption of categoriasSharedCollection; trackBy: trackCategoriaById"
+            >
+              {{ categoriaOption.categoria }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.tecnica" for="field_tecnica">Tecnica</label>
+          <select class="form-control" id="field_tecnica" data-cy="tecnica" name="tecnica" formControlName="tecnica">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="tecnicaOption.id === editForm.get('tecnica')!.value?.id ? editForm.get('tecnica')!.value : tecnicaOption"
+              *ngFor="let tecnicaOption of tecnicasSharedCollection; trackBy: trackTecnicaById"
+            >
+              {{ tecnicaOption.tecnica }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.nivel" for="field_nivel">Nivel</label>
+          <select class="form-control" id="field_nivel" data-cy="nivel" name="nivel" formControlName="nivel">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="nivelOption.id === editForm.get('nivel')!.value?.id ? editForm.get('nivel')!.value : nivelOption"
+              *ngFor="let nivelOption of nivelsSharedCollection; trackBy: trackNivelById"
+            >
+              {{ nivelOption.nivel }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.data" for="field_data">Data</label>
+          <select class="form-control" id="field_data" data-cy="data" name="data" formControlName="data">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="dataOption.id === editForm.get('data')!.value?.id ? editForm.get('data')!.value : dataOption"
+              *ngFor="let dataOption of dataSharedCollection; trackBy: trackDataById"
+            >
+              {{ dataOption.data }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.empresa" for="field_empresa">Empresa</label>
+          <select class="form-control" id="field_empresa" data-cy="empresa" name="empresa" formControlName="empresa">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="empresaOption.id === editForm.get('empresa')!.value?.id ? editForm.get('empresa')!.value : empresaOption"
+              *ngFor="let empresaOption of empresasSharedCollection; trackBy: trackEmpresaById"
+            >
+              {{ empresaOption.empresa }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.moeda" for="field_moeda">Moeda</label>
+          <select class="form-control" id="field_moeda" data-cy="moeda" name="moeda" formControlName="moeda">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="moedaOption.id === editForm.get('moeda')!.value?.id ? editForm.get('moeda')!.value : moedaOption"
+              *ngFor="let moedaOption of moedasSharedCollection; trackBy: trackMoedaById"
+            >
+              {{ moedaOption.tipoMoeda }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.seguro" for="field_seguro">Seguro</label>
+          <select class="form-control" id="field_seguro" data-cy="seguro" name="seguro" formControlName="seguro">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="seguroOption.id === editForm.get('seguro')!.value?.id ? editForm.get('seguro')!.value : seguroOption"
+              *ngFor="let seguroOption of segurosSharedCollection; trackBy: trackSeguroById"
+            >
+              {{ seguroOption.apolice }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.responsavel" for="field_responsavel">Responsavel</label>
+          <select class="form-control" id="field_responsavel" data-cy="responsavel" name="responsavel" formControlName="responsavel">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                responsavelOption.id === editForm.get('responsavel')!.value?.id ? editForm.get('responsavel')!.value : responsavelOption
+              "
+              *ngFor="let responsavelOption of responsavelsSharedCollection; trackBy: trackResponsavelById"
+            >
+              {{ responsavelOption.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.acervoatual" for="field_acervoatual">Acervoatual</label>
+          <select class="form-control" id="field_acervoatual" data-cy="acervoatual" name="acervoatual" formControlName="acervoatual">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                acervoAtualOption.id === editForm.get('acervoatual')!.value?.id ? editForm.get('acervoatual')!.value : acervoAtualOption
+              "
+              *ngFor="let acervoAtualOption of acervoAtualsSharedCollection; trackBy: trackAcervoAtualById"
+            >
+              {{ acervoAtualOption.acervoAtual }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.fotografo" for="field_fotografo">Fotografo</label>
+          <select class="form-control" id="field_fotografo" data-cy="fotografo" name="fotografo" formControlName="fotografo">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="contatoOption.id === editForm.get('fotografo')!.value?.id ? editForm.get('fotografo')!.value : contatoOption"
+              *ngFor="let contatoOption of contatoesSharedCollection; trackBy: trackContatoById"
+            >
+              {{ contatoOption.nomeComp }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="artesApp.obra.andarMapa" for="field_andarMapa">Andar Mapa</label>
+          <select class="form-control" id="field_andarMapa" data-cy="andarMapa" name="andarMapa" formControlName="andarMapa">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="andarMapaOption.id === editForm.get('andarMapa')!.value?.id ? editForm.get('andarMapa')!.value : andarMapaOption"
+              *ngFor="let andarMapaOption of andarMapasSharedCollection; trackBy: trackAndarMapaById"
+            >
+              {{ andarMapaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

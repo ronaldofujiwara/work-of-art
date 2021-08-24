@@ -45,7 +45,7 @@ export class ContatoUpdateComponent implements OnInit {
     site: [null, [Validators.maxLength(50)]],
     observacoes: [null, [Validators.maxLength(200)]],
     dataAtualizacao: [],
-    ativo: [],
+    inativo: [],
     area: [],
     cidade: [],
   });
@@ -133,7 +133,7 @@ export class ContatoUpdateComponent implements OnInit {
       site: contato.site,
       observacoes: contato.observacoes,
       dataAtualizacao: contato.dataAtualizacao ? contato.dataAtualizacao.format(DATE_TIME_FORMAT) : null,
-      ativo: contato.ativo,
+      inativo: contato.inativo,
       area: contato.area,
       cidade: contato.cidade,
     });
@@ -187,7 +187,7 @@ export class ContatoUpdateComponent implements OnInit {
       dataAtualizacao: this.editForm.get(['dataAtualizacao'])!.value
         ? dayjs(this.editForm.get(['dataAtualizacao'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      ativo: this.editForm.get(['ativo'])!.value,
+      inativo: this.editForm.get(['inativo'])!.value,
       area: this.editForm.get(['area'])!.value,
       cidade: this.editForm.get(['cidade'])!.value,
     };

@@ -1,0 +1,29 @@
+{
+  "artesApp": {
+    "nivel": {
+      "home": {
+        "title": "Nivels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Nivel",
+        "createOrEditLabel": "Create or edit a Nivel",
+        "notFound": "No Nivels found"
+      },
+      "created": "A new Nivel is created with identifier {{ param }}",
+      "updated": "A Nivel is updated with identifier {{ param }}",
+      "deleted": "A Nivel is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Nivel {{ id }}?"
+      },
+      "detail": {
+        "title": "Nivel"
+      },
+      "id": "ID",
+      "nivel": "Nivel",
+      "inativo": "Inativo",
+      "obra": "Obra",
+      "help": {
+        "inativo": "Nivel de classificacao"
+      }
+    }
+  }
+}

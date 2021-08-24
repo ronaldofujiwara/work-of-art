@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       elemDefault = {
         id: 0,
         ambiente: 'AAAAAAA',
-        ativo: false,
+        inativo: false,
       };
     });
 
@@ -60,7 +60,7 @@ describe('Service Tests', () => {
           {
             id: 1,
             ambiente: 'BBBBBB',
-            ativo: true,
+            inativo: true,
           },
           elemDefault
         );
@@ -98,7 +98,7 @@ describe('Service Tests', () => {
           {
             id: 1,
             ambiente: 'BBBBBB',
-            ativo: true,
+            inativo: true,
           },
           elemDefault
         );

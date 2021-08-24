@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dadoDocumental">
+      <h2 data-cy="dadoDocumentalDetailsHeading"><span jhiTranslate="artesApp.dadoDocumental.detail.title">Dado Documental</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.data">Data</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.data }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.emissor">Emissor</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.emissor }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.receptor">Receptor</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.receptor }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.obs">Obs</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.obs }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.transcricao">Transcricao</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.transcricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.finalizado">Finalizado</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.finalizado }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.genTranscricao">Gen Transcricao</span></dt>
+        <dd>
+          <span>{{ dadoDocumental.genTranscricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="artesApp.dadoDocumental.tipoDocumento">Tipo Documento</span></dt>
+        <dd>
+          <div *ngIf="dadoDocumental.tipoDocumento">
+            <a [routerLink]="['/tipo-documento', dadoDocumental.tipoDocumento?.id, 'view']">{{
+              dadoDocumental.tipoDocumento?.tipoDocumento
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/dado-documental', dadoDocumental.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

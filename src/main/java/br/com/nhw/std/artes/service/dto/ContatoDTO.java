@@ -113,7 +113,7 @@ public class ContatoDTO implements Serializable {
 
     private Instant dataAtualizacao;
 
-    private Boolean ativo;
+    private Boolean inativo;
 
     private AreaDeptoDTO area;
 
@@ -271,12 +271,12 @@ public class ContatoDTO implements Serializable {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public Boolean getAtivo() {
-        return ativo;
+    public Boolean getInativo() {
+        return inativo;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setInativo(Boolean inativo) {
+        this.inativo = inativo;
     }
 
     public AreaDeptoDTO getArea() {
@@ -339,7 +339,7 @@ public class ContatoDTO implements Serializable {
             ", site='" + getSite() + "'" +
             ", observacoes='" + getObservacoes() + "'" +
             ", dataAtualizacao='" + getDataAtualizacao() + "'" +
-            ", ativo='" + getAtivo() + "'" +
+            ", inativo='" + getInativo() + "'" +
             ", area=" + getArea() +
             ", cidade=" + getCidade() +
             "}";

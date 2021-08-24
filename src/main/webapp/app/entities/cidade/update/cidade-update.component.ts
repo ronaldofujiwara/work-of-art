@@ -20,6 +20,9 @@ export class CidadeUpdateComponent implements OnInit {
     cidade: [null, [Validators.required, Validators.maxLength(255)]],
     estado: [null, [Validators.maxLength(255)]],
     pais: [null, [Validators.maxLength(255)]],
+    cidadeUFPais: [null, [Validators.maxLength(255)]],
+    estadoPais: [null, [Validators.maxLength(255)]],
+    inativo: [],
   });
 
   constructor(protected cidadeService: CidadeService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -69,6 +72,9 @@ export class CidadeUpdateComponent implements OnInit {
       cidade: cidade.cidade,
       estado: cidade.estado,
       pais: cidade.pais,
+      cidadeUFPais: cidade.cidadeUFPais,
+      estadoPais: cidade.estadoPais,
+      inativo: cidade.inativo,
     });
   }
 
@@ -79,6 +85,9 @@ export class CidadeUpdateComponent implements OnInit {
       cidade: this.editForm.get(['cidade'])!.value,
       estado: this.editForm.get(['estado'])!.value,
       pais: this.editForm.get(['pais'])!.value,
+      cidadeUFPais: this.editForm.get(['cidadeUFPais'])!.value,
+      estadoPais: this.editForm.get(['estadoPais'])!.value,
+      inativo: this.editForm.get(['inativo'])!.value,
     };
   }
 }
