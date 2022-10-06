@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 # Artes
 
 This application was generated using JHipster 7.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.1.0](https://www.jhipster.tech/documentation-archive/v7.1.0).
@@ -214,4 +216,11 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [jest]: https://facebook.github.io/jest/
 [jasmine]: https://jasmine.github.io/2.0/introduction.html
 [leaflet]: https://leafletjs.com/
-[definitelytyped]: https://definitelytyped.org/
+
+# [definitelytyped]: https://definitelytyped.org/
+
+# work-of-art
+
+Apllication to catalog and manage Works of Art
+
+> > > > > > > df42c9335ff3f21572397a3d8b4f9188a54f5d83
